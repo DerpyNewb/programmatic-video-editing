@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yohann Mar Gayao, programmatic video editing</title>
+<meta name="description" content="Three narrated explainers cut by code: real, openly licensed footage, graphics timed to the narrator's words, and no AI video.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ground: #18191b;
+  --field: #222427;
+  --line: #3a3d42;
+  --text: #eff0f1;
+  --muted: #a9adb3;
+  --paper: #f4f1ea;
+  --paper-ink: #1d1d1f;
+  --paper-muted: #5c5a55;
+  --pencil: #2448c8;
+  --pencil-wash: #d7d9e5;
+  --pencil-light: #9db4ff;
+  --edge: clamp(16px, 4vw, 48px);
+  --gap: clamp(40px, 7vw, 96px);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--text);
+  font: 400 1.0625rem/1.6 Archivo, system-ui, sans-serif;
+}
+h1, h2, h3 { font-stretch: 62%; font-weight: 800; line-height: 1.02; margin: 0; }
+h1 { font-size: clamp(2.8rem, 9vw, 6rem); letter-spacing: -0.01em; }
+h2 { font-size: clamp(2rem, 5vw, 3.4rem); }
+h3 { font-size: 1.35rem; line-height: 1.15; }
+p { margin: 0; }
+a { color: inherit; text-underline-offset: 0.18em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 3px solid var(--pencil-light); outline-offset: 3px; border-radius: 2px; }
+.wrap { max-width: 1400px; margin: 0 auto; padding: 0 var(--edge); }
+.skip { position: absolute; left: var(--edge); top: -60px; background: var(--paper); color: var(--paper-ink); padding: 10px 14px; z-index: 2; }
+.skip:focus { top: 12px; }
+
+/* opening */
+.hero { padding: clamp(48px, 9vw, 120px) 0 var(--gap); }
+.hero .lede { max-width: 46ch; font-size: clamp(1.15rem, 2.2vw, 1.4rem); line-height: 1.5; margin-top: 24px; }
+.hero .who { margin-top: 20px; color: var(--muted); }
+.hero .who a { color: var(--text); }
+.reel { list-style: none; margin: clamp(36px, 6vw, 64px) 0 0; padding: 0; display: grid; gap: 16px; }
+.reel a { display: grid; grid-template-columns: 132px 1fr; gap: 14px; align-items: center; text-decoration: none; padding: 6px; margin: -6px; }
+.reel img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; display: block; border: 1px solid var(--line); }
+.reel a:hover img { border-color: var(--text); }
+.reel .name { font-stretch: 62%; font-weight: 800; font-size: 1.45rem; line-height: 1.05; display: block; }
+.reel .kind { color: var(--muted); font-size: 0.95rem; display: block; margin-top: 4px; }
+@media (min-width: 760px) {
+  .reel { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .reel a { grid-template-columns: 1fr; gap: 12px; align-items: start; }
+}
+
+/* one sheet per video */
+.sheet { border-top: 1px solid var(--line); padding: var(--gap) 0; scroll-margin-top: 16px; }
+.sheet .meta { color: var(--muted); margin-top: 10px; }
+.body { display: grid; gap: 24px; margin-top: 28px; grid-template-areas: "watch" "paper" "notes"; }
+.watch { grid-area: watch; min-width: 0; }
+.watch video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; max-height: calc(100dvh - 48px); background: #000; object-fit: contain; }
+.watch .failed { margin-top: 10px; color: var(--muted); }
+.paper { grid-area: paper; background: var(--paper); color: var(--paper-ink); padding: clamp(20px, 3vw, 32px); margin: 0; min-width: 0; }
+.paper figcaption { font-stretch: 62%; font-weight: 800; font-size: 1.35rem; line-height: 1.1; }
+.paper .script { font-size: 1.125rem; line-height: 2; margin-top: 14px; }
+.paper .how { color: var(--paper-muted); font-size: 0.95rem; line-height: 1.5; margin-top: 16px; }
+.phrase { padding: 0.12em 0; transition: background-color 0.2s; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.phrase.now { background: var(--pencil-wash); }
+.cut {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 1.75em; height: 1.75em; padding: 0 0.3em; margin-right: 0.2em;
+  border: 2px solid var(--pencil); border-radius: 4px; color: var(--pencil);
+  font-weight: 700; font-size: 0.85em; line-height: 1; text-decoration: none; vertical-align: 0.1em;
+  position: relative;
+}
+.cut::before { content: ""; position: absolute; inset: -9px; } /* a 45 px touch target around the 27 px mark */
+.cut:hover { background: var(--pencil-wash); }
+.phrase.now .cut { background: var(--pencil); color: var(--paper); }
+.paper :focus-visible { outline-color: var(--pencil); }
+@media (prefers-reduced-motion: reduce) { .phrase { transition: none; } }
+.notes { grid-area: notes; display: grid; gap: 22px; align-content: start; min-width: 0; }
+.notes h3 { margin-bottom: 6px; }
+.notes p, .notes li { color: var(--muted); }
+.notes ul { margin: 0; padding-left: 1.1em; }
+.notes li + li { margin-top: 4px; }
+.notes a { color: var(--text); }
+pre { margin: 0 0 8px; background: var(--field); border: 1px solid var(--line); padding: 12px 14px; white-space: pre-wrap; overflow-wrap: anywhere; }
+code { font: 0.875rem/1.5 ui-monospace, Consolas, "Cascadia Mono", monospace; color: var(--text); }
+@media (min-width: 760px) {
+  .body { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "watch watch" "paper notes"; gap: 32px; }
+}
+@media (min-width: 1180px) {
+  .body { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); grid-template-areas: "watch paper" "notes paper"; align-items: start; gap: 32px 40px; }
+  .notes { grid-template-columns: 1fr 1fr; column-gap: 32px; }
+  .notes .wide { grid-column: 1 / -1; }
+}
+
+/* how they're made */
+.method { background: var(--field); padding: var(--gap) 0; }
+.method .grid { display: grid; gap: 32px; margin-top: 28px; }
+.method ol { margin: 0; padding-left: 1.4em; max-width: 62ch; }
+.method li + li { margin-top: 14px; }
+.method li::marker { font-weight: 700; color: var(--muted); }
+.method aside p { color: var(--muted); margin-bottom: 10px; }
+.method pre { background: var(--ground); }
+@media (min-width: 1000px) { .method .grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 56px; align-items: start; } }
+
+/* contact */
+.contact { padding: var(--gap) 0; }
+.card { background: var(--paper); color: var(--paper-ink); padding: clamp(24px, 4vw, 48px); display: grid; gap: 18px; max-width: 760px; }
+.card p { max-width: 52ch; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
+.button { display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; font-weight: 700; text-decoration: none; border: 2px solid var(--pencil); }
+.button.primary { background: var(--pencil); color: var(--paper); }
+.button.plain { color: var(--pencil); }
+.button:hover { text-decoration: underline; }
+.card :focus-visible { outline-color: var(--pencil); }
+footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 0.95rem; }
+</style>
+</head>
+<body>
+<a class="skip" href="#giza">Skip to the videos</a>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Programmatic Video Editing</h1>
+    <p class="lede">Three narrated explainers, each cut by code. The footage and photos are real and openly licensed, every graphic is drawn in code and timed to the narrator's words, and none of the video is AI-generated. The narrators are Gemini text-to-speech voices.</p>
+    <p class="who">Yohann Mar Gayao · <a href="mailto:yohanng500@gmail.com?subject=Programmatic%20video%20editing">yohanng500@gmail.com</a> · <a href="https://github.com/DerpyNewb">GitHub</a></p>
+    <nav aria-label="The three videos">
+      <ul class="reel">
+        <li><a href="#giza"><img src="media/giza.jpg" alt="" width="1280" height="720"><span><span class="name">The Great Pyramid in numbers</span><span class="kind">History · 53 seconds</span></span></a></li>
+        <li><a href="#spf"><img src="media/spf.jpg" alt="" width="1280" height="720"><span><span class="name">What the SPF number means</span><span class="kind">Beauty · 51 seconds</span></span></a></li>
+        <li><a href="#sky"><img src="media/sky.jpg" alt="" width="1280" height="720"><span><span class="name">Why the sky is blue</span><span class="kind">Science explainer · 51 seconds</span></span></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="sheet" id="giza" aria-labelledby="giza-title">
+    <div class="wrap">
+      <h2 id="giza-title">The Great Pyramid in numbers</h2>
+      <p class="meta">For a history channel · 53 seconds · 1080p</p>
+      <div class="body">
+        <div class="watch">
+          <video controls preload="metadata" playsinline poster="media/giza.jpg" width="1920" height="1080">
+            <source src="media/giza.mp4" type="video/mp4">
+            <a href="media/giza.mp4">Open the video file</a>
+          </video>
+        </div>
+        <figure class="paper">
+          <figcaption>The script, marked where the code cuts</figcaption>
+          <p class="script">For more than 3,700 years, nobody built anything taller. The Great Pyramid of Giza was the tomb of the pharaoh Khufu, finished more than 4,500 years ago. Workers quarried an estimated 2.3 million stone blocks, about 6 million tonnes in all. When it was new, it stood 146.6 meters high. Over the centuries, most of its smooth white limestone casing was stripped away, and today it stands 138.5 meters tall. Its granite blocks came from Aswan, more than 900 kilometers to the south. It's the oldest of the Seven Wonders of the Ancient World, and the only one still largely intact. Which ancient wonder should we visit next?</p>
+          <p class="how">Each blue number is a cut. The code puts it 0.12 seconds before the word that opens the phrase. Pick one to play the video from there.</p>
+        </figure>
+        <div class="notes">
+          <div>
+            <h3>Where the facts come from</h3>
+            <ul>
+              <li><a href="https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza">Wikipedia, Great Pyramid of Giza</a></li>
+              <li><a href="https://smarthistory.org/pyramid-of-khufu/">Smarthistory, Pyramid of Khufu</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Footage and sound</h3>
+            <p>15 files from Wikimedia Commons, Pixabay and Freesound, under CC0, CC BY, public domain and the Pixabay license, all credited at the end. They include two Pixabay clips filmed at Giza, the Lumière film of the Sphinx from 1897 and an engraving from 1572.</p>
+          </div>
+          <div class="wide">
+            <h3>One cue from the code</h3>
+            <pre><code>self.show(at('oldest'), rows[0].animate.set_color(SAND), FadeIn(oldest, scale=0.8))</code></pre>
+            <p>The "Oldest" label lands as the narrator says "oldest".</p>
+          </div>
+          <div class="wide">
+            <h3>Checked</h3>
+            <p>Each build was reviewed on contact sheets, and those reviews and a design audit led to ten fixes before the final cut, from labels that ran into each other to counters that briefly read zero. Whisper heard all 113 narrated words in the final mix, which plays at -14.9 LUFS.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" id="spf" aria-labelledby="spf-title">
+    <div class="wrap">
+      <h2 id="spf-title">What the SPF number means</h2>
+      <p class="meta">For a beauty channel · 51 seconds · 1080p</p>
+      <div class="body">
+        <div class="watch">
+          <video controls preload="metadata" playsinline poster="media/spf.jpg" width="1920" height="1080">
+            <source src="media/spf.mp4" type="video/mp4">
+            <a href="media/spf.mp4">Open the video file</a>
+          </video>
+        </div>
+        <figure class="paper">
+          <figcaption>The script, marked where the code cuts</figcaption>
+          <p class="script">SPF 30 doesn't block twice as much UVB as SPF 15. SPF, or sun protection factor, measures how well sunscreen blocks UVB, the rays that burn your skin. SPF 15 blocks about 93 percent. SPF 30 blocks about 97, and SPF 50 about 98. No sunscreen blocks 100 percent. Those numbers come from a thick test layer, and many people apply only 20 to 50 percent of that. SPF also says nothing about UVA, the rays that age your skin, so check the label for broad spectrum. Skin doctors recommend SPF 30 or higher, about a shot glass for your whole body, reapplied every 2 hours. What SPF are you wearing today?</p>
+          <p class="how">Each blue number is a cut. The code puts it 0.12 seconds before the word that opens the phrase. Pick one to play the video from there.</p>
+        </figure>
+        <div class="notes">
+          <div>
+            <h3>Where the facts come from</h3>
+            <ul>
+              <li><a href="https://www.skincancer.org/press/the-skin-cancer-foundation-offers-tips-on-choosing-and-using-sunscreen-2/">Skin Cancer Foundation, tips on choosing sunscreen</a></li>
+              <li><a href="https://www.aad.org/media/stats-sunscreen">American Academy of Dermatology, sunscreen facts</a></li>
+              <li><a href="https://www.aad.org/public/spot-skin-cancer/learn-about-skin-cancer/prevent/sunscreen-labels/how-to-decode-sunscreen-lingo">American Academy of Dermatology, how to read a label</a></li>
+              <li><a href="https://www.law.cornell.edu/cfr/text/21/201.327">FDA rule 21 CFR 201.327, the SPF test</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Footage and sound</h3>
+            <p>12 files from Pixabay, Wikimedia Commons and Freesound, under CC0, CC BY and the Pixabay license, all credited at the end. They include a clip filmed through an ultraviolet camera, where sunscreen shows up dark, and a label photo framed so no brand shows.</p>
+          </div>
+          <div class="wide">
+            <h3>One cue from the code</h3>
+            <pre><code>self.play(trackers[i].animate.set_value(p), run_time=end(word) - self.renderer.time, rate_func=smooth)</code></pre>
+            <p>Each bar grows until the narrator finishes saying its percentage.</p>
+          </div>
+          <div class="wide">
+            <h3>Checked</h3>
+            <p>Each build was reviewed on contact sheets, and nine faults were fixed before the final cut. One was a voice take of "No sunscreen blocks it all" that Whisper heard as "blocks at all", so the line was rewritten and recorded again. Whisper heard all 113 narrated words in the final mix, which plays at -14.4 LUFS.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" id="sky" aria-labelledby="sky-title">
+    <div class="wrap">
+      <h2 id="sky-title">Why the sky is blue</h2>
+      <p class="meta">For a science explainer channel · 51 seconds · 1080p</p>
+      <div class="body">
+        <div class="watch">
+          <video controls preload="metadata" playsinline poster="media/sky.jpg" width="1920" height="1080">
+            <source src="media/sky.mp4" type="video/mp4">
+            <a href="media/sky.mp4">Open the video file</a>
+          </video>
+        </div>
+        <figure class="paper">
+          <figcaption>The script, marked where the code cuts</figcaption>
+          <p class="script">Why is the sky blue, when sunlight looks white? Sunlight is every color of the rainbow mixed together. Air molecules are far smaller than a wave of light, and they scatter short waves much more than long ones. Blue light, at 470 nanometers, scatters about 5 times as much as red, at 700, so blue reaches you from every part of the sky. When the Sun sits on the horizon, its light crosses about 38 times as much air as when it's straight overhead. Most of the blue scatters away before it reaches you, and the reds and oranges are left. On Mars, sunsets are blue. Which question should we answer next?</p>
+          <p class="how">Each blue number is a cut. The code puts it 0.12 seconds before the word that opens the phrase. Pick one to play the video from there.</p>
+        </figure>
+        <div class="notes">
+          <div>
+            <h3>Where the facts come from</h3>
+            <ul>
+              <li><a href="https://en.wikipedia.org/wiki/Rayleigh_scattering">Wikipedia, Rayleigh scattering</a></li>
+              <li><a href="https://en.wikipedia.org/wiki/Visible_spectrum">Wikipedia, Visible spectrum</a></li>
+              <li><a href="https://en.wikipedia.org/wiki/Air_mass_(astronomy)">Wikipedia, Air mass</a></li>
+              <li><a href="https://photojournal.jpl.nasa.gov/catalog/PIA19400">NASA/JPL, Sunset in Mars' Gale Crater</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Footage and sound</h3>
+            <p>13 files from Pixabay, Wikimedia Commons and Freesound, under CC0, CC BY, public domain and the Pixabay license, all credited at the end. They include a photo of light through a prism and NASA's photo of a sunset on Mars, taken by the Curiosity rover in 2015.</p>
+          </div>
+          <div class="wide">
+            <h3>One cue from the code</h3>
+            <pre><code>self.play(mult.animate.set_value(38), run_time=end('times', 2) - at('38'), rate_func=smooth)</code></pre>
+            <p>The counter reaches 38 just as the narrator finishes "38 times". The "about 5 times" figure is worked out on screen from the two wavelengths.</p>
+          </div>
+          <div class="wide">
+            <h3>Checked</h3>
+            <p>Each build was reviewed on contact sheets, and nine faults were fixed before the final cut, including a first voice take that ran too fast for the diagrams. Whisper heard all 113 narrated words in the final mix (it wrote one "5" as "five"), which plays at -14.4 LUFS.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="method" id="method" aria-labelledby="method-title">
+    <div class="wrap">
+      <h2 id="method-title">How each video is made</h2>
+      <div class="grid">
+        <ol>
+          <li>Claude Code writes the script from cited sources and records where every figure comes from.</li>
+          <li>Gemini TTS reads the whole script in one take. Whisper reads every take back before anything is built on it. That read-back caught a line that sounded like its opposite and a mispronounced word, and both were recorded again.</li>
+          <li>faster-whisper times every word of the voiceover.</li>
+          <li><code>timeline.py</code> turns those times into the cut. Each cut lands 0.12 seconds before the word that opens its phrase, on a whole frame.</li>
+          <li><code>footage.py</code> searches Wikimedia Commons, Pixabay and Openverse for openly licensed clips, photos and sound, skips anything marked as AI-generated and keeps each file's credit. Every clip is still checked by eye: the pyramid searches turned up 3D renders and a UFO scene.</li>
+          <li>Manim draws every graphic on a transparent layer, from counters and charts to maps and diagrams, and each one starts on a word.</li>
+          <li>FFmpeg adds a slow push-in to each still, lays the graphics over the footage, and mixes the voice, music and effects to -14 LUFS, with the music ducking under the voice.</li>
+          <li>Contact sheets of every build, a Whisper read-back of the final mix and a design audit catch what's left before a cut is called done.</li>
+        </ol>
+        <aside aria-label="The cut rule, from timeline.py">
+          <p>The rule that places every cut, from <code>timeline.py</code>:</p>
+          <pre><code>LEAD = 0.12  # a cut lands this far ahead of the word that opens its phrase
+
+def before(word, n=1):
+    """The cut for the phrase that opens with this word, on a whole frame."""
+    return frame(at(word, n) - LEAD)</code></pre>
+          <p>Change a word in the script, record it again, and the cuts and graphics move with the new timings.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <div class="card">
+        <h2 id="contact-title">Need videos cut like these?</h2>
+        <p>Yohann Mar Gayao builds them with Claude Code from a script and a voiceover, yours or one made for the job, and works remotely.</p>
+        <div class="actions">
+          <a class="button primary" href="mailto:yohanng500@gmail.com?subject=Programmatic%20video%20editing">Email Yohann about a video</a>
+          <a class="button plain" href="https://derpynewb.github.io/">See more projects</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>The narration is AI text-to-speech, read by the Gemini voices Charon, Sulafat and Puck. The footage, photos, music and sound effects come from openly licensed libraries, and every file is credited at the end of its video.</p>
+  </div>
+</footer>
+
+<script src="media/cuts.js"></script>
+<script>
+// Marks each script where its cuts fall (media/cuts.js), plays the video from a mark, and washes the phrase on screen.
+// Without this script the text still reads; each mark links to the video file at its time.
+for (const sheet of document.querySelectorAll('.sheet')) {
+  const video = sheet.querySelector('video');
+  const script = sheet.querySelector('.script');
+  const data = (window.CUTS || {})[sheet.id];
+  const src = video.querySelector('source').getAttribute('src');
+
+  const failed = () => {
+    if (video.nextElementSibling) return; // already said
+    const note = document.createElement('p');
+    note.className = 'failed';
+    note.innerHTML = `This video didn't load here. <a href="${src}">Open the video file</a> instead.`;
+    video.after(note);
+  };
+  video.querySelector('source').addEventListener('error', failed);
+  if (video.networkState === video.NETWORK_NO_SOURCE) failed(); // it failed before this script ran
+  if (!data) continue;
+
+  const words = script.textContent.trim().split(/\s+/);
+  const starts = data.marks.map(([i]) => i);
+  const phrases = [];
+  script.textContent = '';
+  data.marks.forEach(([i, t], n) => {
+    const phrase = document.createElement('span');
+    phrase.className = 'phrase';
+    const mark = document.createElement('a');
+    mark.className = 'cut';
+    mark.href = `${src}#t=${t}`;
+    mark.textContent = n + 1;
+    mark.setAttribute('aria-label', `Cut ${n + 1}, at ${t.toFixed(1)} seconds: play from here`);
+    mark.addEventListener('click', (event) => {
+      event.preventDefault();
+      video.currentTime = t;
+      video.play().catch(() => {});
+      video.scrollIntoView({ block: 'nearest' });
+    });
+    const end = n + 1 < starts.length ? starts[n + 1] : words.length;
+    phrase.append(mark, words.slice(i, end).join(' '));
+    script.append(phrase, ' ');
+    phrases.push({ t, phrase, mark });
+  });
+
+  const wash = () => {
+    const now = video.currentTime;
+    const started = !(video.paused && now === 0);
+    phrases.forEach(({ t, phrase, mark }, k) => {
+      const next = k + 1 < phrases.length ? phrases[k + 1].t : data.credits;
+      const on = started && now >= t && now < next;
+      phrase.classList.toggle('now', on);
+      if (on) mark.setAttribute('aria-current', 'true');
+      else mark.removeAttribute('aria-current');
+    });
+  };
+  for (const event of ['timeupdate', 'seeked', 'play']) video.addEventListener(event, wash);
+}
+// One narrator at a time: starting a video pauses the others.
+const videos = [...document.querySelectorAll('video')];
+for (const video of videos) {
+  video.addEventListener('play', () => videos.forEach(other => other !== video && other.pause()));
+}
+</script>
+</body>
+</html>
