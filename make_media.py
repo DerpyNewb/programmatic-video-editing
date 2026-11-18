@@ -22,6 +22,9 @@ VIDEOS = {  # key on the page: (folder, poster time in s)
     'spf': ('sunscreen-spf-beauty', 3.8),
     'sky': ('blue-sky-explainer', 2.6),
 }
+ALSO = {  # other cuts of a video, shown in its notes: key: (folder, file, poster time in s). No marks of their own.
+    'giza-remotion': ('giza-pyramid-history', 'giza-pyramid-history-remotion.mp4', 7.0),
+}
 NUMBERS = {'two': '2', 'five': '5'}  # Whisper spells some numbers out
 
 
@@ -81,6 +84,13 @@ def ffmpeg(*args):
     subprocess.run(['ffmpeg', '-v', 'error', '-nostdin', '-y', *map(str, args)], check=True)
 
 
+def web(src, poster, key):
+    """The web copy and the poster frame of one video."""
+    ffmpeg('-i', src, '-c:v', 'libx264', '-crf', 24, '-preset', 'slow', '-pix_fmt', 'yuv420p',
+           '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', MEDIA / f'{key}.mp4')
+    ffmpeg('-ss', poster, '-i', src, '-frames:v', 1, '-vf', 'scale=1280:-2', '-q:v', 4, MEDIA / f'{key}.jpg')
+
+
 def main():
     MEDIA.mkdir(exist_ok=True)
     data = {}
@@ -88,12 +98,13 @@ def main():
         folder = ADS / name
         src = folder / f'{name}-v1.mp4'
         if 'data' not in sys.argv[1:]:
-            ffmpeg('-i', src, '-c:v', 'libx264', '-crf', 24, '-preset', 'slow', '-pix_fmt', 'yuv420p',
-                   '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', MEDIA / f'{key}.mp4')
-            ffmpeg('-ss', poster, '-i', src, '-frames:v', 1, '-vf', 'scale=1280:-2', '-q:v', 4, MEDIA / f'{key}.jpg')
+            web(src, poster, key)
         script, cut_marks, credits = marks(folder)
         data[key] = {'marks': cut_marks, 'credits': credits}
         print(key, len(cut_marks), 'cuts:', ' | '.join(' '.join(script.split()[i:i + 3]) for i, _ in cut_marks))
+    for key, (name, file, poster) in ALSO.items():
+        if 'data' not in sys.argv[1:]:
+            web(ADS / name / file, poster, key)
     (MEDIA / 'cuts.js').write_text('// Written by make_media.py: [index of the script word a cut lands before, cut time in s]\n'
                                    f'window.CUTS = {json.dumps(data)};\n', encoding='utf-8')
 

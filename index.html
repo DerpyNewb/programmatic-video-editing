@@ -94,6 +94,7 @@ a:hover { text-decoration-thickness: 2px; }
 .notes ul { margin: 0; padding-left: 1.1em; }
 .notes li + li { margin-top: 4px; }
 .notes a { color: var(--text); }
+.notes video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #000; margin-bottom: 10px; }
 pre { margin: 0 0 8px; background: var(--field); border: 1px solid var(--line); padding: 12px 14px; white-space: pre-wrap; overflow-wrap: anywhere; }
 code { font: 0.875rem/1.5 ui-monospace, Consolas, "Cascadia Mono", monospace; color: var(--text); }
 @media (min-width: 760px) {
@@ -183,6 +184,14 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--m
           <div class="wide">
             <h3>Checked</h3>
             <p>Each build was reviewed on contact sheets, and those reviews and a design audit led to ten fixes before the final cut, from labels that ran into each other to counters that briefly read zero. Whisper heard all 113 narrated words in the final mix, which plays at -14.9 LUFS.</p>
+          </div>
+          <div class="wide">
+            <h3>The same video, built in Remotion</h3>
+            <video controls preload="none" playsinline poster="media/giza-remotion.jpg" width="1920" height="1080">
+              <source src="media/giza-remotion.mp4" type="video/mp4">
+              <a href="media/giza-remotion.mp4">Open the video file</a>
+            </video>
+            <p>This cut was rebuilt in Remotion from the same voiceover, footage and word timings, with every graphic redrawn as a React component. The cuts land in the same places. The video's length, its cuts and the end credits are read from the word timings and the footage's licence records when the composition loads. <a href="https://github.com/DerpyNewb/remotion-giza-explainer">Remotion source on GitHub</a></p>
           </div>
         </div>
       </div>
@@ -287,7 +296,7 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--m
           <li>faster-whisper times every word of the voiceover.</li>
           <li><code>timeline.py</code> turns those times into the cut. Each cut lands 0.12 seconds before the word that opens its phrase, on a whole frame.</li>
           <li><code>footage.py</code> searches Wikimedia Commons, Pixabay and Openverse for openly licensed clips, photos and sound, skips anything marked as AI-generated and keeps each file's credit. Every clip is still checked by eye: the pyramid searches turned up 3D renders and a UFO scene.</li>
-          <li>Manim draws every graphic on a transparent layer, from counters and charts to maps and diagrams, and each one starts on a word.</li>
+          <li>Manim draws every graphic on a transparent layer, from counters and charts to maps and diagrams, and each one starts on a word. The Great Pyramid video also has a second cut built in Remotion, where the graphics are React components on the same timings.</li>
           <li>FFmpeg adds a slow push-in to each still, lays the graphics over the footage, and mixes the voice, music and effects to -14 LUFS, with the music ducking under the voice.</li>
           <li>Contact sheets of every build, a Whisper read-back of the final mix and a design audit catch what's left before a cut is called done.</li>
         </ol>

@@ -4,13 +4,13 @@ A one-page portfolio of three narrated explainers made without AI video: the Gre
 
 Live at https://derpynewb.github.io/programmatic-video-editing/
 
-The footage, photos, music and sound effects are openly licensed and listed in [CREDITS.md](CREDITS.md). The narration is Gemini text-to-speech, and every graphic is drawn in code with Manim and timed to the narrator's words.
+The footage, photos, music and sound effects are openly licensed and listed in [CREDITS.md](CREDITS.md). The narration is Gemini text-to-speech, and every graphic is drawn in code with Manim and timed to the narrator's words. The Great Pyramid video also has a second cut built in Remotion, from the same voiceover, footage and word timings; its source is in [remotion-giza-explainer](https://github.com/DerpyNewb/remotion-giza-explainer).
 
 ## Files
 
 - `index.html` is the whole page. It needs no build step: open it in a browser.
 - `media/` holds the web copies of the videos (H.264, CRF 24), their poster frames and `cuts.js`, which lists where each cut falls in each script.
-- `make_media.py` makes everything in `media/` from the finished videos, which are built in a separate local project that isn't in this repo. Run `python make_media.py` after a video changes, or `python make_media.py data` to rewrite only `cuts.js`.
+- `make_media.py` makes everything in `media/` from the finished videos, which are built in a separate local project that isn't in this repo. Run `python make_media.py` after a video changes, or `python make_media.py data` to rewrite only `cuts.js`. Its `ALSO` list adds other cuts of a video (the Remotion cut of the Great Pyramid) without marks of their own.
 
 ## How the cut marks are placed
 
