@@ -1,6 +1,6 @@
 # Credits
 
-Every clip, photo, picture, track and sound effect in the five videos, with its license. The first three videos also credit them at the end; the two battles caption each picture on screen.
+Every clip, photo, picture, track and sound effect in the seven videos, with its license. The first three videos also credit them at the end; the four battles caption each picture on screen.
 
 ## The Great Pyramid in numbers (`media/giza.mp4`)
 
@@ -96,3 +96,35 @@ The narration is Gemini text-to-speech (voices Charon, Sulafat and Puck). The gr
 - "Distant Battlefield Soundscape" by Kostas17, CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/), from https://freesound.org/people/Kostas17/sounds/542827
 
 The narration is Gemini text-to-speech (voice Riko). The maps are from the HyperWar transcription of Robert Ross Smith's *Triumph in the Philippines*, a US Army publication.
+
+## The Battle of Bataan (`media/bataan.mp4`)
+
+- "MT. SAMAT NATIONAL SHRINE MEMORIAL CROSS" by RanieljoseMCastaneda, CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en), from https://commons.wikimedia.org/wiki/File:MT._SAMAT_NATIONAL_SHRINE_MEMORIAL_CROSS.png
+- "Lot-9432-8 (23222272364)" by National Museum of the U.S. Navy, Public domain, from https://commons.wikimedia.org/wiki/File:Lot-9432-8_(23222272364).jpg
+- "Reverb Percussion.wav" by Shark_Anthony, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Shark_Anthony/sounds/468903
+- "Pop Click" by GameAudio, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/GameAudio/sounds/220175
+- "Swipe Whoosh" by qubodup, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/qubodup/sounds/60007
+- "Howitzer Artillery Gun Shot Sound Effect 01" by qubodup, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/qubodup/sounds/161343
+- "Ding 1" by greenvwbeetle, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/greenvwbeetle/sounds/241288
+- "Distant Battlefield Soundscape" by Kostas17, CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/), from https://freesound.org/people/Kostas17/sounds/542827
+
+The terrain is real elevation data. Elevation: Terrain Tiles on AWS (Mapzen). SRTM and GMTED2010 data courtesy of the U.S. Geological Survey; ETOPO1 from the U.S. National Oceanic and Atmospheric Administration. The narration is Gemini text-to-speech (voice Riko).
+
+## The Battle of Corregidor (`media/corregidor.mp4`)
+
+- "Map of Corregidor 1941" by Unknown, Public domain, from https://commons.wikimedia.org/wiki/File:Map_of_Corregidor_1941.jpg
+- "Jonathan M. Wainwright as a Brigadier General" by Unknown; released by the United States Department of Defense, Public domain, from https://commons.wikimedia.org/wiki/File:Jonathan_M._Wainwright_as_a_Brigadier_General.jpg
+- "Corregidor DN-ST-86-01667" by PH1 David C. Maclean, U.S. Navy, Public domain, from https://commons.wikimedia.org/wiki/File:Corregidor_DN-ST-86-01667.JPEG
+- "Corregidor Landings May 1942" by Louis Morton, Public domain, from https://commons.wikimedia.org/wiki/File:Corregidor_Landings_May_1942.jpg
+- "Fort Drum Battery Marshall Firing 1935 (1)" by U.S. Army, Public domain, from https://commons.wikimedia.org/wiki/File:Fort_Drum_Battery_Marshall_Firing_1935_(1).jpg
+- "MacArthur and Sutherland s265357" by U.S. Army Signal Corps, Public domain, from https://commons.wikimedia.org/wiki/File:MacArthur_and_Sutherland_s265357.jpg
+- "Oceanwaves and crickets" by Eelke, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/Eelke/sounds/462590
+- "Reverb Percussion.wav" by Shark_Anthony, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Shark_Anthony/sounds/468903
+- "Pop Click" by GameAudio, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/GameAudio/sounds/220175
+- "Swipe Whoosh" by qubodup, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/qubodup/sounds/60007
+- "Howitzer Artillery Gun Shot Sound Effect 01" by qubodup, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/qubodup/sounds/161343
+- "Ding 1" by greenvwbeetle, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/greenvwbeetle/sounds/241288
+- "Prop Airplane Flyover birds chirpping stereo right to left pan.wav" by jimruss68@gmail.com, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/jimruss68@gmail.com/sounds/519653
+- "Distant Battlefield Soundscape" by Kostas17, CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/), from https://freesound.org/people/Kostas17/sounds/542827
+
+The bay is drawn from the same elevation data. Elevation: Terrain Tiles on AWS (Mapzen). SRTM and GMTED2010 data courtesy of the U.S. Geological Survey; ETOPO1 from the U.S. National Oceanic and Atmospheric Administration. The maps are Louis Morton's, from *The Fall of the Philippines*, a US Army publication. The narration is Gemini text-to-speech (voice Riko).
