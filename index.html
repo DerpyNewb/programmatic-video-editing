@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yohann Mar Gayao, programmatic video editing</title>
-<meta name="description" content="Three narrated explainers cut by code: real, openly licensed footage, graphics timed to the narrator's words, and no AI video.">
+<meta name="description" content="Four narrated explainers made by code: three cut from real, openly licensed footage and one animated in Blender and Unreal Engine, with graphics timed to the narration and no AI video.">
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,7 +59,7 @@ a:hover { text-decoration-thickness: 2px; }
 .reel .name { font-stretch: 62%; font-weight: 800; font-size: 1.45rem; line-height: 1.05; display: block; }
 .reel .kind { color: var(--muted); font-size: 0.95rem; display: block; margin-top: 4px; }
 @media (min-width: 760px) {
-  .reel { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .reel { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
   .reel a { grid-template-columns: 1fr; gap: 12px; align-items: start; }
 }
 
@@ -95,6 +95,7 @@ a:hover { text-decoration-thickness: 2px; }
 .notes li + li { margin-top: 4px; }
 .notes a { color: var(--text); }
 .notes video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #000; margin-bottom: 10px; }
+.notes video.tall { width: auto; max-width: 100%; max-height: min(640px, 80dvh); aspect-ratio: 9 / 16; }
 pre { margin: 0 0 8px; background: var(--field); border: 1px solid var(--line); padding: 12px 14px; white-space: pre-wrap; overflow-wrap: anywhere; }
 code { font: 0.875rem/1.5 ui-monospace, Consolas, "Cascadia Mono", monospace; color: var(--text); }
 @media (min-width: 760px) {
@@ -114,6 +115,8 @@ code { font: 0.875rem/1.5 ui-monospace, Consolas, "Cascadia Mono", monospace; co
 .method li::marker { font-weight: 700; color: var(--muted); }
 .method aside p { color: var(--muted); margin-bottom: 10px; }
 .method pre { background: var(--ground); }
+.method .also { color: var(--muted); max-width: 62ch; margin-top: 28px; }
+@media (min-width: 1100px) { .reel { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (min-width: 1000px) { .method .grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 56px; align-items: start; } }
 
 /* contact */
@@ -135,13 +138,14 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--m
 <header class="hero">
   <div class="wrap">
     <h1>Programmatic Video Editing</h1>
-    <p class="lede">Three narrated explainers, each cut by code. The footage and photos are real and openly licensed, every graphic is drawn in code and timed to the narrator's words, and none of the video is AI-generated. The narrators are Gemini text-to-speech voices.</p>
+    <p class="lede">Four narrated explainers, each made by code. Three are cut from real, openly licensed footage, and the fourth is animated from one storyboard file in Blender and Unreal Engine, over public-domain pictures. Every graphic is drawn in code and timed to the narration, and none of the video is AI-generated. The narrators are Gemini text-to-speech voices.</p>
     <p class="who">Yohann Mar Gayao · <a href="mailto:yohanng500@gmail.com?subject=Programmatic%20video%20editing">yohanng500@gmail.com</a> · <a href="https://github.com/DerpyNewb">GitHub</a></p>
-    <nav aria-label="The three videos">
+    <nav aria-label="The four videos">
       <ul class="reel">
         <li><a href="#giza"><img src="media/giza.jpg" alt="" width="1280" height="720"><span><span class="name">The Great Pyramid in numbers</span><span class="kind">History · 53 seconds</span></span></a></li>
         <li><a href="#spf"><img src="media/spf.jpg" alt="" width="1280" height="720"><span><span class="name">What the SPF number means</span><span class="kind">Beauty · 51 seconds</span></span></a></li>
         <li><a href="#sky"><img src="media/sky.jpg" alt="" width="1280" height="720"><span><span class="name">Why the sky is blue</span><span class="kind">Science explainer · 51 seconds</span></span></a></li>
+        <li><a href="#mactan"><img src="media/mactan.jpg" alt="" width="1280" height="720"><span><span class="name">The Battle of Mactan</span><span class="kind">History, animated · 60 seconds</span></span></a></li>
       </ul>
     </nav>
   </div>
@@ -286,6 +290,70 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--m
     </div>
   </section>
 
+  <section class="sheet" id="mactan" aria-labelledby="mactan-title">
+    <div class="wrap">
+      <h2 id="mactan-title">The Battle of Mactan</h2>
+      <p class="meta">For a history channel · 60 seconds · 1080p, with a 9:16 cut</p>
+      <div class="body">
+        <div class="watch">
+          <video controls preload="metadata" playsinline poster="media/mactan.jpg" width="1920" height="1080">
+            <source src="media/mactan.mp4" type="video/mp4">
+            <a href="media/mactan.mp4">Open the video file</a>
+          </video>
+        </div>
+        <figure class="paper">
+          <figcaption>The script, marked where each line starts</figcaption>
+          <p class="script">April 27, 1521. The Battle of Mactan. Magellan's fleet left Spain in 1519. In Cebu, Rajah Humabon became his ally. On Mactan, Zula asked Magellan for help. His rival, Lapulapu, refused to obey Spain. At midnight, sixty armored men set out in three boats. Rocks kept the boats far out, so forty-nine men waded in, thigh-deep. More than fifteen hundred warriors were waiting for them. An arrow hit Magellan's leg, and most of his men fled. A few stayed with him until he fell. Magellan and eight of his men died, with four allies. Lapulapu lost fifteen. Days later, Humabon turned on the crews. The Victoria came home with eighteen men. Today, April 27 is Lapu-Lapu Day in the Philippines.</p>
+          <p class="how">Each blue number is a line of narration. The script was read in one take and cut in the middle of its pauses, and each line starts as its scene or its moment in the battle opens. Pick one to play the video from there.</p>
+        </figure>
+        <div class="notes">
+          <div>
+            <h3>Where the facts come from</h3>
+            <ul>
+              <li><a href="https://archive.org/details/philippineisland33blai">Antonio Pigafetta's eyewitness account, in Blair and Robertson, The Philippine Islands, vol. 33</a></li>
+              <li><a href="https://en.wikipedia.org/wiki/Battle_of_Mactan">Wikipedia, Battle of Mactan</a></li>
+              <li><a href="https://lawphil.net/statutes/repacts/ra2018/ra_11040_2018.html">Republic Act 11040, which made 27 April Lapu-Lapu Day</a></li>
+              <li><a href="https://www.nationalgeographic.com/history/history-magazine/article/240-men-started-magellan-voyage-around-world-only-18-finished-it">National Geographic, on the 18 who finished the voyage</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Pictures and sound</h3>
+            <p>Six public-domain pictures from Wikimedia Commons, each captioned on screen. They include a 16th-century engraving of the fight, a map from a manuscript of Pigafetta's account that marks where Magellan died, and Visayans drawn in the Boxer Codex about 1590. The 14 sound effects are from Freesound. Three are CC BY: "Regular Arrow Shot with rattle" by brendan89 (CC BY 3.0), "Deepest Boom Yet" by hykenfreak (CC BY 4.0) and "Steampunk Crossbow Shot 1" by qubodup (CC BY 4.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file with its source.</p>
+          </div>
+          <div class="wide">
+            <h3>Drawn by code, with no footage</h3>
+            <p>One Python storyboard file says where every shape, line of text and picture sits on each of the 1,440 frames, and both Blender and Unreal Engine render that same file. One dot stands for 10 men, so the landing shows 6 dots for Magellan's 60 men against 150 for more than 1,500 warriors, as Pigafetta counted them.</p>
+          </div>
+          <div class="wide">
+            <h3>The 9:16 cut</h3>
+            <video class="tall" controls preload="none" playsinline poster="media/mactan-portrait.jpg" width="1080" height="1920">
+              <source src="media/mactan-portrait.mp4" type="video/mp4">
+              <a href="media/mactan-portrait.mp4">Open the video file</a>
+            </video>
+            <p>For Shorts and Reels, on the same timing and soundtrack. The text is larger, the timeline runs down the frame, and everything stays clear of the captions and buttons the apps lay over the bottom of the frame.</p>
+          </div>
+          <div class="wide">
+            <h3>The same storyboard in Unreal Engine</h3>
+            <video controls preload="none" playsinline poster="media/mactan-unreal.jpg" width="1920" height="1080">
+              <source src="media/mactan-unreal.mp4" type="video/mp4">
+              <a href="media/mactan-unreal.mp4">Open the video file</a>
+            </video>
+            <p>Unreal draws the shapes as unlit basic meshes and the pictures as flat textures, seen through a long lens so the view is nearly flat. Its colours match Blender's to within 2 or 3 RGB steps.</p>
+          </div>
+          <div class="wide">
+            <h3>One cue from the code</h3>
+            <pre><code>EFFECTS += [(f(852) - 1.5, ARROW, 0, 2.7, -10), (f(852) + 0.05, IMPACT, 0, 0.3, 0)]</code></pre>
+            <p>The arrow's whistle starts 1.5 seconds early, so it strikes as the ring around Magellan's dot appears at frame 852.</p>
+          </div>
+          <div class="wide">
+            <h3>Checked</h3>
+            <p>The storyboard checks its own counts (150 warrior dots, 6 Spanish dots, and 9, 4 and 15 dead), that no picture is stretched, and that nothing leaves the frame. Frames from every scene of each render were reviewed. The narration was first recorded line by line, which sounded like ten different reads and clipped some word endings, so the whole script was read again in one take. Whisper heard all 123 narrated words in the final mix (it wrote the numbers as digits and "crews" as "cruise"), which plays at -14.7 LUFS. Its first read-back heard "waiting for them" as "waiting for him" under the musket fire, so the last two shots were moved to after the line.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="method" id="method" aria-labelledby="method-title">
     <div class="wrap">
       <h2 id="method-title">How each video is made</h2>
@@ -310,13 +378,14 @@ def before(word, n=1):
           <p>Change a word in the script, record it again, and the cuts and graphics move with the new timings.</p>
         </aside>
       </div>
+      <p class="also">The Battle of Mactan is animated instead of cut. Its script and voice go through steps 1, 2 and 8, but a storyboard file sets every frame, Blender and Unreal Engine render it, and <code>sound.py</code> places each line, effect and stretch of ambience on the storyboard's frame numbers.</p>
     </div>
   </section>
 
   <section class="contact" id="contact" aria-labelledby="contact-title">
     <div class="wrap">
       <div class="card">
-        <h2 id="contact-title">Need videos cut like these?</h2>
+        <h2 id="contact-title">Need videos like these?</h2>
         <p>Yohann Mar Gayao builds them with Claude Code from a script and a voiceover, yours or one made for the job, and works remotely.</p>
         <div class="actions">
           <a class="button primary" href="mailto:yohanng500@gmail.com?subject=Programmatic%20video%20editing">Email Yohann about a video</a>
@@ -329,7 +398,7 @@ def before(word, n=1):
 
 <footer>
   <div class="wrap">
-    <p>The narration is AI text-to-speech, read by the Gemini voices Charon, Sulafat and Puck. The footage, photos, music and sound effects come from openly licensed libraries, and every file is credited at the end of its video.</p>
+    <p>The narration is AI text-to-speech, read by the Gemini voices Charon, Sulafat, Puck and Riko. The footage, photos, pictures, music and sound effects are openly licensed or in the public domain. The first three videos credit every file at the end; the Battle of Mactan captions its pictures on screen and credits its sounds on this page, and <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists them all.</p>
   </div>
 </footer>
 

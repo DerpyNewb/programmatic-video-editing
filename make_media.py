@@ -1,4 +1,4 @@
-"""Makes the page's media from the finished videos in ../ad-video-workflow/ads:
+"""Makes the page's media from the finished videos in ../ad-video-workflow/ads and ../animation-workflow/build:
 
   media/<key>.mp4   a web copy (H.264, CRF 24, AAC 128k, fast start)
   media/<key>.jpg   the poster frame
@@ -16,14 +16,20 @@ import sys
 
 HERE = Path(__file__).parent
 ADS = HERE.parent / 'ad-video-workflow' / 'ads'
+ANIMATION = HERE.parent / 'animation-workflow'
 MEDIA = HERE / 'media'
 VIDEOS = {  # key on the page: (folder, poster time in s)
     'giza': ('giza-pyramid-history', 7.0),
     'spf': ('sunscreen-spf-beauty', 3.8),
     'sky': ('blue-sky-explainer', 2.6),
 }
-ALSO = {  # other cuts of a video, shown in its notes: key: (folder, file, poster time in s). No marks of their own.
-    'giza-remotion': ('giza-pyramid-history', 'giza-pyramid-history-remotion.mp4', 7.0),
+ANIMATED = {  # key on the page: (render, poster time in s). Its marks are where sound.py starts each narration line.
+    'mactan': (ANIMATION / 'build' / 'mactan_blender_vo.mp4', 3.0),
+}
+ALSO = {  # other cuts of a video, shown in its notes: key: (file, poster time in s). No marks of their own.
+    'giza-remotion': (ADS / 'giza-pyramid-history' / 'giza-pyramid-history-remotion.mp4', 7.0),
+    'mactan-portrait': (ANIMATION / 'build' / 'mactan_portrait_blender_vo.mp4', 3.0),
+    'mactan-unreal': (ANIMATION / 'build' / 'mactan_unreal_vo.mp4', 3.0),
 }
 NUMBERS = {'two': '2', 'five': '5'}  # Whisper spells some numbers out
 
@@ -80,6 +86,18 @@ def marks(folder):
     return script, out, round(tl.CUT['credits'], 3)
 
 
+def line_marks(folder):
+    """[(index of the script word a narration line opens with, when it starts)] from an animation's sound.py."""
+    spec = importlib.util.spec_from_file_location(f'sound_{folder.name}', folder / 'sound.py')
+    sound = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(sound)
+    script, out = [], []
+    for start, _, text in sound.LINES:
+        out.append((len(script), round(start, 3)))
+        script += text.split()
+    return ' '.join(script), out, sound.SECONDS
+
+
 def ffmpeg(*args):
     subprocess.run(['ffmpeg', '-v', 'error', '-nostdin', '-y', *map(str, args)], check=True)
 
@@ -88,7 +106,7 @@ def web(src, poster, key):
     """The web copy and the poster frame of one video."""
     ffmpeg('-i', src, '-c:v', 'libx264', '-crf', 24, '-preset', 'slow', '-pix_fmt', 'yuv420p',
            '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', MEDIA / f'{key}.mp4')
-    ffmpeg('-ss', poster, '-i', src, '-frames:v', 1, '-vf', 'scale=1280:-2', '-q:v', 4, MEDIA / f'{key}.jpg')
+    ffmpeg('-ss', poster, '-i', src, '-frames:v', 1, '-vf', "scale='min(1280,iw)':-2", '-q:v', 4, MEDIA / f'{key}.jpg')
 
 
 def main():
@@ -102,9 +120,15 @@ def main():
         script, cut_marks, credits = marks(folder)
         data[key] = {'marks': cut_marks, 'credits': credits}
         print(key, len(cut_marks), 'cuts:', ' | '.join(' '.join(script.split()[i:i + 3]) for i, _ in cut_marks))
-    for key, (name, file, poster) in ALSO.items():
+    for key, (src, poster) in ANIMATED.items():
         if 'data' not in sys.argv[1:]:
-            web(ADS / name / file, poster, key)
+            web(src, poster, key)
+        script, cut_marks, end = line_marks(ANIMATION / key)
+        data[key] = {'marks': cut_marks, 'credits': end}
+        print(key, len(cut_marks), 'lines:', ' | '.join(' '.join(script.split()[i:i + 3]) for i, _ in cut_marks))
+    for key, (src, poster) in ALSO.items():
+        if 'data' not in sys.argv[1:]:
+            web(src, poster, key)
     (MEDIA / 'cuts.js').write_text('// Written by make_media.py: [index of the script word a cut lands before, cut time in s]\n'
                                    f'window.CUTS = {json.dumps(data)};\n', encoding='utf-8')
 

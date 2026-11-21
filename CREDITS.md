@@ -1,6 +1,6 @@
 # Credits
 
-Every clip, photo, track and sound effect in the three videos, with its license. Each video also credits them at the end.
+Every clip, photo, picture, track and sound effect in the four videos, with its license. The first three videos also credit them at the end; the Battle of Mactan captions each picture on screen.
 
 ## The Great Pyramid in numbers (`media/giza.mp4`)
 
@@ -52,3 +52,26 @@ Every clip, photo, track and sound effect in the three videos, with its license.
 - "cloud, time lapse, sky clouds, blue, landscape, bright, sky, clouds sky, white, fluffy, blue sky clouds, blue sky, weather, nature, day" by FindingFootage, Pixabay Content License (https://pixabay.com/service/license-summary/), from https://pixabay.com/videos/id-2142/
 
 The narration is Gemini text-to-speech (voices Charon, Sulafat and Puck). The graphics are drawn in code with Manim.
+
+## The Battle of Mactan (`media/mactan.mp4`, `media/mactan-portrait.mp4`, `media/mactan-unreal.mp4`)
+
+- "Magellans death" by Unknown author, Public domain, from https://commons.wikimedia.org/wiki/File:Magellans_death.jpg
+- "Cebu map attached to the Pigafetta's report" by unknown, about the year 1530, Public domain, from https://commons.wikimedia.org/wiki/File:Cebu_map_attached_to_the_Pigafetta%27s_report.jpg
+- "Visayans 1" by Boxer Codex, Public domain, from https://commons.wikimedia.org/wiki/File:Visayans_1.png
+- "Ortelius - Maris Pacifici 1589" by Abraham Ortelius, Public domain, from https://commons.wikimedia.org/wiki/File:Ortelius_-_Maris_Pacifici_1589.jpg
+- "Magellans Ermordung" by Unknown author, Public domain, from https://commons.wikimedia.org/wiki/File:Magellans_Ermordung.jpg
+- "Retrato de Hernando de Magallanes" by Unknown artist, Public domain, from https://commons.wikimedia.org/wiki/File:Retrato_de_Hernando_de_Magallanes.jpg
+- "Musket Explosion" by Willlewis, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Willlewis/sounds/244345
+- "Middle Ages War Cry 2.wav" by joelcarrsound, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/joelcarrsound/sounds/521832
+- "Waves of Hawaii" by florianreichelt, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/florianreichelt/sounds/450755
+- "Regular Arrow Shot with rattle" by brendan89, CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/), from https://freesound.org/people/brendan89/sounds/321553
+- "Reverb Percussion.wav" by Shark_Anthony, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Shark_Anthony/sounds/468903
+- "Pop Click" by GameAudio, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/GameAudio/sounds/220175
+- "Musket Shot.wav" by mlsulli, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/mlsulli/sounds/234869
+- "Swipe Whoosh" by qubodup, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/qubodup/sounds/60007
+- "Deepest Boom Yet" by hykenfreak, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/hykenfreak/sounds/248150
+- "Ding 1" by greenvwbeetle, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/greenvwbeetle/sounds/241288
+- "Kayaking in calm weather" by AugustSandberg, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/AugustSandberg/sounds/509323
+- "People screaming in agony when charging into battle" by florianreichelt, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/florianreichelt/sounds/563011
+- "Arrow Impact" by omerbhatti34, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/omerbhatti34/sounds/521552
+- "Steampunk Crossbow Shot 1" by qubodup, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/qubodup/sounds/219457
