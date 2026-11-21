@@ -25,11 +25,13 @@ VIDEOS = {  # key on the page: (folder, poster time in s)
 }
 ANIMATED = {  # key on the page: (render, poster time in s). Its marks are where sound.py starts each narration line.
     'mactan': (ANIMATION / 'build' / 'mactan_blender_vo.mp4', 3.0),
+    'dalton': (ANIMATION / 'build' / 'dalton_blender_vo.mp4', 3.0),
 }
 ALSO = {  # other cuts of a video, shown in its notes: key: (file, poster time in s). No marks of their own.
     'giza-remotion': (ADS / 'giza-pyramid-history' / 'giza-pyramid-history-remotion.mp4', 7.0),
     'mactan-portrait': (ANIMATION / 'build' / 'mactan_portrait_blender_vo.mp4', 3.0),
     'mactan-unreal': (ANIMATION / 'build' / 'mactan_unreal_vo.mp4', 3.0),
+    'dalton-unreal': (ANIMATION / 'build' / 'dalton_unreal_vo.mp4', 3.0),
 }
 NUMBERS = {'two': '2', 'five': '5'}  # Whisper spells some numbers out
 

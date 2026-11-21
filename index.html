@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yohann Mar Gayao, programmatic video editing</title>
-<meta name="description" content="Four narrated explainers made by code: three cut from real, openly licensed footage and one animated in Blender and Unreal Engine, with graphics timed to the narration and no AI video.">
+<meta name="description" content="Five narrated explainers made by code: three cut from real, openly licensed footage and two animated in Blender and Unreal Engine, with graphics timed to the narration and no AI video.">
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,6 +69,7 @@ a:hover { text-decoration-thickness: 2px; }
 .body { display: grid; gap: 24px; margin-top: 28px; grid-template-areas: "watch" "paper" "notes"; }
 .watch { grid-area: watch; min-width: 0; }
 .watch video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; max-height: calc(100dvh - 48px); background: #000; object-fit: contain; }
+.watch video.tall { width: auto; max-width: 100%; max-height: min(860px, 85dvh); aspect-ratio: 9 / 16; margin: 0 auto; }
 .watch .failed { margin-top: 10px; color: var(--muted); }
 .paper { grid-area: paper; background: var(--paper); color: var(--paper-ink); padding: clamp(20px, 3vw, 32px); margin: 0; min-width: 0; }
 .paper figcaption { font-stretch: 62%; font-weight: 800; font-size: 1.35rem; line-height: 1.1; }
@@ -116,7 +117,7 @@ code { font: 0.875rem/1.5 ui-monospace, Consolas, "Cascadia Mono", monospace; co
 .method aside p { color: var(--muted); margin-bottom: 10px; }
 .method pre { background: var(--ground); }
 .method .also { color: var(--muted); max-width: 62ch; margin-top: 28px; }
-@media (min-width: 1100px) { .reel { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .reel { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
 @media (min-width: 1000px) { .method .grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 56px; align-items: start; } }
 
 /* contact */
@@ -138,14 +139,15 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--m
 <header class="hero">
   <div class="wrap">
     <h1>Programmatic Video Editing</h1>
-    <p class="lede">Four narrated explainers, each made by code. Three are cut from real, openly licensed footage, and the fourth is animated from one storyboard file in Blender and Unreal Engine, over public-domain pictures. Every graphic is drawn in code and timed to the narration, and none of the video is AI-generated. The narrators are Gemini text-to-speech voices.</p>
+    <p class="lede">Five narrated explainers, each made by code. Three are cut from real, openly licensed footage, and two are animated from storyboard files in Blender and Unreal Engine, over public-domain pictures and maps. Every graphic is drawn in code and timed to the narration, and none of the video is AI-generated. The narrators are Gemini text-to-speech voices.</p>
     <p class="who">Yohann Mar Gayao · <a href="mailto:yohanng500@gmail.com?subject=Programmatic%20video%20editing">yohanng500@gmail.com</a> · <a href="https://github.com/DerpyNewb">GitHub</a></p>
-    <nav aria-label="The four videos">
+    <nav aria-label="The five videos">
       <ul class="reel">
         <li><a href="#giza"><img src="media/giza.jpg" alt="" width="1280" height="720"><span><span class="name">The Great Pyramid in numbers</span><span class="kind">History · 53 seconds</span></span></a></li>
         <li><a href="#spf"><img src="media/spf.jpg" alt="" width="1280" height="720"><span><span class="name">What the SPF number means</span><span class="kind">Beauty · 51 seconds</span></span></a></li>
         <li><a href="#sky"><img src="media/sky.jpg" alt="" width="1280" height="720"><span><span class="name">Why the sky is blue</span><span class="kind">Science explainer · 51 seconds</span></span></a></li>
         <li><a href="#mactan"><img src="media/mactan.jpg" alt="" width="1280" height="720"><span><span class="name">The Battle of Mactan</span><span class="kind">History, animated · 60 seconds</span></span></a></li>
+        <li><a href="#dalton"><img src="media/dalton.jpg" alt="" width="1080" height="1920"><span><span class="name">The Battle of Balete Pass</span><span class="kind">History, animated, vertical · 88 seconds</span></span></a></li>
       </ul>
     </nav>
   </div>
@@ -354,6 +356,63 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--m
     </div>
   </section>
 
+  <section class="sheet" id="dalton" aria-labelledby="dalton-title">
+    <div class="wrap">
+      <h2 id="dalton-title">The Battle of Balete Pass</h2>
+      <p class="meta">For a history channel · 88 seconds · vertical, for Shorts and Reels</p>
+      <div class="body">
+        <div class="watch">
+          <video class="tall" controls preload="metadata" playsinline poster="media/dalton.jpg" width="1080" height="1920">
+            <source src="media/dalton.mp4" type="video/mp4">
+            <a href="media/dalton.mp4">Open the video file</a>
+          </video>
+        </div>
+        <figure class="paper">
+          <figcaption>The script, marked where each line starts</figcaption>
+          <p class="script">Balete Pass, 1945. The battle for the road into northern Luzon. General Yamashita's army held the Cagayan Valley, the rice bowl of northern Luzon. Route 5, the road in from the south, crossed the mountains at Balete Pass. From San Jose, it climbs nearly twenty-five miles into the Caraballo Mountains, to three thousand feet at the pass. On February 21, the US 25th Division began its drive north. Japan committed perhaps twelve thousand troops to hold the road. Filipino guerrillas and a Chinese militia fought alongside the Americans. The front was six miles wide, across steep, forested ridges. Carrying parties took twelve hours to reach one forward battalion. On May 9, a patrol reached the pass and found no Japanese. On May 13, Route 5 was declared open. Three days later, a sniper killed Brigadier General James Dalton the Second as he inspected the pass. That September, the pass was renamed Dalton Pass in his memory. The drive cost the 25th Division's regiments five hundred forty-five killed and sixteen hundred fifty wounded. Japan's 10th Division lost almost seven thousand men killed. On May 27, the Americans took Santa Fe, the gateway to the Cagayan Valley. Since 2016, Balete Pass has been a national shrine, and the battle is remembered every May.</p>
+          <p class="how">Each blue number is a line of narration. This time the narration was recorded first, in one take, and every scene was laid out on it, so each mark on screen lands on the word that names it. Pick a number to play the video from there.</p>
+        </figure>
+        <div class="notes">
+          <div>
+            <h3>Where the facts come from</h3>
+            <ul>
+              <li><a href="https://www.ibiblio.org/hyperwar/USA/USA-P-Triumph/USA-P-Triumph-27.html">Robert Ross Smith, Triumph in the Philippines (US Army, 1963), the Army's official history</a></li>
+              <li><a href="https://www.lawphil.net/statutes/comacts/ca1945/ca_679_1945.html">Commonwealth Act 679 (1945), which renamed the pass for General Dalton</a></li>
+              <li><a href="https://lawphil.net/statutes/repacts/ra2016/ra_10796_2016.html">Republic Act 10796 (2016), which made it a national shrine</a></li>
+              <li><a href="https://www.wikidata.org/wiki/Q53625913">The national historical marker at the pass (2005)</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Pictures and sound</h3>
+            <p>Four US Army Signal Corps photos, Dalton's West Point portrait and two maps from Smith's history, all public domain and each captioned on screen, and a 2016 photo of the shrine by Patrick Roque (CC BY 4.0), credited on screen. One photo carried a typed wartime caption with a slur, and the crop leaves it out. The sound effects are from Freesound; two are CC BY: "Distant Battlefield Soundscape" by Kostas17 (CC BY 3.0) and "amazon 04.wav" by volivieri (CC BY 4.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file with its source.</p>
+          </div>
+          <div class="wide">
+            <h3>Facts checked against the sources</h3>
+            <p>The dates, the casualty figures, the heights and the renaming were checked against Smith's text and the laws themselves. Figures the sources can't support were left out: a memorial plaque's totals survive in only one transcription, and a casualty count on Wikipedia isn't in the pages it cites. The screen says what each bar counts: the US figures are the 25th Division's three infantry regiments, and the Japanese figure is the 10th Division's dead, from 21 February until the pass fell.</p>
+          </div>
+          <div class="wide">
+            <h3>The same storyboard in Unreal Engine</h3>
+            <video class="tall" controls preload="none" playsinline poster="media/dalton-unreal.jpg" width="1080" height="1920">
+              <source src="media/dalton-unreal.mp4" type="video/mp4">
+              <a href="media/dalton-unreal.mp4">Open the video file</a>
+            </video>
+            <p>The lines drawn over the maps are rectangles turned to the angle between two points, and both engines draw them the same way.</p>
+          </div>
+          <div class="wide">
+            <h3>One cue from the code</h3>
+            <pre><code>ROUTE5 = [(340, 1447), (374, 1371), (322, 1305), (324, 1282), (359, 1223), (387, 1192)]
+ring(m19(*ROUTE5[2]), (372, S2[1]))</code></pre>
+            <p>Route 5's corners are points on the Army's map, in its own pixels, and the third is the map's pass symbol. The ring around it pops at frame 372, where the narrator says "Balete Pass".</p>
+          </div>
+          <div class="wide">
+            <h3>Checked</h3>
+            <p>The storyboard checks that the three bars share one scale, that every map point falls on its map, that no picture is stretched and that nothing leaves the frame. Every render was reviewed at four frames a second. Whisper heard all 211 narrated words in the final mix (it wrote the numbers as digits and "the Second" as "II"), which plays at -14.2 LUFS.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="method" id="method" aria-labelledby="method-title">
     <div class="wrap">
       <h2 id="method-title">How each video is made</h2>
@@ -378,7 +437,7 @@ def before(word, n=1):
           <p>Change a word in the script, record it again, and the cuts and graphics move with the new timings.</p>
         </aside>
       </div>
-      <p class="also">The Battle of Mactan is animated instead of cut. Its script and voice go through steps 1, 2 and 8, but a storyboard file sets every frame, Blender and Unreal Engine render it, and <code>sound.py</code> places each line, effect and stretch of ambience on the storyboard's frame numbers.</p>
+      <p class="also">The two battles are animated instead of cut. Their scripts and voices go through steps 1, 2 and 8, but a storyboard file sets every frame, Blender and Unreal Engine render it, and <code>sound.py</code> places each line, effect and stretch of ambience on the storyboard's frame numbers. For Balete Pass the narration came first, and the storyboard was laid out on its measured lines.</p>
     </div>
   </section>
 
@@ -398,7 +457,7 @@ def before(word, n=1):
 
 <footer>
   <div class="wrap">
-    <p>The narration is AI text-to-speech, read by the Gemini voices Charon, Sulafat, Puck and Riko. The footage, photos, pictures, music and sound effects are openly licensed or in the public domain. The first three videos credit every file at the end; the Battle of Mactan captions its pictures on screen and credits its sounds on this page, and <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists them all.</p>
+    <p>The narration is AI text-to-speech, read by the Gemini voices Charon, Sulafat, Puck and Riko. The footage, photos, pictures, music and sound effects are openly licensed or in the public domain. The first three videos credit every file at the end; the two battles caption their pictures on screen and credit their sounds on this page, and <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists them all.</p>
   </div>
 </footer>
 

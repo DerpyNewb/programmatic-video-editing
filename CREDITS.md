@@ -1,6 +1,6 @@
 # Credits
 
-Every clip, photo, picture, track and sound effect in the four videos, with its license. The first three videos also credit them at the end; the Battle of Mactan captions each picture on screen.
+Every clip, photo, picture, track and sound effect in the five videos, with its license. The first three videos also credit them at the end; the two battles caption each picture on screen.
 
 ## The Great Pyramid in numbers (`media/giza.mp4`)
 
@@ -75,3 +75,24 @@ The narration is Gemini text-to-speech (voices Charon, Sulafat and Puck). The gr
 - "People screaming in agony when charging into battle" by florianreichelt, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/florianreichelt/sounds/563011
 - "Arrow Impact" by omerbhatti34, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/omerbhatti34/sounds/521552
 - "Steampunk Crossbow Shot 1" by qubodup, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/qubodup/sounds/219457
+
+## The Battle of Balete Pass (`media/dalton.mp4`, `media/dalton-unreal.mp4`)
+
+- "SC 271001 - Men of the 126th Inf., 3rd Bn., going down a hill into Santa Fe, Luzon, P.I. (52307114029)" by Signal Corps Archive from United States, Public domain, from https://commons.wikimedia.org/wiki/File:SC_271001_-_Men_of_the_126th_Inf.,_3rd_Bn.,_going_down_a_hill_into_Santa_Fe,_Luzon,_P.I._(52307114029).jpg
+- "SC 270892 - Patrol of the 3rd Bn., 161st RCT, 25th Inf. Div., goes up a creek bed in the Luzon mountains near Digdig. 12 March, 1945. (52310227810)" by Signal Corps Archive from United States, Public domain, from https://commons.wikimedia.org/wiki/File:SC_270892_-_Patrol_of_the_3rd_Bn.,_161st_RCT,_25th_Inf._Div.,_goes_up_a_creek_bed_in_the_Luzon_mountains_near_Digdig._12_March,_1945._(52310227810).jpg
+- "James Leo Dalton II - Cadet Photo" by United States Military Academy, Public domain, from https://commons.wikimedia.org/wiki/File:James_Leo_Dalton_II_-_Cadet_Photo.jpg
+- "Balete pass (national road, santa fe, nueva vizcaya; 2016)" by Patrick Roque, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0), from https://commons.wikimedia.org/wiki/File:Balete_pass_(national_road,_santa_fe,_nueva_vizcaya;_2016).jpg
+- "SC 310815 - A flamethrower operator of K Company, 3rd Battalion, 161st RCT, 25th Div., attacks a Japanese pillbox at the Balete Pass, March 1945 - Flickr" by Signal Corps Archive from Ireland, United States, Public domain, from https://commons.wikimedia.org/wiki/File:SC_310815_-_A_flamethrower_operator_of_K_Company,_3rd_Battalion,_161st_RCT,_25th_Div.,_attacks_a_Japanese_pillbox_at_the_Balete_Pass,_March_1945_-_Flickr.jpg
+- "SC 205918 - Veteran Artillery men of the "C" Battery., 90th Field Artillery., lay down a murderous barrage on troublesome Japanese artillery positions in Balete Pass, Luzon, Philippine Islands, April 1945 - Flickr" by Signal Corps Archive from Ireland, United States, Public domain, from https://commons.wikimedia.org/wiki/File:SC_205918_-_Veteran_Artillery_men_of_the_%22C%22_Battery.,_90th_Field_Artillery.,_lay_down_a_murderous_barrage_on_troublesome_Japanese_artillery_positions_in_Balete_Pass,_Luzon,_Philippine_Islands,_April_1945_-_Flickr.jpg
+- "Map 19, Troop Dispositions, Northern Luzon, 21 February 1945" by D. Holmes, Jr., in Robert Ross Smith, Triumph in the Philippines (US Army Center of Military History, 1963), Public domain (US Army publication), from https://www.ibiblio.org/hyperwar/USA/USA-P-Triumph/maps/USA-P-Triumph-19.jpg
+- "Map 22, To Balete Pass and Santa Fe, 25th Division, 12 March-31 May 1945" by D. Holmes, Jr., in Robert Ross Smith, Triumph in the Philippines (US Army Center of Military History, 1963), Public domain (US Army publication), from https://www.ibiblio.org/hyperwar/USA/USA-P-Triumph/maps/USA-P-Triumph-22.jpg
+- "Reverb Percussion.wav" by Shark_Anthony, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Shark_Anthony/sounds/468903
+- "Pop Click" by GameAudio, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/GameAudio/sounds/220175
+- "amazon 04.wav" by volivieri, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/volivieri/sounds/241989
+- "carbine single.wav" by cognito perceptu, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/cognito%20perceptu/sounds/46655
+- "Swipe Whoosh" by qubodup, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/qubodup/sounds/60007
+- "Howitzer Artillery Gun Shot Sound Effect 01" by qubodup, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/qubodup/sounds/161343
+- "Ding 1" by greenvwbeetle, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/greenvwbeetle/sounds/241288
+- "Distant Battlefield Soundscape" by Kostas17, CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/), from https://freesound.org/people/Kostas17/sounds/542827
+
+The narration is Gemini text-to-speech (voice Riko). The maps are from the HyperWar transcription of Robert Ross Smith's *Triumph in the Philippines*, a US Army publication.
