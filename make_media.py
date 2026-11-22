@@ -30,6 +30,8 @@ ANIMATED = {  # key on the page: (render, poster time in s). Its marks are where
     'corregidor': (ANIMATION / 'build' / 'corregidor_unreal_vo.mp4', 3.0),
     'irisan': (ANIMATION / 'build' / 'irisan_blender_vo.mp4', 3.0),
     'leyte': (ANIMATION / 'build' / 'leyte_unreal_vo.mp4', 5.0),
+    'manila': (ANIMATION / 'build' / 'manila_unreal_vo.mp4', 3.0),
+    'baguio': (ANIMATION / 'build' / 'baguio_blender_vo.mp4', 3.0),
 }
 ALSO = {  # other cuts of a video, shown in its notes: key: (file, poster time in s). No marks of their own.
     'giza-remotion': (ADS / 'giza-pyramid-history' / 'giza-pyramid-history-remotion.mp4', 7.0),
@@ -94,6 +96,7 @@ def marks(folder):
 
 def line_marks(folder):
     """[(index of the script word a narration line opens with, when it starts)] from an animation's sound.py."""
+    sys.modules.pop('storyboard', None)  # each sound.py imports its own folder's storyboard by that name
     spec = importlib.util.spec_from_file_location(f'sound_{folder.name}', folder / 'sound.py')
     sound = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(sound)

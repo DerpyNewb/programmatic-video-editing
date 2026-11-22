@@ -1,6 +1,6 @@
 # Credits
 
-Every clip, photo, picture, track and sound effect in the nine videos, with its license. The first three videos also credit them at the end; the six battles caption each picture on screen.
+Every clip, photo, picture, track and sound effect in the eleven videos, with its license. The three videos cut from footage also credit them at the end; the eight battles caption each picture on screen.
 
 ## The Great Pyramid in numbers (`media/giza.mp4`)
 
@@ -170,3 +170,51 @@ The skyline and the relief are drawn from elevation data. Elevation: Terrain Til
 - "Thunderstorm, rain and thunder in the french countryside during the summer" by felix.blume, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/felix.blume/sounds/133991
 
 The island is drawn from elevation data. Elevation: Terrain Tiles on AWS (Mapzen). SRTM and GMTED2010 data courtesy of the U.S. Geological Survey; ETOPO1 from the U.S. National Oceanic and Atmospheric Administration. The roads are © OpenStreetMap contributors (ODbL). The unit and ship symbols are drawn with milsymbol (MIT). The narration is Gemini text-to-speech (voice Riko).
+
+## The Battle of Manila (`media/manila.mp4`)
+
+- "Filipino survivors of the assault on the walled city area, after their liberation by U.S. troops, 23 February 1945" by U.S. Navy (National Archives 80-G-273380, via NHHC), Public domain, from https://commons.wikimedia.org/wiki/File:80-G-273380.jpg
+- "Complete demolition of the Legislature Building in Manila, P.I." by U.S. National Archives (NARA 292587), Public domain, from https://commons.wikimedia.org/wiki/File:Bombing_campaign._Southeast_Asia_%26_the_Pacific_-_NARA_-_292587.jpg
+- "World War II. Emaciated internees at Santo Tomas Internment Center, Manila. Feb 1945" by U.S. Army Signal Corps, Public domain, from https://commons.wikimedia.org/wiki/File:Liberation-Men--_santo_tomas.jpg
+- "U.S. troops fighting in the Walled City, Manila" by U.S. Army Signal Corps (SC 203048), Public domain, from https://commons.wikimedia.org/wiki/File:ManilaIntramuros.jpg
+- "Distant Boom.wav" by Henrythetrain, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Henrythetrain/sounds/142598
+- "building collapse / demolition" by greyfeather, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/greyfeather/sounds/712918
+- "040313_INS Quatre Cantons_Ciutat del Futur.wav" by sonsdebarcelona, CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/), from https://freesound.org/people/sonsdebarcelona/sounds/180013
+- "Sniper Rifle Shot [FpR3Ni1LSBg].flac" by qubodup, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/qubodup/sounds/182051
+- "M1A2 Abrams Accelerating.wav" by flyguy85, CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/), from https://freesound.org/people/flyguy85/sounds/156919
+- "Machine Gun Burst" by qubodup, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/qubodup/sounds/482121
+- "Distant Gunshots in Mexico City" by marcelorabago, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/marcelorabago/sounds/469895
+- "fire_embers_large_campfire.aif" by Dynamicell, CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/), from https://freesound.org/people/Dynamicell/sounds/17554
+- "Church Bells, Distant, A.wav" by InspectorJ, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/InspectorJ/sounds/398195
+- "Crowd Cheering" by SoundsExciting, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/SoundsExciting/sounds/365132
+- "building_collapse04_enclosed_space.wav" by onteca, CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/), from https://freesound.org/people/onteca/sounds/197770
+- "S06-01 Machine gun bursts with echo.wav" by craigsmith, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/craigsmith/sounds/675596
+- "Campfire.wav" by el-bee, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/el-bee/sounds/318889
+- "Church Bell" by bone666138, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/bone666138/sounds/198843
+- "Clock ticking" by olver, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/olver/sounds/130388
+- "Swosh swoosh whoosh air sound, free, high quality" by qubodup, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/qubodup/sounds/60026
+- "Regular Sniper Rifle Shot [w/ Bolt Reload] (Outdoor/Mixed)" by EFlexMusic, CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/), from https://freesound.org/people/EFlexMusic/sounds/398348
+
+## The Battle of Baguio (`media/baguio.mp4`)
+
+- "General Yamashita Surrenders" by U.S. Army Signal Corps (NARA; "III-SC 662462" on Commons, probably 111-SC-662462), Public domain, from https://commons.wikimedia.org/wiki/File:General_Yamashita_Surrenders.jpg
+- "Philippine Island - Baguio - NARA - 68155822" by U.S. National Archives (NARA 68155822), Public domain, from https://commons.wikimedia.org/wiki/File:Philippine_Island_-_Baguio_-_NARA_-_68155822.jpg
+- "Philippine Island - Luzon Island - NARA - 68156779" by U.S. National Archives (NARA 68156779), Public domain, from https://commons.wikimedia.org/wiki/File:Philippine_Island_-_Luzon_Island_-_NARA_-_68156779.jpg
+- "SC 396829 - Two members of the 129th Inf., 37th Div., eating C rations beside gravestones at Baguio Cemetary, Luzon, P.I. (52597052573)" by U.S. Army Signal Corps (SC 396829), photographer Stettner, Public domain, from https://commons.wikimedia.org/wiki/File:SC_396829_-_Two_members_of_the_129th_Inf.,_37th_Div.,_eating_C_rations_beside_gravestones_at_Baguio_Cemetary,_Luzon,_P.I._(52597052573).jpg
+- "Baguio" by U.S. Army, in Robert Ross Smith, Triumph in the Philippines (1963), p. 455, Public domain, from https://www.ibiblio.org/hyperwar/USA/USA-P-Triumph/USA-P-Triumph-24.html
+- "Route 11 winding south from Baguio" by U.S. Army, in Robert Ross Smith, Triumph in the Philippines (1963), p. 469, Public domain, from https://www.ibiblio.org/hyperwar/USA/USA-P-Triumph/USA-P-Triumph-25.html
+- "Military Vehicle Humming.flac" by qubodup, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/qubodup/sounds/182793
+- "Mountain Wind – Silence, Ambiance, Air, Tone, Buzz, Noise" by senorstudy, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/senorstudy/sounds/437283
+- "Drum Hit 2.wav" by robertmcdonald, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/robertmcdonald/sounds/139506
+- "School Bell Chime" by melokacool, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/melokacool/sounds/662162
+- "Mouse click sounds" by Masgame, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Masgame/sounds/347544
+- "air-raid.wav" by blaukreuz, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/blaukreuz/sounds/160888
+- "AK47 down the block.aif" by Franki-01234, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Franki-01234/sounds/201669
+- "moderate bomb explosion" by simoneyoh3998, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/simoneyoh3998/sounds/500673
+- "Distant Blasts.wav" by DylanTheFish, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/DylanTheFish/sounds/455513
+- "Bomb Explosion Far.wav" by Fester993, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Fester993/sounds/563932
+- "THUNDER / Rain low frequencies 4-CHANNEL-48kHz.wav" by BlueDelta, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/BlueDelta/sounds/367222
+- "Pine forest birds in Maclear, Eastern Cape" by Vortichez, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/Vortichez/sounds/545432
+- "Swoosh" by EminYILDIRIM, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/EminYILDIRIM/sounds/555057
+- "AIRPLANE FLYOVER.mp3" by tubbers, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/tubbers/sounds/211870
+- "M4 Assault rifle firing.wav" by mnslugger20, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/mnslugger20/sounds/259758
