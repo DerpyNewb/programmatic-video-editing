@@ -28,6 +28,8 @@ ANIMATED = {  # key on the page: (render, poster time in s). Its marks are where
     'dalton': (ANIMATION / 'build' / 'dalton_blender_vo.mp4', 3.0),
     'bataan': (ANIMATION / 'build' / 'bataan_blender_vo.mp4', 3.0),
     'corregidor': (ANIMATION / 'build' / 'corregidor_unreal_vo.mp4', 3.0),
+    'irisan': (ANIMATION / 'build' / 'irisan_blender_vo.mp4', 3.0),
+    'leyte': (ANIMATION / 'build' / 'leyte_unreal_vo.mp4', 5.0),
 }
 ALSO = {  # other cuts of a video, shown in its notes: key: (file, poster time in s). No marks of their own.
     'giza-remotion': (ADS / 'giza-pyramid-history' / 'giza-pyramid-history-remotion.mp4', 7.0),

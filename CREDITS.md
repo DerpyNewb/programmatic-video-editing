@@ -1,6 +1,6 @@
 # Credits
 
-Every clip, photo, picture, track and sound effect in the seven videos, with its license. The first three videos also credit them at the end; the four battles caption each picture on screen.
+Every clip, photo, picture, track and sound effect in the nine videos, with its license. The first three videos also credit them at the end; the six battles caption each picture on screen.
 
 ## The Great Pyramid in numbers (`media/giza.mp4`)
 
@@ -128,3 +128,45 @@ The terrain is real elevation data. Elevation: Terrain Tiles on AWS (Mapzen). SR
 - "Distant Battlefield Soundscape" by Kostas17, CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/), from https://freesound.org/people/Kostas17/sounds/542827
 
 The bay is drawn from the same elevation data. Elevation: Terrain Tiles on AWS (Mapzen). SRTM and GMTED2010 data courtesy of the U.S. Geological Survey; ETOPO1 from the U.S. National Oceanic and Atmospheric Administration. The maps are Louis Morton's, from *The Fall of the Philippines*, a US Army publication. The narration is Gemini text-to-speech (voice Riko).
+
+## The Battle of Irisan (`media/irisan.mp4`)
+
+- "Machine Gun Shooting" by deleted_user_7146007, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/deleted_user_7146007/sounds/383796
+- "Airplane flyby at Sea.wav" by LarsErikErtzgaardRingen, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/LarsErikErtzgaardRingen/sounds/594014
+- "WAR-TANK-ENGINE AND CRAWLERS-Crawlers rattling and engine sounds-0004.wav" by JoniHeinonen, CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/), from https://freesound.org/people/JoniHeinonen/sounds/161894
+- "Click_1.wav" by JonnyRuss01, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/JonnyRuss01/sounds/478197
+- "Machine Gun 001 - triple shot.ogg" by pgi, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/pgi/sounds/212600
+- "Mortar" by Mozfoo, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Mozfoo/sounds/529239
+- "mountain wind heavy strong gusts Swiss Alps.flac" by kyles, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/kyles/sounds/454092
+- "Mortar Shots.flac" by qubodup, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/qubodup/sounds/184382
+- "Creepy Bass Hit" by snakebarney, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/snakebarney/sounds/138120
+- "Artillery (distance)" by 2887679652, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/2887679652/sounds/171475
+
+Pictures (all public domain, US government works):
+
+- Map 21, "The Irisan Gorge Area", and the photos "Route 9 Near Burgos, Looking Eastward" and "Irisan Gorge", from Robert Ross Smith, Triumph in the Philippines (US Army, Office of the Chief of Military History, 1963), from https://www.ibiblio.org/hyperwar/USA/USA-P-Triumph/index.html (maps/USA-P-Triumph-21.jpg, img/USA-P-Triumph-p471.jpg, img/USA-P-Triumph-p482.jpg)
+- "SC 364518 - Pfc. Adolph Fox, Co. D., 130th Inf., ... firing at sniper positions from top of Monastery Hill, overlooking Baguio city", 26 April 1945, photographer Simpkins, US Army Signal Corps (US National Archives), public domain, from https://commons.wikimedia.org/wiki/File:SC_364518_-_Pfc._Adolph_Fox,_Co._D.,_130th_Inf.,_from_Detroit,_Mich.,_firing_at_sniper_positions_from_top_of_Monastery_Hill,_overlooking_Baguio_city,_Luzon,_P.I._(52118827091).jpg
+- "Surrender of Japanese Forces in the Philippines, 1945", Naval History and Heritage Command NH 97276, public domain, from https://commons.wikimedia.org/wiki/File:Surrender_of_Japanese_Forces_in_the_Philippines_1945.jpg
+
+The skyline and the relief are drawn from elevation data. Elevation: Terrain Tiles on AWS (Mapzen). SRTM and GMTED2010 data courtesy of the U.S. Geological Survey; ETOPO1 from the U.S. National Oceanic and Atmospheric Administration. Route 9 is today's road, © OpenStreetMap contributors (ODbL). The unit symbols are drawn with milsymbol (MIT). The narration is Gemini text-to-speech (voice Riko).
+
+## The Battle of Leyte (`media/leyte.mp4`)
+
+- "Gen. Douglas MacArthur wades ashore during initial landings at Leyte, P.I. October 1944 HD-SN-99-02866" by U.S. Army Signal Corps (NARA 111-SC-407101), Public domain, from https://commons.wikimedia.org/wiki/File:Gen._Douglas_MacArthur_wades_ashore_during_initial_landings_at_Leyte,_P.I._October_1944_HD-SN-99-02866.jpg
+- "Japanese destroyer sinking in Ormoc Bay 1944" by U.S. Navy (plane from USS Yorktown (CV-10)), Public domain, from https://commons.wikimedia.org/wiki/File:Japanese_destroyer_sinking_in_Ormoc_Bay_1944.jpg
+- "Convoy carrying 77th Division approaches Deposito" by U.S. Army, in M. Hamlin Cannon, Leyte (1954), p. 282, Public domain, from https://www.ibiblio.org/hyperwar/USA/USA-P-Return/USA-P-Return-16.html
+- "Notification Chime" by hykenfreak, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/hykenfreak/sounds/202029
+- "boat engine throaty.flac" by kyles, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/kyles/sounds/453770
+- "S20-14 Cannon fire; shells fall nearby.wav" by craigsmith, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/craigsmith/sounds/675611
+- "Bass Drum Hit 1.wav" by CouleurCasquette, CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/), from https://freesound.org/people/CouleurCasquette/sounds/349016
+- "Ocean Noise - Surf" by amholma, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/amholma/sounds/372181
+- "boat engine small ferry bassy NYC, USA.flac" by kyles, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/kyles/sounds/452924
+- "Far_Off_Boom.wav" by CaCtUs2003, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/CaCtUs2003/sounds/147584
+- "click 1 d.wav" by TicTacShutUp, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/TicTacShutUp/sounds/406
+- "Battle, war zone gun fight" by alanmcki, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/alanmcki/sounds/326442
+- "Deep Whoosh #1" by Kinoton, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Kinoton/sounds/351256
+- "ExplosionBombBlastAmbient6.wav" by zimbot, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/zimbot/sounds/120573
+- "Propeller Plane" by cliftonmcarlson, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/cliftonmcarlson/sounds/251971
+- "Thunderstorm, rain and thunder in the french countryside during the summer" by felix.blume, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/felix.blume/sounds/133991
+
+The island is drawn from elevation data. Elevation: Terrain Tiles on AWS (Mapzen). SRTM and GMTED2010 data courtesy of the U.S. Geological Survey; ETOPO1 from the U.S. National Oceanic and Atmospheric Administration. The roads are © OpenStreetMap contributors (ODbL). The unit and ship symbols are drawn with milsymbol (MIT). The narration is Gemini text-to-speech (voice Riko).
