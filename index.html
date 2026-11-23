@@ -21,6 +21,7 @@
   --paper-muted: #5c5a55;
   --pencil: #2448c8;
   --pencil-wash: #d7d9e5;
+  --pencil-now: #b9c6f2;
   --pencil-light: #9db4ff;
   --edge: clamp(16px, 4vw, 48px);
   --gap: clamp(40px, 7vw, 96px);
@@ -39,7 +40,9 @@ h1, h2, h3 { font-stretch: 62%; font-weight: 800; line-height: 1.02; margin: 0; 
 h1 { font-size: clamp(2.8rem, 9vw, 6rem); letter-spacing: -0.01em; }
 h2 { font-size: clamp(2rem, 5vw, 3.4rem); }
 h3 { font-size: 1.35rem; line-height: 1.15; }
+h1, h2, h3 { text-wrap: balance; }
 p { margin: 0; }
+p, li { text-wrap: pretty; }
 a { color: inherit; text-underline-offset: 0.18em; }
 a:hover { text-decoration-thickness: 2px; }
 :focus-visible { outline: 3px solid var(--pencil-light); outline-offset: 3px; border-radius: 2px; }
@@ -52,7 +55,10 @@ a:hover { text-decoration-thickness: 2px; }
 .hero .lede { max-width: 46ch; font-size: clamp(1.15rem, 2.2vw, 1.4rem); line-height: 1.5; margin-top: 24px; }
 .hero .who { margin-top: 20px; color: var(--muted); }
 .hero .who a { color: var(--text); }
-.reel { list-style: none; margin: clamp(36px, 6vw, 64px) 0 0; padding: 0; display: grid; gap: 16px; }
+.reels { margin-top: clamp(36px, 6vw, 64px); }
+.reels .group { font-stretch: 62%; font-weight: 800; font-size: 1.1rem; color: var(--muted); margin: 32px 0 12px; }
+.reels .group:first-child { margin-top: 0; }
+.reel { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
 .reel a { display: grid; grid-template-columns: 132px 1fr; gap: 14px; align-items: center; text-decoration: none; padding: 6px; margin: -6px; }
 .reel img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; display: block; border: 1px solid var(--line); }
 .reel a:hover img { border-color: var(--text); }
@@ -66,17 +72,19 @@ a:hover { text-decoration-thickness: 2px; }
 /* one sheet per video */
 .sheet { border-top: 1px solid var(--line); padding: var(--gap) 0; scroll-margin-top: 16px; }
 .sheet .meta { color: var(--muted); margin-top: 10px; }
-.body { display: grid; gap: 24px; margin-top: 28px; grid-template-areas: "watch" "paper" "notes"; }
-.watch { grid-area: watch; min-width: 0; }
+.body { margin-top: 28px; }
+/* The video stays on screen while its script is read, so a picked line and the picture are seen together.
+   Below 1180 px the pair is a plain block, so the sticky video can ride down the whole paper. */
+.watch { min-width: 0; position: sticky; top: 0; z-index: 1; background: var(--ground); padding-bottom: 12px; }
 .watch video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; max-height: calc(100dvh - 48px); background: #000; object-fit: contain; }
-.watch video.tall { width: auto; max-width: 100%; max-height: min(860px, 85dvh); aspect-ratio: 9 / 16; margin: 0 auto; }
-.watch .failed { margin-top: 10px; color: var(--muted); }
-.paper { grid-area: paper; background: var(--paper); color: var(--paper-ink); padding: clamp(20px, 3vw, 32px); margin: 0; min-width: 0; }
+.watch video.tall { width: auto; max-width: 100%; height: 55dvh; max-height: none; aspect-ratio: 9 / 16; margin: 0 auto; }
+.failed { margin-top: 10px; color: var(--muted); }
+.paper { background: var(--paper); color: var(--paper-ink); padding: clamp(20px, 3vw, 32px); margin: 12px 0 0; min-width: 0; }
 .paper figcaption { font-stretch: 62%; font-weight: 800; font-size: 1.35rem; line-height: 1.1; }
-.paper .script { font-size: 1.125rem; line-height: 2; margin-top: 14px; }
-.paper .how { color: var(--paper-muted); font-size: 0.95rem; line-height: 1.5; margin-top: 16px; }
-.phrase { padding: 0.12em 0; transition: background-color 0.2s; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
-.phrase.now { background: var(--pencil-wash); }
+.paper .script { font-size: 1.125rem; line-height: 2; margin-top: 14px; max-width: 68ch; }
+.paper .how { color: var(--paper-muted); font-size: 0.95rem; line-height: 1.5; margin-top: 16px; max-width: 60ch; }
+.phrase { padding: 0.12em 0; transition: background-color 0.2s, box-shadow 0.2s; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.phrase.now { background: var(--pencil-now); box-shadow: inset 0 -3px var(--pencil); }
 .cut {
   display: inline-flex; align-items: center; justify-content: center;
   min-width: 1.75em; height: 1.75em; padding: 0 0.3em; margin-right: 0.2em;
@@ -88,10 +96,19 @@ a:hover { text-decoration-thickness: 2px; }
 .cut:hover { background: var(--pencil-wash); }
 .phrase.now .cut { background: var(--pencil); color: var(--paper); }
 .paper :focus-visible { outline-color: var(--pencil); }
+@media (max-width: 1179px) { /* a mark reached by Tab scrolls clear of the sticky video above it */
+  .cut { scroll-margin-top: calc((100vw - 2 * var(--edge)) * 9 / 16 + 32px); }
+  .pair:has(video.tall) .cut { scroll-margin-top: calc(55dvh + 32px); }
+}
 @media (prefers-reduced-motion: reduce) { .phrase { transition: none; } }
-.notes { grid-area: notes; display: grid; gap: 22px; align-content: start; min-width: 0; }
+.notes { display: grid; gap: 22px 32px; margin-top: 32px; align-content: start; min-width: 0; }
 .notes h3 { margin-bottom: 6px; }
-.notes p, .notes li { color: var(--muted); }
+.notes p, .notes li { color: var(--muted); max-width: 62ch; }
+.notes details { border-top: 1px solid var(--line); }
+.notes summary { cursor: pointer; font-weight: 700; padding: 12px 0; }
+.notes summary::marker { color: var(--muted); }
+.notes summary:hover { text-decoration: underline; text-underline-offset: 0.18em; }
+.more { display: grid; gap: 22px 32px; padding: 10px 0 4px; }
 .notes ul { margin: 0; padding-left: 1.1em; }
 .notes li + li { margin-top: 4px; }
 .notes a { color: var(--text); }
@@ -99,13 +116,22 @@ a:hover { text-decoration-thickness: 2px; }
 .notes video.tall { width: auto; max-width: 100%; max-height: min(640px, 80dvh); aspect-ratio: 9 / 16; }
 pre { margin: 0 0 8px; background: var(--field); border: 1px solid var(--line); padding: 12px 14px; white-space: pre-wrap; overflow-wrap: anywhere; }
 code { font: 0.875rem/1.5 ui-monospace, Consolas, "Cascadia Mono", monospace; color: var(--text); }
+.back { margin-top: 24px; }
+.back a { display: inline-block; padding: 10px 0; color: var(--muted); }
+.back a:hover { color: var(--text); }
 @media (min-width: 760px) {
-  .body { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "watch watch" "paper notes"; gap: 32px; }
+  .notes { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .notes > .wide, .notes > details { grid-column: 1 / -1; }
 }
 @media (min-width: 1180px) {
-  .body { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); grid-template-areas: "watch paper" "notes paper"; align-items: start; gap: 32px 40px; }
-  .notes { grid-template-columns: 1fr 1fr; column-gap: 32px; }
-  .notes .wide { grid-column: 1 / -1; }
+  /* Video and script side by side; a vertical video's column is exactly the video's width. */
+  .body { --tall-h: min(860px, calc(100dvh - 32px)); }
+  .pair { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+  .pair:has(video.tall) { grid-template-columns: calc(var(--tall-h) * 9 / 16) minmax(0, 1fr); }
+  .watch { top: 16px; padding-bottom: 0; background: none; }
+  .watch video.tall { width: 100%; height: auto; }
+  .pair .paper { margin: 0; }
+  .more { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 }
 
 /* how they're made */
@@ -118,7 +144,9 @@ code { font: 0.875rem/1.5 ui-monospace, Consolas, "Cascadia Mono", monospace; co
 .method pre { background: var(--ground); }
 .method .also { color: var(--muted); max-width: 62ch; margin-top: 28px; }
 @media (min-width: 1100px) { .reel { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
-@media (min-width: 1000px) { .method .grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 56px; align-items: start; } }
+/* The cut rule needs about 620 px to sit on its own lines; it gets them from 700 px stacked and 1400 px side by side. */
+@media (min-width: 700px) { .method pre { white-space: pre; overflow-wrap: normal; overflow-x: auto; } }
+@media (min-width: 1400px) { .method .grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: start; } }
 
 /* contact */
 .contact { padding: var(--gap) 0; }
@@ -131,6 +159,7 @@ code { font: 0.875rem/1.5 ui-monospace, Consolas, "Cascadia Mono", monospace; co
 .button:hover { text-decoration: underline; }
 .card :focus-visible { outline-color: var(--pencil); }
 footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 0.95rem; }
+footer p { max-width: 64ch; }
 </style>
 </head>
 <body>
@@ -141,19 +170,29 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--m
     <h1>Programmatic Video Editing</h1>
     <p class="lede">Fourteen narrated explainers, each made by code. Eleven are animated from storyboard files in Blender and Unreal Engine, over public-domain pictures, maps and real terrain, and the first five are in 3D, two of them with whole cities built from OpenStreetMap. Three are cut from real, openly licensed footage. Every graphic is drawn in code and timed to the narration, and none of the video is AI-generated. The narrators are Gemini text-to-speech voices.</p>
     <p class="who">Yohann Mar Gayao · <a href="mailto:yohanng500@gmail.com?subject=Programmatic%20video%20editing">yohanng500@gmail.com</a> · <a href="https://github.com/DerpyNewb">GitHub</a></p>
-    <nav aria-label="The fourteen videos">
-      <ul class="reel">
+    <nav class="reels" id="videos" aria-label="The fourteen videos">
+      <p class="group" id="reel-3d">3D</p>
+      <ul class="reel" aria-labelledby="reel-3d">
         <li><a href="#manila"><img src="media/manila.jpg" alt="" width="1080" height="1920"><span><span class="name">The Battle of Manila</span><span class="kind">History, 3D, vertical · 118 seconds</span></span></a></li>
         <li><a href="#baguio"><img src="media/baguio.jpg" alt="" width="1080" height="1920"><span><span class="name">The Battle of Baguio</span><span class="kind">History, 3D, vertical · 112 seconds</span></span></a></li>
         <li><a href="#leyte"><img src="media/leyte.jpg" alt="" width="1080" height="1920"><span><span class="name">The Battle of Leyte</span><span class="kind">History, 3D, vertical · 112 seconds</span></span></a></li>
         <li><a href="#bataan"><img src="media/bataan.jpg" alt="" width="1080" height="1920"><span><span class="name">The Battle of Bataan</span><span class="kind">History, 3D, vertical · 102 seconds</span></span></a></li>
         <li><a href="#manila1570"><img src="media/manila1570.jpg" alt="" width="1080" height="1920"><span><span class="name">The Battle of Manila, 1570</span><span class="kind">History, 3D, vertical · 97 seconds</span></span></a></li>
+      </ul>
+      <p class="group" id="reel-footage">Cut from footage</p>
+      <ul class="reel" aria-labelledby="reel-footage">
         <li><a href="#giza"><img src="media/giza.jpg" alt="" width="1280" height="720"><span><span class="name">The Great Pyramid in numbers</span><span class="kind">History · 53 seconds</span></span></a></li>
         <li><a href="#spf"><img src="media/spf.jpg" alt="" width="1280" height="720"><span><span class="name">What the SPF number means</span><span class="kind">Beauty · 51 seconds</span></span></a></li>
         <li><a href="#sky"><img src="media/sky.jpg" alt="" width="1280" height="720"><span><span class="name">Why the sky is blue</span><span class="kind">Science explainer · 51 seconds</span></span></a></li>
+      </ul>
+      <p class="group" id="reel-animated">Animated</p>
+      <ul class="reel" aria-labelledby="reel-animated">
         <li><a href="#mactan"><img src="media/mactan.jpg" alt="" width="1280" height="720"><span><span class="name">The Battle of Mactan</span><span class="kind">History, animated · 60 seconds</span></span></a></li>
         <li><a href="#dalton"><img src="media/dalton.jpg" alt="" width="1080" height="1920"><span><span class="name">The Battle of Balete Pass</span><span class="kind">History, animated, vertical · 88 seconds</span></span></a></li>
         <li><a href="#lamitan"><img src="media/lamitan.jpg" alt="" width="1080" height="1920"><span><span class="name">Lamitan, 1637</span><span class="kind">History, animated, vertical · 87 seconds</span></span></a></li>
+      </ul>
+      <p class="group" id="reel-layered">Layered 2.5D</p>
+      <ul class="reel" aria-labelledby="reel-layered">
         <li><a href="#corregidor"><img src="media/corregidor.jpg" alt="" width="1080" height="1920"><span><span class="name">The Battle of Corregidor</span><span class="kind">History, layered 2.5D, vertical · 98 seconds</span></span></a></li>
         <li><a href="#irisan"><img src="media/irisan.jpg" alt="" width="1080" height="1920"><span><span class="name">The Battle of Irisan</span><span class="kind">History, layered 2.5D, vertical · 102 seconds</span></span></a></li>
         <li><a href="#bangkusay"><img src="media/bangkusay.jpg" alt="" width="1080" height="1920"><span><span class="name">The Battle of Bangkusay Channel</span><span class="kind">History, layered 2.5D, vertical · 109 seconds</span></span></a></li>
@@ -168,17 +207,19 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--m
       <h2 id="manila-title">The Battle of Manila</h2>
       <p class="meta">For a history channel · 118 seconds · vertical, for Shorts and Reels · 3D in Unreal Engine · <a href="https://youtube.com/shorts/i-WbGF7iXPw">Watch on YouTube</a></p>
       <div class="body">
-        <div class="watch">
-          <video class="tall" controls preload="metadata" playsinline poster="media/manila.jpg" width="1080" height="1920">
-            <source src="media/manila.mp4" type="video/mp4">
-            <a href="media/manila.mp4">Open the video file</a>
-          </video>
+        <div class="pair">
+          <div class="watch">
+            <video class="tall" controls preload="metadata" playsinline poster="media/manila.jpg" width="1080" height="1920">
+              <source src="media/manila.mp4" type="video/mp4">
+              <a href="media/manila.mp4">Open the video file</a>
+            </video>
+          </div>
+          <figure class="paper">
+            <figcaption>The script, marked where each line starts</figcaption>
+            <p class="script">On February 3, 1945, American cavalry broke into Manila's Santo Tomas University, where almost four thousand civilian internees were held. The next night, infantry found about eight hundred prisoners of war and five hundred thirty internees in Old Bilibid Prison. Yamashita had not planned to defend Manila, but Admiral Iwabuchi's naval command chose to fight, with about ten thousand troops in the city. Falling back over the Pasig, they blew the bridges, and fires from their demolitions swept the districts north of the river. On February 7, the 37th Division crossed the Pasig in assault boats, just east of Malacañan Palace. With the 11th Airborne pushing up from the south, the city was sealed off on February 12. As casualties mounted, the Americans lifted their limits on artillery, but air strikes stayed banned. Expecting only death, the Japanese committed all sorts of excesses against the city and the Filipinos still under their control. On February 23, after days of shelling, troops stormed Intramuros by boat across the Pasig and through a breach by Quezon Gate. Nearly three thousand hostages, mostly women and children, came out of its churches. Most of the men had been murdered in Fort Santiago's dungeons. Just before the last fighting ended, MacArthur restored the Commonwealth government at Malacañan. Your capital city, he said, cruelly punished though it be, has regained its rightful place. The last defenders held the Legislative, Finance and Agriculture Buildings. Howitzers firing point-blank wrecked them, and on March 3, it was over. The Americans lost over a thousand killed and fifty-five hundred wounded; the Japanese, some sixteen thousand killed. An estimated one hundred thousand Filipino civilians lost their lives.</p>
+            <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and the camera's flight, the ruins and the areas held were laid out on it. Pick a number to play the video from there.</p>
+          </figure>
         </div>
-        <figure class="paper">
-          <figcaption>The script, marked where each line starts</figcaption>
-          <p class="script">On February 3, 1945, American cavalry broke into Manila's Santo Tomas University, where almost four thousand civilian internees were held. The next night, infantry found about eight hundred prisoners of war and five hundred thirty internees in Old Bilibid Prison. Yamashita had not planned to defend Manila, but Admiral Iwabuchi's naval command chose to fight, with about ten thousand troops in the city. Falling back over the Pasig, they blew the bridges, and fires from their demolitions swept the districts north of the river. On February 7, the 37th Division crossed the Pasig in assault boats, just east of Malacañan Palace. With the 11th Airborne pushing up from the south, the city was sealed off on February 12. As casualties mounted, the Americans lifted their limits on artillery, but air strikes stayed banned. Expecting only death, the Japanese committed all sorts of excesses against the city and the Filipinos still under their control. On February 23, after days of shelling, troops stormed Intramuros by boat across the Pasig and through a breach by Quezon Gate. Nearly three thousand hostages, mostly women and children, came out of its churches. Most of the men had been murdered in Fort Santiago's dungeons. Just before the last fighting ended, MacArthur restored the Commonwealth government at Malacañan. Your capital city, he said, cruelly punished though it be, has regained its rightful place. The last defenders held the Legislative, Finance and Agriculture Buildings. Howitzers firing point-blank wrecked them, and on March 3, it was over. The Americans lost over a thousand killed and fifty-five hundred wounded; the Japanese, some sixteen thousand killed. An estimated one hundred thousand Filipino civilians lost their lives.</p>
-          <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and the camera's flight, the ruins and the areas held were laid out on it. Pick a number to play the video from there.</p>
-        </figure>
         <div class="notes">
           <div>
             <h3>Where the facts come from</h3>
@@ -189,30 +230,36 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--m
             </ul>
           </div>
           <div>
-            <h3>The city, pictures and sound</h3>
-            <p>The city is today's: about 195,000 building footprints from OpenStreetMap, drawn low to stand in for the 1945 city, with ten buildings that stood in 1945 at their own height, among them the Legislative Building, Manila City Hall and San Agustin Church. Land reclaimed from the bay since the war is drawn as sea. The ground is elevation data from AWS Terrain Tiles (Mapzen; SRTM and GMTED2010 from the US Geological Survey, ETOPO1 from NOAA), rendered at true scale under Unreal's physical sun, sky and volumetric clouds. The four photos are from the US Army Signal Corps, the US Navy and the National Archives, all public domain and captioned on screen. The unit symbols are drawn with milsymbol (MIT). The sound effects are from Freesound; eight are CC BY: "040313_INS Quatre Cantons_Ciutat del Futur.wav" by sonsdebarcelona, "M1A2 Abrams Accelerating.wav" by flyguy85, "fire_embers_large_campfire.aif" by Dynamicell, "building_collapse04_enclosed_space.wav" by onteca and "Regular Sniper Rifle Shot [w/ Bolt Reload] (Outdoor/Mixed)" by EFlexMusic (CC BY 3.0), and "Church Bells, Distant, A.wav" by InspectorJ, "Campfire.wav" by el-bee and "Church Bell" by bone666138 (CC BY 4.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file.</p>
-          </div>
-          <div class="wide">
-            <h3>Who held what</h3>
-            <p>A tint shows who held which ground, the way strategy-game maps do: blue for the Americans, hatched amber for the Japanese, and a bright front line where the two meet. It is traced from Smith's three maps of the battle, with their dated front lines of 7, 12, 18 and 22 February, and simplified, so the screen calls it approximate. Manila is flat, so the tint is drawn by finding where each pixel's line of sight meets the ground, and it lines up with the Unreal render without rendering the city again.</p>
-          </div>
-          <div class="wide">
-            <h3>Facts checked against the sources</h3>
-            <p>Every date, number and quote was checked word for word against Smith, the Army brochure and MacArthur's reports. Where they differ, the video follows Smith: he ends the battle on 3 March, and the brochure on 4 March. Five districts turn to ruins as the narration reaches them, the ones Smith's summary lists as wrecked (p. 307), so Ermita and Malate stay standing although the fighting went through them. Smith warns that the casualty figures are uncertain, and the screen says so. The explosions mark where fighting was, not where any shell landed.</p>
-          </div>
-          <div class="wide">
             <h3>One cue from the code</h3>
             <pre><code># the crossing (926: "assault boats"): a bridgehead at Malacanan Gardens
 {'show': (926, 1080), 'paint': [('japan', _SOUTH), ...,
                                 ('us', _oval(14.5915, 120.9972, 0.0055, 0.0062))]},</code></pre>
             <p>Each phase of the areas held is a list of shapes, painted in order and shown between two frames. At frame 926, as the narrator says "assault boats", a small American foothold appears on the south bank of the Pasig at Malacañan Gardens, where Smith puts the crossing. Each phase fades into the next over 16 frames.</p>
           </div>
-          <div class="wide">
-            <h3>Checked</h3>
-            <p>Stills along the camera's flight and contact sheets of the composed frames were checked before each render; the 3D takes 7 minutes in Unreal once the city is imported. A check in the storyboard fails any title, label or picture that strays under the strips and buttons that Shorts and Reels draw over a video. Whisper read the final mix back, writing the numbers as digits and some names by ear, such as "malakanyan" for Malacañan. The mix plays at -14.3 LUFS.</p>
-          </div>
+          <details>
+            <summary>How this one was made and checked</summary>
+            <div class="more">
+              <div>
+                <h3>The city, pictures and sound</h3>
+                <p>The city is today's: about 195,000 building footprints from OpenStreetMap, drawn low to stand in for the 1945 city, with ten buildings that stood in 1945 at their own height, among them the Legislative Building, Manila City Hall and San Agustin Church. Land reclaimed from the bay since the war is drawn as sea. The ground is elevation data from AWS Terrain Tiles (Mapzen; SRTM and GMTED2010 from the US Geological Survey, ETOPO1 from NOAA), rendered at true scale under Unreal's physical sun, sky and volumetric clouds. The four photos are from the US Army Signal Corps, the US Navy and the National Archives, all public domain and captioned on screen. The unit symbols are drawn with milsymbol (MIT). The sound effects are from Freesound; eight are CC BY: "040313_INS Quatre Cantons_Ciutat del Futur.wav" by sonsdebarcelona, "M1A2 Abrams Accelerating.wav" by flyguy85, "fire_embers_large_campfire.aif" by Dynamicell, "building_collapse04_enclosed_space.wav" by onteca and "Regular Sniper Rifle Shot [w/ Bolt Reload] (Outdoor/Mixed)" by EFlexMusic (CC BY 3.0), and "Church Bells, Distant, A.wav" by InspectorJ, "Campfire.wav" by el-bee and "Church Bell" by bone666138 (CC BY 4.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file.</p>
+              </div>
+              <div>
+                <h3>Who held what</h3>
+                <p>A tint shows who held which ground, the way strategy-game maps do: blue for the Americans, hatched amber for the Japanese, and a bright front line where the two meet. It is traced from Smith's three maps of the battle, with their dated front lines of 7, 12, 18 and 22 February, and simplified, so the screen calls it approximate. Manila is flat, so the tint is drawn by finding where each pixel's line of sight meets the ground, and it lines up with the Unreal render without rendering the city again.</p>
+              </div>
+              <div>
+                <h3>Facts checked against the sources</h3>
+                <p>Every date, number and quote was checked word for word against Smith, the Army brochure and MacArthur's reports. Where they differ, the video follows Smith: he ends the battle on 3 March, and the brochure on 4 March. Five districts turn to ruins as the narration reaches them, the ones Smith's summary lists as wrecked (p. 307), so Ermita and Malate stay standing although the fighting went through them. Smith warns that the casualty figures are uncertain, and the screen says so. The explosions mark where fighting was, not where any shell landed.</p>
+              </div>
+              <div>
+                <h3>Checked</h3>
+                <p>Stills along the camera's flight and contact sheets of the composed frames were checked before each render; the 3D takes 7 minutes in Unreal once the city is imported. A check in the storyboard fails any title, label or picture that strays under the strips and buttons that Shorts and Reels draw over a video. Whisper read the final mix back, writing the numbers as digits and some names by ear, such as "malakanyan" for Malacañan. The mix plays at -14.3 LUFS.</p>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
+      <p class="back"><a href="#videos">Back to all fourteen videos</a></p>
     </div>
   </section>
 
@@ -221,17 +268,19 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--m
       <h2 id="baguio-title">The Battle of Baguio</h2>
       <p class="meta">For a history channel · 112 seconds · vertical, for Shorts and Reels · 3D in Blender · <a href="https://youtube.com/shorts/ZPe5C7SKmqg">Watch on YouTube</a></p>
       <div class="body">
-        <div class="watch">
-          <video class="tall" controls preload="metadata" playsinline poster="media/baguio.jpg" width="1080" height="1920">
-            <source src="media/baguio.mp4" type="video/mp4">
-            <a href="media/baguio.mp4">Open the video file</a>
-          </video>
+        <div class="pair">
+          <div class="watch">
+            <video class="tall" controls preload="metadata" playsinline poster="media/baguio.jpg" width="1080" height="1920">
+              <source src="media/baguio.mp4" type="video/mp4">
+              <a href="media/baguio.mp4">Open the video file</a>
+            </video>
+          </div>
+          <figure class="paper">
+            <figcaption>The script, marked where each line starts</figcaption>
+            <p class="script">Baguio, the prewar summer capital of the Philippines, sits about five thousand feet up in the mountains of northern Luzon. On December 8, 1941, Japanese bombers struck its barracks, and by Christmas Eve the Americans had pulled out. By 1945, it was the headquarters of General Yamashita's army, and of the collaborationist government. Four approaches led up to the city. Route 11, today's Kennon Road, wound up the Bued River gorge over nineteen bridges. It was the best road in northern Luzon, and the most strongly defended. Route 9, from the coast at Bauang, was the easiest. From February 21, the 33d Division probed the approaches. On Route 11, a small Japanese force could hold up the whole division almost indefinitely. Filipino guerrillas under Colonel Russell Volckmann cut off food from the north. By late March, Japanese troops at the front got under a quarter pound of rice a day. At the end of March, Yamashita ordered Japanese civilians and the puppet government out. In April, he left for the Bambang front, leaving General Utsunomiya in charge. I Corps ordered an all-out attack for April 12, with the 37th Division making the main effort up Route 9. At the Irisan Gorge, a six-day battle proved the critical action of the drive. At Asin, a Japanese battalion of under five hundred lost over three hundred fifty killed. Utsunomiya ordered a general withdrawal. A patrol of the 129th Infantry entered Baguio on April 24, and two days later the regiment secured most of the city. Some ten thousand Japanese troops got away. Since late February, the 23d Division alone had lost over two thousand killed in combat. On September 3, 1945, Yamashita came back to Baguio to surrender, at the former High Commissioner's residence in Camp John Hay.</p>
+            <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and the camera's flight, every mark and the areas held were laid out on it. Pick a number to play the video from there.</p>
+          </figure>
         </div>
-        <figure class="paper">
-          <figcaption>The script, marked where each line starts</figcaption>
-          <p class="script">Baguio, the prewar summer capital of the Philippines, sits about five thousand feet up in the mountains of northern Luzon. On December 8, 1941, Japanese bombers struck its barracks, and by Christmas Eve the Americans had pulled out. By 1945, it was the headquarters of General Yamashita's army, and of the collaborationist government. Four approaches led up to the city. Route 11, today's Kennon Road, wound up the Bued River gorge over nineteen bridges. It was the best road in northern Luzon, and the most strongly defended. Route 9, from the coast at Bauang, was the easiest. From February 21, the 33d Division probed the approaches. On Route 11, a small Japanese force could hold up the whole division almost indefinitely. Filipino guerrillas under Colonel Russell Volckmann cut off food from the north. By late March, Japanese troops at the front got under a quarter pound of rice a day. At the end of March, Yamashita ordered Japanese civilians and the puppet government out. In April, he left for the Bambang front, leaving General Utsunomiya in charge. I Corps ordered an all-out attack for April 12, with the 37th Division making the main effort up Route 9. At the Irisan Gorge, a six-day battle proved the critical action of the drive. At Asin, a Japanese battalion of under five hundred lost over three hundred fifty killed. Utsunomiya ordered a general withdrawal. A patrol of the 129th Infantry entered Baguio on April 24, and two days later the regiment secured most of the city. Some ten thousand Japanese troops got away. Since late February, the 23d Division alone had lost over two thousand killed in combat. On September 3, 1945, Yamashita came back to Baguio to surrender, at the former High Commissioner's residence in Camp John Hay.</p>
-          <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and the camera's flight, every mark and the areas held were laid out on it. Pick a number to play the video from there.</p>
-        </figure>
         <div class="notes">
           <div>
             <h3>Where the facts come from</h3>
@@ -242,29 +291,35 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--m
             </ul>
           </div>
           <div>
-            <h3>The town, pictures and sound</h3>
-            <p>Baguio's mountains are elevation data from AWS Terrain Tiles (Mapzen; SRTM and GMTED2010 from the US Geological Survey, ETOPO1 from NOAA), with heights drawn 1.5 times true, and its 15,760 buildings are today's OpenStreetMap footprints, drawn low to stand in for the 1945 town. Blender's EEVEE renders them under a physical sky and an afternoon sun. The six pictures are National Archives aerials, Signal Corps photos and two photos from Smith, all public domain and captioned on screen. The unit symbols are drawn with milsymbol (MIT). The sound effects are from Freesound; two are CC BY: "Pine forest birds in Maclear, Eastern Cape" by Vortichez and "Swoosh" by EminYILDIRIM (both CC BY 4.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file.</p>
-          </div>
-          <div class="wide">
-            <h3>Who held what</h3>
-            <p>A tint shows who held which ground: blue for the Americans and Filipinos, hatched amber for the Japanese, and a bright front line where the two meet. It is traced from Smith's Maps 19 and 20 and simplified, so the screen calls it approximate. Blender lays it on the terrain and the roofs, so ridges hide it the way they hide the ground. Where no map gives a line, the sources file says what the tint guesses. Volckmann's guerrillas held much of the countryside north of Baguio, but no map gives its extent, so the tint leaves it out.</p>
-          </div>
-          <div class="wide">
-            <h3>Facts checked against the sources</h3>
-            <p>Every date, number and quote was checked word for word against Smith, Morton and MacArthur's reports. The Army's campaign brochure was left out, because it gets this front wrong in places: it calls Route 11 "the easiest road into the mountains", while Smith calls it the most strongly defended. The American cost isn't shown, because Smith gives no total for the drive on Baguio. Asin's place is approximate, and the screen says so. The explosions and fires stand for the artillery and the fighting, not a record of what was hit.</p>
-          </div>
-          <div class="wide">
             <h3>One cue from the code</h3>
             <pre><code>TOP, BOTTOM, RIGHT, BUTTONS = 710, -480, 476, (350, 60)
 check_safe(ELEMENTS, FRAMES, (-504, BOTTOM, RIGHT, TOP), BUTTONS, 'baguio HUD')</code></pre>
             <p>Positions count from the centre of the 1080 by 1920 frame. Text stays below the top 250 pixels and above the bottom 480, where Shorts and Reels draw the title, caption and channel name, and in the lower half it stays clear of the buttons on the right. Running the storyboard fails on any fixed title, label or picture that strays.</p>
           </div>
-          <div class="wide">
-            <h3>Checked</h3>
-            <p>Quarter-size stills and contact sheets of the composed frames were checked before each render; the 3D takes 16 to 29 minutes in Blender's EEVEE, and the text overlay 7 to 12 more. The stills caught every burst and fire sitting at sea level, under two kilometres of mountain, until the storyboard measured their ground, and caught muted notes vanishing against bright clouds. Whisper read the final mix back, writing the numbers as digits and some names by ear, such as "bood" for Bued. The mix plays at -14.7 LUFS.</p>
-          </div>
+          <details>
+            <summary>How this one was made and checked</summary>
+            <div class="more">
+              <div>
+                <h3>The town, pictures and sound</h3>
+                <p>Baguio's mountains are elevation data from AWS Terrain Tiles (Mapzen; SRTM and GMTED2010 from the US Geological Survey, ETOPO1 from NOAA), with heights drawn 1.5 times true, and its 15,760 buildings are today's OpenStreetMap footprints, drawn low to stand in for the 1945 town. Blender's EEVEE renders them under a physical sky and an afternoon sun. The six pictures are National Archives aerials, Signal Corps photos and two photos from Smith, all public domain and captioned on screen. The unit symbols are drawn with milsymbol (MIT). The sound effects are from Freesound; two are CC BY: "Pine forest birds in Maclear, Eastern Cape" by Vortichez and "Swoosh" by EminYILDIRIM (both CC BY 4.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file.</p>
+              </div>
+              <div>
+                <h3>Who held what</h3>
+                <p>A tint shows who held which ground: blue for the Americans and Filipinos, hatched amber for the Japanese, and a bright front line where the two meet. It is traced from Smith's Maps 19 and 20 and simplified, so the screen calls it approximate. Blender lays it on the terrain and the roofs, so ridges hide it the way they hide the ground. Where no map gives a line, the sources file says what the tint guesses. Volckmann's guerrillas held much of the countryside north of Baguio, but no map gives its extent, so the tint leaves it out.</p>
+              </div>
+              <div>
+                <h3>Facts checked against the sources</h3>
+                <p>Every date, number and quote was checked word for word against Smith, Morton and MacArthur's reports. The Army's campaign brochure was left out, because it gets this front wrong in places: it calls Route 11 "the easiest road into the mountains", while Smith calls it the most strongly defended. The American cost isn't shown, because Smith gives no total for the drive on Baguio. Asin's place is approximate, and the screen says so. The explosions and fires stand for the artillery and the fighting, not a record of what was hit.</p>
+              </div>
+              <div>
+                <h3>Checked</h3>
+                <p>Quarter-size stills and contact sheets of the composed frames were checked before each render; the 3D takes 16 to 29 minutes in Blender's EEVEE, and the text overlay 7 to 12 more. The stills caught every burst and fire sitting at sea level, under two kilometres of mountain, until the storyboard measured their ground, and caught muted notes vanishing against bright clouds. Whisper read the final mix back, writing the numbers as digits and some names by ear, such as "bood" for Bued. The mix plays at -14.7 LUFS.</p>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
+      <p class="back"><a href="#videos">Back to all fourteen videos</a></p>
     </div>
   </section>
 
@@ -273,17 +328,19 @@ check_safe(ELEMENTS, FRAMES, (-504, BOTTOM, RIGHT, TOP), BUTTONS, 'baguio HUD')<
       <h2 id="leyte-title">The Battle of Leyte</h2>
       <p class="meta">For a history channel · 112 seconds · vertical, for Shorts and Reels · 3D in Unreal Engine · <a href="https://youtube.com/shorts/6yGAoEOizZ4">Watch on YouTube</a></p>
       <div class="body">
-        <div class="watch">
-          <video class="tall" controls preload="metadata" playsinline poster="media/leyte.jpg" width="1080" height="1920">
-            <source src="media/leyte.mp4" type="video/mp4">
-            <a href="media/leyte.mp4">Open the video file</a>
-          </video>
+        <div class="pair">
+          <div class="watch">
+            <video class="tall" controls preload="metadata" playsinline poster="media/leyte.jpg" width="1080" height="1920">
+              <source src="media/leyte.mp4" type="video/mp4">
+              <a href="media/leyte.mp4">Open the video file</a>
+            </video>
+          </div>
+          <figure class="paper">
+            <figcaption>The script, marked where each line starts</figcaption>
+            <p class="script">On October 20, 1944, American forces came back to the Philippines, landing on the island of Leyte. A mountain backbone runs down the island, between Leyte Valley in the east and Ormoc Valley in the west. At ten that morning, Sixth Army put two corps ashore at once: Ten Corps near Palo and Tacloban, and Twenty-fourth Corps fifteen miles south, at Dulag. General MacArthur waded ashore near Palo with President Sergio Osmena, and broadcast: People of the Philippines, I have returned. From October 23 to 26, the Battle of Leyte Gulf drew in nearly two hundred thousand men and two hundred eighty-two ships. The Japanese Navy suffered damage it could never repair. Japan still chose Leyte for its decisive battle. Nine convoys landed more than forty-five thousand troops at Ormoc. Ten Corps drove up Leyte Valley and took Carigara on November 2. Beyond it, Highway Two corkscrewed over Breakneck Ridge. Fought through a typhoon, the battle there cost nearly fifteen hundred American casualties. On December 6, Japanese paratroopers dropped on the Burauen airfields. The next day, the third anniversary of Pearl Harbor, the 77th Division landed below Ormoc. Three days later, Ormoc fell. On December 21, the two corps joined on Highway Two. On Christmas Day, Palompon fell, and MacArthur declared organized resistance over. The campaign cost the US Army more than fifteen thousand five hundred casualties, more than thirty-five hundred of them killed. Sixth Army estimated more than fifty-six thousand Japanese killed. Yamashita later said that after Leyte, he realized decisive battle was impossible.</p>
+            <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and the camera's flight and every mark were laid out on it. Pick a number to play the video from there.</p>
+          </figure>
         </div>
-        <figure class="paper">
-          <figcaption>The script, marked where each line starts</figcaption>
-          <p class="script">On October 20, 1944, American forces came back to the Philippines, landing on the island of Leyte. A mountain backbone runs down the island, between Leyte Valley in the east and Ormoc Valley in the west. At ten that morning, Sixth Army put two corps ashore at once: Ten Corps near Palo and Tacloban, and Twenty-fourth Corps fifteen miles south, at Dulag. General MacArthur waded ashore near Palo with President Sergio Osmena, and broadcast: People of the Philippines, I have returned. From October 23 to 26, the Battle of Leyte Gulf drew in nearly two hundred thousand men and two hundred eighty-two ships. The Japanese Navy suffered damage it could never repair. Japan still chose Leyte for its decisive battle. Nine convoys landed more than forty-five thousand troops at Ormoc. Ten Corps drove up Leyte Valley and took Carigara on November 2. Beyond it, Highway Two corkscrewed over Breakneck Ridge. Fought through a typhoon, the battle there cost nearly fifteen hundred American casualties. On December 6, Japanese paratroopers dropped on the Burauen airfields. The next day, the third anniversary of Pearl Harbor, the 77th Division landed below Ormoc. Three days later, Ormoc fell. On December 21, the two corps joined on Highway Two. On Christmas Day, Palompon fell, and MacArthur declared organized resistance over. The campaign cost the US Army more than fifteen thousand five hundred casualties, more than thirty-five hundred of them killed. Sixth Army estimated more than fifty-six thousand Japanese killed. Yamashita later said that after Leyte, he realized decisive battle was impossible.</p>
-          <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and the camera's flight and every mark were laid out on it. Pick a number to play the video from there.</p>
-        </figure>
         <div class="notes">
           <div>
             <h3>Where the facts come from</h3>
@@ -296,25 +353,31 @@ check_safe(ELEMENTS, FRAMES, (-504, BOTTOM, RIGHT, TOP), BUTTONS, 'baguio HUD')<
             </ul>
           </div>
           <div>
-            <h3>Terrain, pictures and sound</h3>
-            <p>The island is real elevation data from AWS Terrain Tiles (Mapzen; SRTM and GMTED2010 from the US Geological Survey, ETOPO1 from NOAA), with heights drawn four times true, rendered at true scale under Unreal's physical sun, sky and volumetric clouds. The roads follow OpenStreetMap. The three photos are MacArthur wading ashore (US Army Signal Corps, NARA 111-SC-407101), a Japanese destroyer sinking in Ormoc Bay (US Navy) and the 77th Division's convoy approaching Deposito (US Army, in Cannon), all public domain. The unit and ship symbols are drawn with milsymbol (MIT). The sound effects are from Freesound; four are CC BY: "Notification Chime" by hykenfreak, "click 1 d.wav" by TicTacShutUp and "ExplosionBombBlastAmbient6.wav" by zimbot (CC BY 4.0), and "Bass Drum Hit 1.wav" by CouleurCasquette (CC BY 3.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file.</p>
-          </div>
-          <div class="wide">
-            <h3>Facts checked against the sources</h3>
-            <p>Every date and number was checked word for word against Cannon, MacArthur's reports, the Army brochure, the Navy's history and the law. Where they differ, the screen says which it follows: Cannon and the brochure date Ormoc's fall to 10 December, while the marker in Ormoc says 11 December. The Japanese losses are the US Army's estimates, and the screen says "by estimate". Leyte's length, the number of paratroopers and a single total of Japanese dead are left out, because the sources disagree. The explosions mark where fighting was, not where any shell landed.</p>
-          </div>
-          <div class="wide">
             <h3>One cue from the code</h3>
             <pre><code>aa.render_warm_up_frames = True
 aa.render_warm_up_count = 32</code></pre>
             <p>The first full-size stills showed the islands as kilometre-wide facets. Unreal's Nanite loads fine terrain detail only after it has drawn a frame, and the render queue's warm-up frames weren't drawing. These two lines fixed it, and every frame now shows the full 75-metre elevation grid.</p>
           </div>
-          <div class="wide">
-            <h3>Checked</h3>
-            <p>Full-size stills along the camera's flight were checked before the full render, which takes 5.5 minutes in Unreal once the terrain is imported. Whisper heard every narrated word in the final mix, writing the numbers as digits and some names by ear, such as "Ormuk" for Ormoc. The read-back also caught explosions drowning out "men and 282 ships", and they now play quieter under those words. The mix plays at -14.3 LUFS.</p>
-          </div>
+          <details>
+            <summary>How this one was made and checked</summary>
+            <div class="more">
+              <div>
+                <h3>Terrain, pictures and sound</h3>
+                <p>The island is real elevation data from AWS Terrain Tiles (Mapzen; SRTM and GMTED2010 from the US Geological Survey, ETOPO1 from NOAA), with heights drawn four times true, rendered at true scale under Unreal's physical sun, sky and volumetric clouds. The roads follow OpenStreetMap. The three photos are MacArthur wading ashore (US Army Signal Corps, NARA 111-SC-407101), a Japanese destroyer sinking in Ormoc Bay (US Navy) and the 77th Division's convoy approaching Deposito (US Army, in Cannon), all public domain. The unit and ship symbols are drawn with milsymbol (MIT). The sound effects are from Freesound; four are CC BY: "Notification Chime" by hykenfreak, "click 1 d.wav" by TicTacShutUp and "ExplosionBombBlastAmbient6.wav" by zimbot (CC BY 4.0), and "Bass Drum Hit 1.wav" by CouleurCasquette (CC BY 3.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file.</p>
+              </div>
+              <div>
+                <h3>Facts checked against the sources</h3>
+                <p>Every date and number was checked word for word against Cannon, MacArthur's reports, the Army brochure, the Navy's history and the law. Where they differ, the screen says which it follows: Cannon and the brochure date Ormoc's fall to 10 December, while the marker in Ormoc says 11 December. The Japanese losses are the US Army's estimates, and the screen says "by estimate". Leyte's length, the number of paratroopers and a single total of Japanese dead are left out, because the sources disagree. The explosions mark where fighting was, not where any shell landed.</p>
+              </div>
+              <div>
+                <h3>Checked</h3>
+                <p>Full-size stills along the camera's flight were checked before the full render, which takes 5.5 minutes in Unreal once the terrain is imported. Whisper heard every narrated word in the final mix, writing the numbers as digits and some names by ear, such as "Ormuk" for Ormoc. The read-back also caught explosions drowning out "men and 282 ships", and they now play quieter under those words. The mix plays at -14.3 LUFS.</p>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
+      <p class="back"><a href="#videos">Back to all fourteen videos</a></p>
     </div>
   </section>
 
@@ -323,17 +386,19 @@ aa.render_warm_up_count = 32</code></pre>
       <h2 id="bataan-title">The Battle of Bataan</h2>
       <p class="meta">For a history channel · 102 seconds · vertical, for Shorts and Reels · 3D in Blender · <a href="https://youtube.com/shorts/iNs19hNDIlg">Watch on YouTube</a></p>
       <div class="body">
-        <div class="watch">
-          <video class="tall" controls preload="metadata" playsinline poster="media/bataan.jpg" width="1080" height="1920">
-            <source src="media/bataan.mp4" type="video/mp4">
-            <a href="media/bataan.mp4">Open the video file</a>
-          </video>
+        <div class="pair">
+          <div class="watch">
+            <video class="tall" controls preload="metadata" playsinline poster="media/bataan.jpg" width="1080" height="1920">
+              <source src="media/bataan.mp4" type="video/mp4">
+              <a href="media/bataan.mp4">Open the video file</a>
+            </video>
+          </div>
+          <figure class="paper">
+            <figcaption>The script, marked where each line starts</figcaption>
+            <p class="script">Bataan, 1942. The peninsula where Filipino and American troops made their stand on Luzon. On December 23, 1941, General MacArthur ordered his forces back into Bataan. The defense of Bataan began on January 7. Bataan is twenty-five miles long, with two extinct volcanoes: Mount Natib in the north, and the Mariveles Mountains in the south. The first line ran twenty miles, from Abucay across Mount Natib to Mauban, but the mountain split it in two. The Japanese attacked on January 9. By January 26, the defenders had fallen back to their final line, from Orion to Bagac. Japanese landings on the west coast failed, and on February 8, General Homma called off his offensive. But Bataan was starving. From January 6, the troops lived on half rations. By March, they got about a thousand calories a day, and most front-line soldiers had malaria. On April 3, Good Friday, the final Japanese offensive opened with almost a hundred and fifty guns. On Easter Sunday, they took Mount Samat. Within days, the defense collapsed. On April 9, General Edward King surrendered his force of seventy-eight thousand men. The prisoners were marched sixty-five miles, from Mariveles to San Fernando, and then sent on to Camp O'Donnell. Thousands died on the march, and more than twenty thousand in the camp. Today a memorial cross stands on Mount Samat, and every April the Philippines marks Araw ng Kagitingan, the Day of Valor.</p>
+            <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and the camera moves and every mark were laid out on it, so each line on the map draws itself as the narrator names it. Pick a number to play the video from there.</p>
+          </figure>
         </div>
-        <figure class="paper">
-          <figcaption>The script, marked where each line starts</figcaption>
-          <p class="script">Bataan, 1942. The peninsula where Filipino and American troops made their stand on Luzon. On December 23, 1941, General MacArthur ordered his forces back into Bataan. The defense of Bataan began on January 7. Bataan is twenty-five miles long, with two extinct volcanoes: Mount Natib in the north, and the Mariveles Mountains in the south. The first line ran twenty miles, from Abucay across Mount Natib to Mauban, but the mountain split it in two. The Japanese attacked on January 9. By January 26, the defenders had fallen back to their final line, from Orion to Bagac. Japanese landings on the west coast failed, and on February 8, General Homma called off his offensive. But Bataan was starving. From January 6, the troops lived on half rations. By March, they got about a thousand calories a day, and most front-line soldiers had malaria. On April 3, Good Friday, the final Japanese offensive opened with almost a hundred and fifty guns. On Easter Sunday, they took Mount Samat. Within days, the defense collapsed. On April 9, General Edward King surrendered his force of seventy-eight thousand men. The prisoners were marched sixty-five miles, from Mariveles to San Fernando, and then sent on to Camp O'Donnell. Thousands died on the march, and more than twenty thousand in the camp. Today a memorial cross stands on Mount Samat, and every April the Philippines marks Araw ng Kagitingan, the Day of Valor.</p>
-          <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and the camera moves and every mark were laid out on it, so each line on the map draws itself as the narrator names it. Pick a number to play the video from there.</p>
-        </figure>
         <div class="notes">
           <div>
             <h3>Where the facts come from</h3>
@@ -345,25 +410,31 @@ aa.render_warm_up_count = 32</code></pre>
             </ul>
           </div>
           <div>
-            <h3>Terrain, pictures and sound</h3>
-            <p>The peninsula is real elevation data from AWS Terrain Tiles (Mapzen; SRTM and GMTED2010 from the US Geological Survey, ETOPO1 from NOAA), with heights drawn 2.5 times true, as the screen says. The pictures are an Office of War Information photo of an operating room on Bataan (public domain) and the Mt. Samat Memorial Cross by RanieljoseMCastaneda (CC0). The sound effects are from Freesound; one is CC BY: "Distant Battlefield Soundscape" by Kostas17 (CC BY 3.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file.</p>
-          </div>
-          <div class="wide">
-            <h3>Facts checked against the sources</h3>
-            <p>Every date and number was checked against Morton's text, the laws and the two Death March sources. The defence lines run through the places Morton names, placed with Wikidata, GeoNames and OpenStreetMap; the points between them are estimates, and the screen calls them approximate. The death tolls are disputed, so the screen gives each figure with its source: Britannica's best estimate for the march, perhaps 30 % too high, beside the USAF Museum's "as many as 11,000".</p>
-          </div>
-          <div class="wide">
             <h3>One cue from the code</h3>
             <pre><code>{'name': 'orion_bagac', 'color': 'us', 'draw': (972, 1018), 'gone': 1770,
  'width': 0.11, 'path': ORION_BAGAC},</code></pre>
             <p>The final line is a glowing tube draped over the terrain. It draws itself from frame 972 and reaches Bagac at frame 1018, as the narrator says "Bagac", then undraws at frame 1770, when the defense collapses.</p>
           </div>
-          <div class="wide">
-            <h3>Checked</h3>
-            <p>Each camera move was checked on quarter-size stills before the full render, which takes 16 minutes in Blender's EEVEE. Those stills caught labels cut off at the frame's edge and the flat edge of the elevation data showing on the high views; a coarser grid of all of central Luzon now runs out to the horizon. Whisper heard every narrated word in the final mix, writing the numbers as digits and the Philippine names by ear. The mix plays at -14.3 LUFS.</p>
-          </div>
+          <details>
+            <summary>How this one was made and checked</summary>
+            <div class="more">
+              <div>
+                <h3>Terrain, pictures and sound</h3>
+                <p>The peninsula is real elevation data from AWS Terrain Tiles (Mapzen; SRTM and GMTED2010 from the US Geological Survey, ETOPO1 from NOAA), with heights drawn 2.5 times true, as the screen says. The pictures are an Office of War Information photo of an operating room on Bataan (public domain) and the Mt. Samat Memorial Cross by RanieljoseMCastaneda (CC0). The sound effects are from Freesound; one is CC BY: "Distant Battlefield Soundscape" by Kostas17 (CC BY 3.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file.</p>
+              </div>
+              <div>
+                <h3>Facts checked against the sources</h3>
+                <p>Every date and number was checked against Morton's text, the laws and the two Death March sources. The defence lines run through the places Morton names, placed with Wikidata, GeoNames and OpenStreetMap; the points between them are estimates, and the screen calls them approximate. The death tolls are disputed, so the screen gives each figure with its source: Britannica's best estimate for the march, perhaps 30 % too high, beside the USAF Museum's "as many as 11,000".</p>
+              </div>
+              <div>
+                <h3>Checked</h3>
+                <p>Each camera move was checked on quarter-size stills before the full render, which takes 16 minutes in Blender's EEVEE. Those stills caught labels cut off at the frame's edge and the flat edge of the elevation data showing on the high views; a coarser grid of all of central Luzon now runs out to the horizon. Whisper heard every narrated word in the final mix, writing the numbers as digits and the Philippine names by ear. The mix plays at -14.3 LUFS.</p>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
+      <p class="back"><a href="#videos">Back to all fourteen videos</a></p>
     </div>
   </section>
 
@@ -372,17 +443,19 @@ aa.render_warm_up_count = 32</code></pre>
       <h2 id="manila1570-title">The Battle of Manila, 1570</h2>
       <p class="meta">For a history channel · 97 seconds · vertical, for Shorts and Reels · 3D in Unreal Engine · <a href="https://youtube.com/shorts/P-PHZq_uRI8">Watch on YouTube</a></p>
       <div class="body">
-        <div class="watch">
-          <video class="tall" controls preload="metadata" playsinline poster="media/manila1570.jpg" width="1080" height="1920">
-            <source src="media/manila1570.mp4" type="video/mp4">
-            <a href="media/manila1570.mp4">Open the video file</a>
-          </video>
+        <div class="pair">
+          <div class="watch">
+            <video class="tall" controls preload="metadata" playsinline poster="media/manila1570.jpg" width="1080" height="1920">
+              <source src="media/manila1570.mp4" type="video/mp4">
+              <a href="media/manila1570.mp4">Open the video file</a>
+            </video>
+          </div>
+          <figure class="paper">
+            <figcaption>The script, marked where each line starts</figcaption>
+            <p class="script">In May 1570, the Spanish master-of-camp, Martin de Goiti, sailed north from Panay to explore Luzon. He had two ships with three large guns, and about fifteen boats crewed by Visayan allies. Manila stood on a tongue of land between the river and the sea, behind a palisade, with cannon at its gates. Its young ruler, Rajah Sulayman, met Goiti at the shore. His people, he said, were not painted Indians; they would repay with death the least thing that touched their honor. Goiti then went into the town with only his interpreters, and sealed a blood compact with Sulayman and his uncle, also a rajah. But the town stayed armed, and allies warned that its warriors would strike at the first rain, when Spanish arquebuses could not fire. At ten one morning, Goiti fired a cannon seaward to recall a boat, and the fort's guns opened fire on his ship. The Spaniards stormed the palisade before the gunners at its gates could fire, took the town, and set it on fire. Its people fled up the river. The rain they had waited for came only when the town had burned. Beside Sulayman's house, the Spaniards found cannon being cast, and a mould for one seventeen feet long. Prisoners told the Spaniards that Sulayman had given the order to fire, and fired the first shot himself. With too few men to follow them inland, and the southwest gales coming, Goiti sailed back. Legazpi grieved that Manila had burned; he meant to settle there. When Legazpi came in 1571, Sulayman made peace. If I were king of this land, he said, the word I had given would not have been broken.</p>
+            <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and the camera's flight, the fire and every mark were laid out on it. Pick a number to play the video from there.</p>
+          </figure>
         </div>
-        <figure class="paper">
-          <figcaption>The script, marked where each line starts</figcaption>
-          <p class="script">In May 1570, the Spanish master-of-camp, Martin de Goiti, sailed north from Panay to explore Luzon. He had two ships with three large guns, and about fifteen boats crewed by Visayan allies. Manila stood on a tongue of land between the river and the sea, behind a palisade, with cannon at its gates. Its young ruler, Rajah Sulayman, met Goiti at the shore. His people, he said, were not painted Indians; they would repay with death the least thing that touched their honor. Goiti then went into the town with only his interpreters, and sealed a blood compact with Sulayman and his uncle, also a rajah. But the town stayed armed, and allies warned that its warriors would strike at the first rain, when Spanish arquebuses could not fire. At ten one morning, Goiti fired a cannon seaward to recall a boat, and the fort's guns opened fire on his ship. The Spaniards stormed the palisade before the gunners at its gates could fire, took the town, and set it on fire. Its people fled up the river. The rain they had waited for came only when the town had burned. Beside Sulayman's house, the Spaniards found cannon being cast, and a mould for one seventeen feet long. Prisoners told the Spaniards that Sulayman had given the order to fire, and fired the first shot himself. With too few men to follow them inland, and the southwest gales coming, Goiti sailed back. Legazpi grieved that Manila had burned; he meant to settle there. When Legazpi came in 1571, Sulayman made peace. If I were king of this land, he said, the word I had given would not have been broken.</p>
-          <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and the camera's flight, the fire and every mark were laid out on it. Pick a number to play the video from there.</p>
-        </figure>
         <div class="notes">
           <div>
             <h3>Where the facts come from</h3>
@@ -392,26 +465,32 @@ aa.render_warm_up_count = 32</code></pre>
             </ul>
           </div>
           <div>
-            <h3>The town, the shore and sound</h3>
-            <p>No picture or plan of the 1570 town survives, so the town, the village across the river, the boats, the trees and every effect are illustration built in code, and the screen says so. Each house has a burnt twin, with charred posts and fallen roofs, that takes its place as the fire passes. The shore is traced from Gamoneda's 1898 plan, the oldest detailed survey found, because nearly all of the land reclaimed from the bay came after it. The ground is elevation data from AWS Terrain Tiles (Mapzen; SRTM and GMTED2010 from the US Geological Survey, ETOPO1 from NOAA) and the Pasig is from OpenStreetMap, rendered at true scale under Unreal's physical sun, sky and volumetric clouds. The sound effects are from Freesound; two are CC BY: "Medieval cannon shot" by engray (CC BY 3.0) and "Warcry Yarghh! - British Male" by theuncertainman (CC BY 4.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file.</p>
-          </div>
-          <div class="wide">
-            <h3>Who says what</h3>
-            <p>Every account was written by the expedition or the colony, so the video says who claims what. The blame on Sulayman for the first shot is what prisoners told the Spaniards, the dead and captives are counted by the Spanish account, and Sulayman's own explanation of 1571 is given in his words as Riquel recorded them. The accounts disagree on the number of men, the guns taken and how many shots hit the ship, so the video gives none of those numbers. Only one account dates the fight, to 24 May, and its writer was not there, so the screen gives it as one account's day.</p>
-          </div>
-          <div class="wide">
             <h3>One cue from the code</h3>
             <pre><code>SHOTS = [cue(6, 'opened', 2 + 10 * k) for k in range(3)]  # the fort's guns, one after another (Relation, p. 100)
 STORM = cue(7, 'stormed')
 BURN = cue(7, 'fire')</code></pre>
             <p><code>cue(line, word)</code> is the frame where the narrator starts that word in the take, measured by Whisper. The fort's three shots start as the narrator says "opened", ten frames apart, and the town starts to burn on "fire".</p>
           </div>
-          <div class="wide">
-            <h3>Checked</h3>
-            <p>Every quote on screen was checked word for word against the source text by a script. The shore was fitted to today's map with six points that stand on both, Fort Santiago's tip and five old churches, to about 50 metres. Whisper read the take back, and the scenes were timed to its measured line starts and word times. The mix plays at -14.4 LUFS.</p>
-          </div>
+          <details>
+            <summary>How this one was made and checked</summary>
+            <div class="more">
+              <div>
+                <h3>The town, the shore and sound</h3>
+                <p>No picture or plan of the 1570 town survives, so the town, the village across the river, the boats, the trees and every effect are illustration built in code, and the screen says so. Each house has a burnt twin, with charred posts and fallen roofs, that takes its place as the fire passes. The shore is traced from Gamoneda's 1898 plan, the oldest detailed survey found, because nearly all of the land reclaimed from the bay came after it. The ground is elevation data from AWS Terrain Tiles (Mapzen; SRTM and GMTED2010 from the US Geological Survey, ETOPO1 from NOAA) and the Pasig is from OpenStreetMap, rendered at true scale under Unreal's physical sun, sky and volumetric clouds. The sound effects are from Freesound; two are CC BY: "Medieval cannon shot" by engray (CC BY 3.0) and "Warcry Yarghh! - British Male" by theuncertainman (CC BY 4.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file.</p>
+              </div>
+              <div>
+                <h3>Who says what</h3>
+                <p>Every account was written by the expedition or the colony, so the video says who claims what. The blame on Sulayman for the first shot is what prisoners told the Spaniards, the dead and captives are counted by the Spanish account, and Sulayman's own explanation of 1571 is given in his words as Riquel recorded them. The accounts disagree on the number of men, the guns taken and how many shots hit the ship, so the video gives none of those numbers. Only one account dates the fight, to 24 May, and its writer was not there, so the screen gives it as one account's day.</p>
+              </div>
+              <div>
+                <h3>Checked</h3>
+                <p>Every quote on screen was checked word for word against the source text by a script. The shore was fitted to today's map with six points that stand on both, Fort Santiago's tip and five old churches, to about 50 metres. Whisper read the take back, and the scenes were timed to its measured line starts and word times. The mix plays at -14.4 LUFS.</p>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
+      <p class="back"><a href="#videos">Back to all fourteen videos</a></p>
     </div>
   </section>
 
@@ -420,17 +499,19 @@ BURN = cue(7, 'fire')</code></pre>
       <h2 id="giza-title">The Great Pyramid in numbers</h2>
       <p class="meta">For a history channel · 53 seconds · 1080p</p>
       <div class="body">
-        <div class="watch">
-          <video controls preload="metadata" playsinline poster="media/giza.jpg" width="1920" height="1080">
-            <source src="media/giza.mp4" type="video/mp4">
-            <a href="media/giza.mp4">Open the video file</a>
-          </video>
+        <div class="pair">
+          <div class="watch">
+            <video controls preload="metadata" playsinline poster="media/giza.jpg" width="1920" height="1080">
+              <source src="media/giza.mp4" type="video/mp4">
+              <a href="media/giza.mp4">Open the video file</a>
+            </video>
+          </div>
+          <figure class="paper">
+            <figcaption>The script, marked where the code cuts</figcaption>
+            <p class="script">For more than 3,700 years, nobody built anything taller. The Great Pyramid of Giza was the tomb of the pharaoh Khufu, finished more than 4,500 years ago. Workers quarried an estimated 2.3 million stone blocks, about 6 million tonnes in all. When it was new, it stood 146.6 meters high. Over the centuries, most of its smooth white limestone casing was stripped away, and today it stands 138.5 meters tall. Its granite blocks came from Aswan, more than 900 kilometers to the south. It's the oldest of the Seven Wonders of the Ancient World, and the only one still largely intact. Which ancient wonder should we visit next?</p>
+            <p class="how">Each blue number is a cut. The code puts it 0.12 seconds before the word that opens the phrase. Pick one to play the video from there.</p>
+          </figure>
         </div>
-        <figure class="paper">
-          <figcaption>The script, marked where the code cuts</figcaption>
-          <p class="script">For more than 3,700 years, nobody built anything taller. The Great Pyramid of Giza was the tomb of the pharaoh Khufu, finished more than 4,500 years ago. Workers quarried an estimated 2.3 million stone blocks, about 6 million tonnes in all. When it was new, it stood 146.6 meters high. Over the centuries, most of its smooth white limestone casing was stripped away, and today it stands 138.5 meters tall. Its granite blocks came from Aswan, more than 900 kilometers to the south. It's the oldest of the Seven Wonders of the Ancient World, and the only one still largely intact. Which ancient wonder should we visit next?</p>
-          <p class="how">Each blue number is a cut. The code puts it 0.12 seconds before the word that opens the phrase. Pick one to play the video from there.</p>
-        </figure>
         <div class="notes">
           <div>
             <h3>Where the facts come from</h3>
@@ -440,28 +521,34 @@ BURN = cue(7, 'fire')</code></pre>
             </ul>
           </div>
           <div>
-            <h3>Footage and sound</h3>
-            <p>The video uses 15 files from Wikimedia Commons, Pixabay and Freesound, under CC0, CC BY, public domain and the Pixabay license, all credited at the end. They include two Pixabay clips filmed at Giza, the Lumière film of the Sphinx from 1897 and an engraving from 1572.</p>
-          </div>
-          <div class="wide">
             <h3>One cue from the code</h3>
             <pre><code>self.show(at('oldest'), rows[0].animate.set_color(SAND), FadeIn(oldest, scale=0.8))</code></pre>
             <p>The "Oldest" label lands as the narrator says "oldest".</p>
           </div>
-          <div class="wide">
-            <h3>Checked</h3>
-            <p>Each build was reviewed on contact sheets, and those reviews and a design audit led to ten fixes before the final cut, from labels that ran into each other to counters that briefly read zero. Whisper heard all 113 narrated words in the final mix, which plays at -14.9 LUFS.</p>
-          </div>
-          <div class="wide">
-            <h3>The same video, built in Remotion</h3>
-            <video controls preload="none" playsinline poster="media/giza-remotion.jpg" width="1920" height="1080">
-              <source src="media/giza-remotion.mp4" type="video/mp4">
-              <a href="media/giza-remotion.mp4">Open the video file</a>
-            </video>
-            <p>This cut was rebuilt in Remotion from the same voiceover, footage and word timings, with every graphic redrawn as a React component. The cuts land in the same places. The video's length, its cuts and the end credits are read from the word timings and the footage's licence records when the composition loads. <a href="https://github.com/DerpyNewb/remotion-giza-explainer">Remotion source on GitHub</a></p>
-          </div>
+          <details>
+            <summary>How this one was made and checked</summary>
+            <div class="more">
+              <div>
+                <h3>Footage and sound</h3>
+                <p>The video uses 15 files from Wikimedia Commons, Pixabay and Freesound, under CC0, CC BY, public domain and the Pixabay license, all credited at the end. They include two Pixabay clips filmed at Giza, the Lumière film of the Sphinx from 1897 and an engraving from 1572.</p>
+              </div>
+              <div>
+                <h3>Checked</h3>
+                <p>Each build was reviewed on contact sheets, and those reviews and a design audit led to ten fixes before the final cut, from labels that ran into each other to counters that briefly read zero. Whisper heard all 113 narrated words in the final mix, which plays at -14.9 LUFS.</p>
+              </div>
+              <div>
+                <h3>The same video, built in Remotion</h3>
+                <video controls preload="none" playsinline poster="media/giza-remotion.jpg" width="1920" height="1080">
+                  <source src="media/giza-remotion.mp4" type="video/mp4">
+                  <a href="media/giza-remotion.mp4">Open the video file</a>
+                </video>
+                <p>This cut was rebuilt in Remotion from the same voiceover, footage and word timings, with every graphic redrawn as a React component. The cuts land in the same places. The video's length, its cuts and the end credits are read from the word timings and the footage's licence records when the composition loads. <a href="https://github.com/DerpyNewb/remotion-giza-explainer">Remotion source on GitHub</a></p>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
+      <p class="back"><a href="#videos">Back to all fourteen videos</a></p>
     </div>
   </section>
 
@@ -470,17 +557,19 @@ BURN = cue(7, 'fire')</code></pre>
       <h2 id="spf-title">What the SPF number means</h2>
       <p class="meta">For a beauty channel · 51 seconds · 1080p</p>
       <div class="body">
-        <div class="watch">
-          <video controls preload="metadata" playsinline poster="media/spf.jpg" width="1920" height="1080">
-            <source src="media/spf.mp4" type="video/mp4">
-            <a href="media/spf.mp4">Open the video file</a>
-          </video>
+        <div class="pair">
+          <div class="watch">
+            <video controls preload="metadata" playsinline poster="media/spf.jpg" width="1920" height="1080">
+              <source src="media/spf.mp4" type="video/mp4">
+              <a href="media/spf.mp4">Open the video file</a>
+            </video>
+          </div>
+          <figure class="paper">
+            <figcaption>The script, marked where the code cuts</figcaption>
+            <p class="script">SPF 30 doesn't block twice as much UVB as SPF 15. SPF, or sun protection factor, measures how well sunscreen blocks UVB, the rays that burn your skin. SPF 15 blocks about 93 percent. SPF 30 blocks about 97, and SPF 50 about 98. No sunscreen blocks 100 percent. Those numbers come from a thick test layer, and many people apply only 20 to 50 percent of that. SPF also says nothing about UVA, the rays that age your skin, so check the label for broad spectrum. Skin doctors recommend SPF 30 or higher, about a shot glass for your whole body, reapplied every 2 hours. What SPF are you wearing today?</p>
+            <p class="how">Each blue number is a cut. The code puts it 0.12 seconds before the word that opens the phrase. Pick one to play the video from there.</p>
+          </figure>
         </div>
-        <figure class="paper">
-          <figcaption>The script, marked where the code cuts</figcaption>
-          <p class="script">SPF 30 doesn't block twice as much UVB as SPF 15. SPF, or sun protection factor, measures how well sunscreen blocks UVB, the rays that burn your skin. SPF 15 blocks about 93 percent. SPF 30 blocks about 97, and SPF 50 about 98. No sunscreen blocks 100 percent. Those numbers come from a thick test layer, and many people apply only 20 to 50 percent of that. SPF also says nothing about UVA, the rays that age your skin, so check the label for broad spectrum. Skin doctors recommend SPF 30 or higher, about a shot glass for your whole body, reapplied every 2 hours. What SPF are you wearing today?</p>
-          <p class="how">Each blue number is a cut. The code puts it 0.12 seconds before the word that opens the phrase. Pick one to play the video from there.</p>
-        </figure>
         <div class="notes">
           <div>
             <h3>Where the facts come from</h3>
@@ -492,20 +581,26 @@ BURN = cue(7, 'fire')</code></pre>
             </ul>
           </div>
           <div>
-            <h3>Footage and sound</h3>
-            <p>The video uses 12 files from Pixabay, Wikimedia Commons and Freesound, under CC0, CC BY and the Pixabay license, all credited at the end. They include a clip filmed through an ultraviolet camera, where sunscreen shows up dark, and a label photo framed so no brand shows.</p>
-          </div>
-          <div class="wide">
             <h3>One cue from the code</h3>
             <pre><code>self.play(trackers[i].animate.set_value(p), run_time=end(word) - self.renderer.time, rate_func=smooth)</code></pre>
             <p>Each bar grows until the narrator finishes saying its percentage.</p>
           </div>
-          <div class="wide">
-            <h3>Checked</h3>
-            <p>Each build was reviewed on contact sheets, and nine faults were fixed before the final cut. One was a voice take of "No sunscreen blocks it all" that Whisper heard as "blocks at all", so the line was rewritten and recorded again. Whisper heard all 113 narrated words in the final mix, which plays at -14.4 LUFS.</p>
-          </div>
+          <details>
+            <summary>How this one was made and checked</summary>
+            <div class="more">
+              <div>
+                <h3>Footage and sound</h3>
+                <p>The video uses 12 files from Pixabay, Wikimedia Commons and Freesound, under CC0, CC BY and the Pixabay license, all credited at the end. They include a clip filmed through an ultraviolet camera, where sunscreen shows up dark, and a label photo framed so no brand shows.</p>
+              </div>
+              <div>
+                <h3>Checked</h3>
+                <p>Each build was reviewed on contact sheets, and nine faults were fixed before the final cut. One was a voice take of "No sunscreen blocks it all" that Whisper heard as "blocks at all", so the line was rewritten and recorded again. Whisper heard all 113 narrated words in the final mix, which plays at -14.4 LUFS.</p>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
+      <p class="back"><a href="#videos">Back to all fourteen videos</a></p>
     </div>
   </section>
 
@@ -514,17 +609,19 @@ BURN = cue(7, 'fire')</code></pre>
       <h2 id="sky-title">Why the sky is blue</h2>
       <p class="meta">For a science explainer channel · 51 seconds · 1080p</p>
       <div class="body">
-        <div class="watch">
-          <video controls preload="metadata" playsinline poster="media/sky.jpg" width="1920" height="1080">
-            <source src="media/sky.mp4" type="video/mp4">
-            <a href="media/sky.mp4">Open the video file</a>
-          </video>
+        <div class="pair">
+          <div class="watch">
+            <video controls preload="metadata" playsinline poster="media/sky.jpg" width="1920" height="1080">
+              <source src="media/sky.mp4" type="video/mp4">
+              <a href="media/sky.mp4">Open the video file</a>
+            </video>
+          </div>
+          <figure class="paper">
+            <figcaption>The script, marked where the code cuts</figcaption>
+            <p class="script">Why is the sky blue, when sunlight looks white? Sunlight is every color of the rainbow mixed together. Air molecules are far smaller than a wave of light, and they scatter short waves much more than long ones. Blue light, at 470 nanometers, scatters about 5 times as much as red, at 700, so blue reaches you from every part of the sky. When the Sun sits on the horizon, its light crosses about 38 times as much air as when it's straight overhead. Most of the blue scatters away before it reaches you, and the reds and oranges are left. On Mars, sunsets are blue. Which question should we answer next?</p>
+            <p class="how">Each blue number is a cut. The code puts it 0.12 seconds before the word that opens the phrase. Pick one to play the video from there.</p>
+          </figure>
         </div>
-        <figure class="paper">
-          <figcaption>The script, marked where the code cuts</figcaption>
-          <p class="script">Why is the sky blue, when sunlight looks white? Sunlight is every color of the rainbow mixed together. Air molecules are far smaller than a wave of light, and they scatter short waves much more than long ones. Blue light, at 470 nanometers, scatters about 5 times as much as red, at 700, so blue reaches you from every part of the sky. When the Sun sits on the horizon, its light crosses about 38 times as much air as when it's straight overhead. Most of the blue scatters away before it reaches you, and the reds and oranges are left. On Mars, sunsets are blue. Which question should we answer next?</p>
-          <p class="how">Each blue number is a cut. The code puts it 0.12 seconds before the word that opens the phrase. Pick one to play the video from there.</p>
-        </figure>
         <div class="notes">
           <div>
             <h3>Where the facts come from</h3>
@@ -536,20 +633,26 @@ BURN = cue(7, 'fire')</code></pre>
             </ul>
           </div>
           <div>
-            <h3>Footage and sound</h3>
-            <p>The video uses 13 files from Pixabay, Wikimedia Commons and Freesound, under CC0, CC BY, public domain and the Pixabay license, all credited at the end. They include a photo of light through a prism and NASA's photo of a sunset on Mars, taken by the Curiosity rover in 2015.</p>
-          </div>
-          <div class="wide">
             <h3>One cue from the code</h3>
             <pre><code>self.play(mult.animate.set_value(38), run_time=end('times', 2) - at('38'), rate_func=smooth)</code></pre>
             <p>The counter reaches 38 just as the narrator finishes "38 times". The "about 5 times" figure is worked out on screen from the two wavelengths.</p>
           </div>
-          <div class="wide">
-            <h3>Checked</h3>
-            <p>Each build was reviewed on contact sheets, and nine faults were fixed before the final cut, including a first voice take that ran too fast for the diagrams. Whisper heard all 113 narrated words in the final mix (it wrote one "5" as "five"), which plays at -14.4 LUFS.</p>
-          </div>
+          <details>
+            <summary>How this one was made and checked</summary>
+            <div class="more">
+              <div>
+                <h3>Footage and sound</h3>
+                <p>The video uses 13 files from Pixabay, Wikimedia Commons and Freesound, under CC0, CC BY, public domain and the Pixabay license, all credited at the end. They include a photo of light through a prism and NASA's photo of a sunset on Mars, taken by the Curiosity rover in 2015.</p>
+              </div>
+              <div>
+                <h3>Checked</h3>
+                <p>Each build was reviewed on contact sheets, and nine faults were fixed before the final cut, including a first voice take that ran too fast for the diagrams. Whisper heard all 113 narrated words in the final mix (it wrote one "5" as "five"), which plays at -14.4 LUFS.</p>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
+      <p class="back"><a href="#videos">Back to all fourteen videos</a></p>
     </div>
   </section>
 
@@ -558,17 +661,19 @@ BURN = cue(7, 'fire')</code></pre>
       <h2 id="mactan-title">The Battle of Mactan</h2>
       <p class="meta">For a history channel · 60 seconds · 1080p, with a 9:16 cut</p>
       <div class="body">
-        <div class="watch">
-          <video controls preload="metadata" playsinline poster="media/mactan.jpg" width="1920" height="1080">
-            <source src="media/mactan.mp4" type="video/mp4">
-            <a href="media/mactan.mp4">Open the video file</a>
-          </video>
+        <div class="pair">
+          <div class="watch">
+            <video controls preload="metadata" playsinline poster="media/mactan.jpg" width="1920" height="1080">
+              <source src="media/mactan.mp4" type="video/mp4">
+              <a href="media/mactan.mp4">Open the video file</a>
+            </video>
+          </div>
+          <figure class="paper">
+            <figcaption>The script, marked where each line starts</figcaption>
+            <p class="script">April 27, 1521. The Battle of Mactan. Magellan's fleet left Spain in 1519. In Cebu, Rajah Humabon became his ally. On Mactan, Zula asked Magellan for help. His rival, Lapulapu, refused to obey Spain. At midnight, sixty armored men set out in three boats. Rocks kept the boats far out, so forty-nine men waded in, thigh-deep. More than fifteen hundred warriors were waiting for them. An arrow hit Magellan's leg, and most of his men fled. A few stayed with him until he fell. Magellan and eight of his men died, with four allies. Lapulapu lost fifteen. Days later, Humabon turned on the crews. The Victoria came home with eighteen men. Today, April 27 is Lapu-Lapu Day in the Philippines.</p>
+            <p class="how">Each blue number is a line of narration. The script was read in one take and cut in the middle of its pauses, and each line starts as its scene or its moment in the battle opens. Pick one to play the video from there.</p>
+          </figure>
         </div>
-        <figure class="paper">
-          <figcaption>The script, marked where each line starts</figcaption>
-          <p class="script">April 27, 1521. The Battle of Mactan. Magellan's fleet left Spain in 1519. In Cebu, Rajah Humabon became his ally. On Mactan, Zula asked Magellan for help. His rival, Lapulapu, refused to obey Spain. At midnight, sixty armored men set out in three boats. Rocks kept the boats far out, so forty-nine men waded in, thigh-deep. More than fifteen hundred warriors were waiting for them. An arrow hit Magellan's leg, and most of his men fled. A few stayed with him until he fell. Magellan and eight of his men died, with four allies. Lapulapu lost fifteen. Days later, Humabon turned on the crews. The Victoria came home with eighteen men. Today, April 27 is Lapu-Lapu Day in the Philippines.</p>
-          <p class="how">Each blue number is a line of narration. The script was read in one take and cut in the middle of its pauses, and each line starts as its scene or its moment in the battle opens. Pick one to play the video from there.</p>
-        </figure>
         <div class="notes">
           <div>
             <h3>Where the facts come from</h3>
@@ -580,40 +685,46 @@ BURN = cue(7, 'fire')</code></pre>
             </ul>
           </div>
           <div>
-            <h3>Pictures and sound</h3>
-            <p>The video uses six public-domain pictures from Wikimedia Commons, each captioned on screen. They include a 16th-century engraving of the fight, a map from a manuscript of Pigafetta's account that marks where Magellan died, and Visayans drawn in the Boxer Codex about 1590. The 14 sound effects are from Freesound. Three are CC BY: "Regular Arrow Shot with rattle" by brendan89 (CC BY 3.0), "Deepest Boom Yet" by hykenfreak (CC BY 4.0) and "Steampunk Crossbow Shot 1" by qubodup (CC BY 4.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file with its source.</p>
-          </div>
-          <div class="wide">
-            <h3>Drawn by code, with no footage</h3>
-            <p>One Python storyboard file says where every shape, line of text and picture sits on each of the 1,440 frames, and both Blender and Unreal Engine render that same file. One dot stands for 10 men, so the landing shows 6 dots for Magellan's 60 men against 150 for more than 1,500 warriors, as Pigafetta counted them.</p>
-          </div>
-          <div class="wide">
-            <h3>The 9:16 cut</h3>
-            <video class="tall" controls preload="none" playsinline poster="media/mactan-portrait.jpg" width="1080" height="1920">
-              <source src="media/mactan-portrait.mp4" type="video/mp4">
-              <a href="media/mactan-portrait.mp4">Open the video file</a>
-            </video>
-            <p>This cut is for Shorts and Reels, with the same timing and soundtrack. The text is larger, the timeline runs down the frame, and everything stays clear of the captions and buttons the apps lay over the bottom of the frame.</p>
-          </div>
-          <div class="wide">
-            <h3>The same storyboard in Unreal Engine</h3>
-            <video controls preload="none" playsinline poster="media/mactan-unreal.jpg" width="1920" height="1080">
-              <source src="media/mactan-unreal.mp4" type="video/mp4">
-              <a href="media/mactan-unreal.mp4">Open the video file</a>
-            </video>
-            <p>Unreal draws the shapes as unlit basic meshes and the pictures as flat textures, seen through a long lens so the view is nearly flat. Its colours match Blender's to within 2 or 3 RGB steps.</p>
-          </div>
-          <div class="wide">
             <h3>One cue from the code</h3>
             <pre><code>EFFECTS += [(f(852) - 1.5, ARROW, 0, 2.7, -10), (f(852) + 0.05, IMPACT, 0, 0.3, 0)]</code></pre>
             <p>The arrow's whistle starts 1.5 seconds early, so it strikes as the ring around Magellan's dot appears at frame 852.</p>
           </div>
-          <div class="wide">
-            <h3>Checked</h3>
-            <p>The storyboard checks its own counts (150 warrior dots, 6 Spanish dots, and 9, 4 and 15 dead), that no picture is stretched, and that nothing leaves the frame. Frames from every scene of each render were reviewed. The narration was first recorded line by line, which sounded like ten different reads and clipped some word endings, so the whole script was read again in one take. Whisper heard all 123 narrated words in the final mix (it wrote the numbers as digits and "crews" as "cruise"), which plays at -14.7 LUFS. Its first read-back heard "waiting for them" as "waiting for him" under the musket fire, so the last two shots were moved to after the line.</p>
-          </div>
+          <details>
+            <summary>How this one was made and checked</summary>
+            <div class="more">
+              <div>
+                <h3>Pictures and sound</h3>
+                <p>The video uses six public-domain pictures from Wikimedia Commons, each captioned on screen. They include a 16th-century engraving of the fight, a map from a manuscript of Pigafetta's account that marks where Magellan died, and Visayans drawn in the Boxer Codex about 1590. The 14 sound effects are from Freesound. Three are CC BY: "Regular Arrow Shot with rattle" by brendan89 (CC BY 3.0), "Deepest Boom Yet" by hykenfreak (CC BY 4.0) and "Steampunk Crossbow Shot 1" by qubodup (CC BY 4.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file with its source.</p>
+              </div>
+              <div>
+                <h3>Drawn by code, with no footage</h3>
+                <p>One Python storyboard file says where every shape, line of text and picture sits on each of the 1,440 frames, and both Blender and Unreal Engine render that same file. One dot stands for 10 men, so the landing shows 6 dots for Magellan's 60 men against 150 for more than 1,500 warriors, as Pigafetta counted them.</p>
+              </div>
+              <div>
+                <h3>The 9:16 cut</h3>
+                <video class="tall" controls preload="none" playsinline poster="media/mactan-portrait.jpg" width="1080" height="1920">
+                  <source src="media/mactan-portrait.mp4" type="video/mp4">
+                  <a href="media/mactan-portrait.mp4">Open the video file</a>
+                </video>
+                <p>This cut is for Shorts and Reels, with the same timing and soundtrack. The text is larger, the timeline runs down the frame, and everything stays clear of the captions and buttons the apps lay over the bottom of the frame.</p>
+              </div>
+              <div>
+                <h3>The same storyboard in Unreal Engine</h3>
+                <video controls preload="none" playsinline poster="media/mactan-unreal.jpg" width="1920" height="1080">
+                  <source src="media/mactan-unreal.mp4" type="video/mp4">
+                  <a href="media/mactan-unreal.mp4">Open the video file</a>
+                </video>
+                <p>Unreal draws the shapes as unlit basic meshes and the pictures as flat textures, seen through a long lens so the view is nearly flat. Its colours match Blender's to within 2 or 3 RGB steps.</p>
+              </div>
+              <div>
+                <h3>Checked</h3>
+                <p>The storyboard checks its own counts (150 warrior dots, 6 Spanish dots, and 9, 4 and 15 dead), that no picture is stretched, and that nothing leaves the frame. Frames from every scene of each render were reviewed. The narration was first recorded line by line, which sounded like ten different reads and clipped some word endings, so the whole script was read again in one take. Whisper heard all 123 narrated words in the final mix (it wrote the numbers as digits and "crews" as "cruise"), which plays at -14.7 LUFS. Its first read-back heard "waiting for them" as "waiting for him" under the musket fire, so the last two shots were moved to after the line.</p>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
+      <p class="back"><a href="#videos">Back to all fourteen videos</a></p>
     </div>
   </section>
 
@@ -622,17 +733,19 @@ BURN = cue(7, 'fire')</code></pre>
       <h2 id="dalton-title">The Battle of Balete Pass</h2>
       <p class="meta">For a history channel · 88 seconds · vertical, for Shorts and Reels</p>
       <div class="body">
-        <div class="watch">
-          <video class="tall" controls preload="metadata" playsinline poster="media/dalton.jpg" width="1080" height="1920">
-            <source src="media/dalton.mp4" type="video/mp4">
-            <a href="media/dalton.mp4">Open the video file</a>
-          </video>
+        <div class="pair">
+          <div class="watch">
+            <video class="tall" controls preload="metadata" playsinline poster="media/dalton.jpg" width="1080" height="1920">
+              <source src="media/dalton.mp4" type="video/mp4">
+              <a href="media/dalton.mp4">Open the video file</a>
+            </video>
+          </div>
+          <figure class="paper">
+            <figcaption>The script, marked where each line starts</figcaption>
+            <p class="script">Balete Pass, 1945. The battle for the road into northern Luzon. General Yamashita's army held the Cagayan Valley, the rice bowl of northern Luzon. Route 5, the road in from the south, crossed the mountains at Balete Pass. From San Jose, it climbs nearly twenty-five miles into the Caraballo Mountains, to three thousand feet at the pass. On February 21, the US 25th Division began its drive north. Japan committed perhaps twelve thousand troops to hold the road. Filipino guerrillas and a Chinese militia fought alongside the Americans. The front was six miles wide, across steep, forested ridges. Carrying parties took twelve hours to reach one forward battalion. On May 9, a patrol reached the pass and found no Japanese. On May 13, Route 5 was declared open. Three days later, a sniper killed Brigadier General James Dalton the Second as he inspected the pass. That September, the pass was renamed Dalton Pass in his memory. The drive cost the 25th Division's regiments five hundred forty-five killed and sixteen hundred fifty wounded. Japan's 10th Division lost almost seven thousand men killed. On May 27, the Americans took Santa Fe, the gateway to the Cagayan Valley. Since 2016, Balete Pass has been a national shrine, and the battle is remembered every May.</p>
+            <p class="how">Each blue number is a line of narration. This time the narration was recorded first, in one take, and every scene was laid out on it, so each mark on screen lands on the word that names it. Pick a number to play the video from there.</p>
+          </figure>
         </div>
-        <figure class="paper">
-          <figcaption>The script, marked where each line starts</figcaption>
-          <p class="script">Balete Pass, 1945. The battle for the road into northern Luzon. General Yamashita's army held the Cagayan Valley, the rice bowl of northern Luzon. Route 5, the road in from the south, crossed the mountains at Balete Pass. From San Jose, it climbs nearly twenty-five miles into the Caraballo Mountains, to three thousand feet at the pass. On February 21, the US 25th Division began its drive north. Japan committed perhaps twelve thousand troops to hold the road. Filipino guerrillas and a Chinese militia fought alongside the Americans. The front was six miles wide, across steep, forested ridges. Carrying parties took twelve hours to reach one forward battalion. On May 9, a patrol reached the pass and found no Japanese. On May 13, Route 5 was declared open. Three days later, a sniper killed Brigadier General James Dalton the Second as he inspected the pass. That September, the pass was renamed Dalton Pass in his memory. The drive cost the 25th Division's regiments five hundred forty-five killed and sixteen hundred fifty wounded. Japan's 10th Division lost almost seven thousand men killed. On May 27, the Americans took Santa Fe, the gateway to the Cagayan Valley. Since 2016, Balete Pass has been a national shrine, and the battle is remembered every May.</p>
-          <p class="how">Each blue number is a line of narration. This time the narration was recorded first, in one take, and every scene was laid out on it, so each mark on screen lands on the word that names it. Pick a number to play the video from there.</p>
-        </figure>
         <div class="notes">
           <div>
             <h3>Where the facts come from</h3>
@@ -644,33 +757,39 @@ BURN = cue(7, 'fire')</code></pre>
             </ul>
           </div>
           <div>
-            <h3>Pictures and sound</h3>
-            <p>The pictures are four US Army Signal Corps photos, Dalton's West Point portrait and two maps from Smith's history, all public domain and each captioned on screen, and a 2016 photo of the shrine by Patrick Roque (CC BY 4.0), credited on screen. One photo carried a typed wartime caption with a slur, and the crop leaves it out. The sound effects are from Freesound; two are CC BY: "Distant Battlefield Soundscape" by Kostas17 (CC BY 3.0) and "amazon 04.wav" by volivieri (CC BY 4.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file with its source.</p>
-          </div>
-          <div class="wide">
-            <h3>Facts checked against the sources</h3>
-            <p>The dates, the casualty figures, the heights and the renaming were checked against Smith's text and the laws themselves. Figures the sources can't support were left out: a memorial plaque's totals survive in only one transcription, and a casualty count on Wikipedia isn't in the pages it cites. The screen says what each bar counts: the US figures are the 25th Division's three infantry regiments, and the Japanese figure is the 10th Division's dead, from 21 February until the pass fell.</p>
-          </div>
-          <div class="wide">
-            <h3>The same storyboard in Unreal Engine</h3>
-            <video class="tall" controls preload="none" playsinline poster="media/dalton-unreal.jpg" width="1080" height="1920">
-              <source src="media/dalton-unreal.mp4" type="video/mp4">
-              <a href="media/dalton-unreal.mp4">Open the video file</a>
-            </video>
-            <p>The lines drawn over the maps are rectangles turned to the angle between two points, and both engines draw them the same way.</p>
-          </div>
-          <div class="wide">
             <h3>One cue from the code</h3>
             <pre><code>ROUTE5 = [(340, 1447), (374, 1371), (322, 1305), (324, 1282), (359, 1223), (387, 1192)]
 ring(m19(*ROUTE5[2]), (372, S2[1]))</code></pre>
             <p>Route 5's corners are points on the Army's map, in its own pixels, and the third is the map's pass symbol. The ring around it pops at frame 372, where the narrator says "Balete Pass".</p>
           </div>
-          <div class="wide">
-            <h3>Checked</h3>
-            <p>The storyboard checks that the three bars share one scale, that every map point falls on its map, that no picture is stretched and that nothing leaves the frame. Every render was reviewed at four frames a second. Whisper heard all 211 narrated words in the final mix (it wrote the numbers as digits and "the Second" as "II"), which plays at -14.2 LUFS.</p>
-          </div>
+          <details>
+            <summary>How this one was made and checked</summary>
+            <div class="more">
+              <div>
+                <h3>Pictures and sound</h3>
+                <p>The pictures are four US Army Signal Corps photos, Dalton's West Point portrait and two maps from Smith's history, all public domain and each captioned on screen, and a 2016 photo of the shrine by Patrick Roque (CC BY 4.0), credited on screen. One photo carried a typed wartime caption with a slur, and the crop leaves it out. The sound effects are from Freesound; two are CC BY: "Distant Battlefield Soundscape" by Kostas17 (CC BY 3.0) and "amazon 04.wav" by volivieri (CC BY 4.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file with its source.</p>
+              </div>
+              <div>
+                <h3>Facts checked against the sources</h3>
+                <p>The dates, the casualty figures, the heights and the renaming were checked against Smith's text and the laws themselves. Figures the sources can't support were left out: a memorial plaque's totals survive in only one transcription, and a casualty count on Wikipedia isn't in the pages it cites. The screen says what each bar counts: the US figures are the 25th Division's three infantry regiments, and the Japanese figure is the 10th Division's dead, from 21 February until the pass fell.</p>
+              </div>
+              <div>
+                <h3>The same storyboard in Unreal Engine</h3>
+                <video class="tall" controls preload="none" playsinline poster="media/dalton-unreal.jpg" width="1080" height="1920">
+                  <source src="media/dalton-unreal.mp4" type="video/mp4">
+                  <a href="media/dalton-unreal.mp4">Open the video file</a>
+                </video>
+                <p>The lines drawn over the maps are rectangles turned to the angle between two points, and both engines draw them the same way.</p>
+              </div>
+              <div>
+                <h3>Checked</h3>
+                <p>The storyboard checks that the three bars share one scale, that every map point falls on its map, that no picture is stretched and that nothing leaves the frame. Every render was reviewed at four frames a second. Whisper heard all 211 narrated words in the final mix (it wrote the numbers as digits and "the Second" as "II"), which plays at -14.2 LUFS.</p>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
+      <p class="back"><a href="#videos">Back to all fourteen videos</a></p>
     </div>
   </section>
 
@@ -679,17 +798,19 @@ ring(m19(*ROUTE5[2]), (372, S2[1]))</code></pre>
       <h2 id="lamitan-title">Lamitan, 1637</h2>
       <p class="meta">For a history channel · 87 seconds · vertical, for Shorts and Reels · animated infographic in Blender · <a href="https://youtube.com/shorts/wgvScE4Vbsg">Watch on YouTube</a></p>
       <div class="body">
-        <div class="watch">
-          <video class="tall" controls preload="metadata" playsinline poster="media/lamitan.jpg" width="1080" height="1920">
-            <source src="media/lamitan.mp4" type="video/mp4">
-            <a href="media/lamitan.mp4">Open the video file</a>
-          </video>
+        <div class="pair">
+          <div class="watch">
+            <video class="tall" controls preload="metadata" playsinline poster="media/lamitan.jpg" width="1080" height="1920">
+              <source src="media/lamitan.mp4" type="video/mp4">
+              <a href="media/lamitan.mp4">Open the video file</a>
+            </video>
+          </div>
+          <figure class="paper">
+            <figcaption>The script, marked where each line starts</figcaption>
+            <p class="script">Mindanao, 1637. Spain's governor marches on the court of Sultan Kudarat. Months earlier, Kudarat's war captain Tagal was sailing home from a raid. At Punta de Flechas, a squadron from Zamboanga caught his fleet and killed him. Governor Sebastian Hurtado de Corcuera came in person. On March 13, 1637, he landed near Lamitan with about seventy men. Guns covered the beach road, so they forded the river instead. Town and fort fell in about half an hour. Kudarat smeared his face with mud and fled to his fortified hill. On March 17, they stormed the hill from the front, up a path so narrow that men climbed one at a time. After two hours, Corcuera sounded the retreat. That night, the defenders feasted, believing they had killed the governor. At dawn, a second column under Nicolas Gonzalez struck from the rear, where the hill had no stockades. Kudarat escaped, shot in the arm. Accounts disagree on whether his queen leapt to her death or got away. On March 25, as the Spanish embarked, Kudarat's men lay in ambush on two hills by the shore. The parting salute, fired with live shot, swept them without the Spanish knowing. Kudarat lived. When Spanish soldiers later reached Lake Lanao, he asked its people: look at the Tagalogs and Visayans. Are you better than they?</p>
+            <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and each mark on screen sits on the frame of the word that names it. Pick a number to play the video from there.</p>
+          </figure>
         </div>
-        <figure class="paper">
-          <figcaption>The script, marked where each line starts</figcaption>
-          <p class="script">Mindanao, 1637. Spain's governor marches on the court of Sultan Kudarat. Months earlier, Kudarat's war captain Tagal was sailing home from a raid. At Punta de Flechas, a squadron from Zamboanga caught his fleet and killed him. Governor Sebastian Hurtado de Corcuera came in person. On March 13, 1637, he landed near Lamitan with about seventy men. Guns covered the beach road, so they forded the river instead. Town and fort fell in about half an hour. Kudarat smeared his face with mud and fled to his fortified hill. On March 17, they stormed the hill from the front, up a path so narrow that men climbed one at a time. After two hours, Corcuera sounded the retreat. That night, the defenders feasted, believing they had killed the governor. At dawn, a second column under Nicolas Gonzalez struck from the rear, where the hill had no stockades. Kudarat escaped, shot in the arm. Accounts disagree on whether his queen leapt to her death or got away. On March 25, as the Spanish embarked, Kudarat's men lay in ambush on two hills by the shore. The parting salute, fired with live shot, swept them without the Spanish knowing. Kudarat lived. When Spanish soldiers later reached Lake Lanao, he asked its people: look at the Tagalogs and Visayans. Are you better than they?</p>
-          <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and each mark on screen sits on the frame of the word that names it. Pick a number to play the video from there.</p>
-        </figure>
         <div class="notes">
           <div>
             <h3>Where the facts come from</h3>
@@ -700,24 +821,30 @@ ring(m19(*ROUTE5[2]), (372, S2[1]))</code></pre>
             </ul>
           </div>
           <div>
-            <h3>Map and sound</h3>
-            <p>The map of western Mindanao is painted from Natural Earth's shapes, which are today's coasts, with relief from AWS Terrain Tiles (Mapzen; SRTM and GMTED2010 from the US Geological Survey, ETOPO1 from NOAA). Lake Lanao is found as the flat water in the elevation data. Where Lamitan stood is not known, so the diagram of the town and the hill is drawn from the accounts' words, and the screen says it is not to scale. The night, the dawn, the cloud shadows, the fire and the smoke are painted light. The sound effects are from Freesound; four are CC BY: "Crickets in the night" by caquet, "Kendang, Kendhang or Gendang" by redafs and "Soft Clicks" by andersmmg (CC BY 4.0), and "Medieval cannon shot" by engray (CC BY 3.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file.</p>
-          </div>
-          <div class="wide">
-            <h3>Facts checked against the sources</h3>
-            <p>Every quote was checked word for word against the sources. They were all written by the Spanish side, and they disagree on most numbers, such as the Spanish dead of 17 March (18, 23, "more than twenty" and 26), so the video gives only "about seventy", the one figure all four accounts share. The brief asked for an ambush of the Spanish at Punta Flechas, but no account has one: there a Spanish squadron caught Kudarat's fleet, and the one ambush laid for the Spanish was at Lamitan as they left. The video shows both. Kudarat's speech is quoted only as far as Combés gives it in his voice.</p>
-          </div>
-          <div class="wide">
             <h3>One cue from the code</h3>
             <pre><code>assert len(crossings(ROUTE, RIVER)) == 2, 'the route to the fort fords the river twice (Mastrilli, p. 264)'</code></pre>
             <p>The diagram is drawn from the accounts' words, so the storyboard checks it against them. The march forded the river twice, so running the storyboard fails if the drawn route crosses the drawn river any other number of times. Other checks keep the guns and the fort on one bank and the sea routes off the land.</p>
           </div>
-          <div class="wide">
-            <h3>Checked</h3>
-            <p>Whisper read the final mix back and heard 205 of the 221 script words as written. The rest are numbers written as digits and names spelled by ear, such as "Llamatan" for Lamitan, and a mix of the voice alone gave the same differences, so the effects hide no words. The mix plays at -14.3 LUFS.</p>
-          </div>
+          <details>
+            <summary>How this one was made and checked</summary>
+            <div class="more">
+              <div>
+                <h3>Map and sound</h3>
+                <p>The map of western Mindanao is painted from Natural Earth's shapes, which are today's coasts, with relief from AWS Terrain Tiles (Mapzen; SRTM and GMTED2010 from the US Geological Survey, ETOPO1 from NOAA). Lake Lanao is found as the flat water in the elevation data. Where Lamitan stood is not known, so the diagram of the town and the hill is drawn from the accounts' words, and the screen says it is not to scale. The night, the dawn, the cloud shadows, the fire and the smoke are painted light. The sound effects are from Freesound; four are CC BY: "Crickets in the night" by caquet, "Kendang, Kendhang or Gendang" by redafs and "Soft Clicks" by andersmmg (CC BY 4.0), and "Medieval cannon shot" by engray (CC BY 3.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file.</p>
+              </div>
+              <div>
+                <h3>Facts checked against the sources</h3>
+                <p>Every quote was checked word for word against the sources. They were all written by the Spanish side, and they disagree on most numbers, such as the Spanish dead of 17 March (18, 23, "more than twenty" and 26), so the video gives only "about seventy", the one figure all four accounts share. The brief asked for an ambush of the Spanish at Punta Flechas, but no account has one: there a Spanish squadron caught Kudarat's fleet, and the one ambush laid for the Spanish was at Lamitan as they left. The video shows both. Kudarat's speech is quoted only as far as Combés gives it in his voice.</p>
+              </div>
+              <div>
+                <h3>Checked</h3>
+                <p>Whisper read the final mix back and heard 205 of the 221 script words as written. The rest are numbers written as digits and names spelled by ear, such as "Llamatan" for Lamitan, and a mix of the voice alone gave the same differences, so the effects hide no words. The mix plays at -14.3 LUFS.</p>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
+      <p class="back"><a href="#videos">Back to all fourteen videos</a></p>
     </div>
   </section>
 
@@ -726,17 +853,19 @@ ring(m19(*ROUTE5[2]), (372, S2[1]))</code></pre>
       <h2 id="corregidor-title">The Battle of Corregidor</h2>
       <p class="meta">For a history channel · 98 seconds · vertical, for Shorts and Reels · layered 2.5D in Unreal Engine</p>
       <div class="body">
-        <div class="watch">
-          <video class="tall" controls preload="metadata" playsinline poster="media/corregidor.jpg" width="1080" height="1920">
-            <source src="media/corregidor.mp4" type="video/mp4">
-            <a href="media/corregidor.mp4">Open the video file</a>
-          </video>
+        <div class="pair">
+          <div class="watch">
+            <video class="tall" controls preload="metadata" playsinline poster="media/corregidor.jpg" width="1080" height="1920">
+              <source src="media/corregidor.mp4" type="video/mp4">
+              <a href="media/corregidor.mp4">Open the video file</a>
+            </video>
+          </div>
+          <figure class="paper">
+            <figcaption>The script, marked where each line starts</figcaption>
+            <p class="script">Corregidor, 1942. The island fortress at the mouth of Manila Bay. Three and a half miles long and shaped like a tadpole, it was the largest of four fortified islands guarding the finest natural harbor in the Orient. Its big guns were built to fight battleships. Inside Malinta Hill, a tunnel fourteen hundred feet long held the army's headquarters, a hospital and the Commonwealth government. Japanese bombers first struck on December 29, 1941. The next day, the headquarters moved into the tunnel. In March, MacArthur left by PT boat, and General Jonathan Wainwright took command. On April 9, Bataan surrendered. Japanese guns moved onto its southern tip, two miles across the water. For twenty-seven days they shelled the island. On May 4 alone, an estimated sixteen thousand shells fell. On the night of May 5, under a full moon, the Japanese 61st Infantry crossed in landing barges. They came ashore near North Point, a thousand yards east of their target. Between half and two-thirds of the boats were put out of action, but by one thirty in the morning, the troops ashore had taken Battery Denver. Colonel Howard sent in his last reserve, a battalion of sailors. They counterattacked at six fifteen. Shortly before ten, Japanese tanks went into action. With a thousand wounded in the tunnel, Wainwright decided to surrender. At noon on May 6, the white flag went up. Close to eleven thousand men on Corregidor became prisoners. In 1954, the battlefields of Corregidor and Bataan were declared national shrines.</p>
+            <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and every layer and mark was timed to it. Pick a number to play the video from there.</p>
+          </figure>
         </div>
-        <figure class="paper">
-          <figcaption>The script, marked where each line starts</figcaption>
-          <p class="script">Corregidor, 1942. The island fortress at the mouth of Manila Bay. Three and a half miles long and shaped like a tadpole, it was the largest of four fortified islands guarding the finest natural harbor in the Orient. Its big guns were built to fight battleships. Inside Malinta Hill, a tunnel fourteen hundred feet long held the army's headquarters, a hospital and the Commonwealth government. Japanese bombers first struck on December 29, 1941. The next day, the headquarters moved into the tunnel. In March, MacArthur left by PT boat, and General Jonathan Wainwright took command. On April 9, Bataan surrendered. Japanese guns moved onto its southern tip, two miles across the water. For twenty-seven days they shelled the island. On May 4 alone, an estimated sixteen thousand shells fell. On the night of May 5, under a full moon, the Japanese 61st Infantry crossed in landing barges. They came ashore near North Point, a thousand yards east of their target. Between half and two-thirds of the boats were put out of action, but by one thirty in the morning, the troops ashore had taken Battery Denver. Colonel Howard sent in his last reserve, a battalion of sailors. They counterattacked at six fifteen. Shortly before ten, Japanese tanks went into action. With a thousand wounded in the tunnel, Wainwright decided to surrender. At noon on May 6, the white flag went up. Close to eleven thousand men on Corregidor became prisoners. In 1954, the battlefields of Corregidor and Bataan were declared national shrines.</p>
-          <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and every layer and mark was timed to it. Pick a number to play the video from there.</p>
-        </figure>
         <div class="notes">
           <div>
             <h3>Where the facts come from</h3>
@@ -747,25 +876,31 @@ ring(m19(*ROUTE5[2]), (372, S2[1]))</code></pre>
             </ul>
           </div>
           <div>
-            <h3>Pictures and sound</h3>
-            <p>The pictures are Morton's maps of the island and of the landings, and four photos: Fort Drum's guns firing in 1935, MacArthur in the tunnel, Wainwright, and a 1982 Navy aerial of the island, all public domain and captioned on screen. The bay is open elevation data, and the smoke is blurred noise. The sound effects are from Freesound; three are CC BY: "Distant Battlefield Soundscape" by Kostas17 (CC BY 3.0), "Oceanwaves and crickets" by Eelke and a propeller fly-over by jimruss68 (both CC BY 4.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file.</p>
-          </div>
-          <div class="wide">
-            <h3>Three words cut for accuracy</h3>
-            <p>The recorded take called the last reserve "a battalion of sailors led by Marines". The Marine Corps history says only six Marines served in it, its commander and five NCOs, so those three words were cut out of the take, and the screen names the commander, Maj. Francis Williams. The landing's drift of about 1,000 yards is quoted from Morton, not measured on his map.</p>
-          </div>
-          <div class="wide">
             <h3>One cue from the code</h3>
             <pre><code># Depths, centimetres behind the picture plane
 SEA, BAY, ISLAND, MAP, SKY, NEAR = 5000, 2600, 1200, 900, 400, -250</code></pre>
             <p>Every layer sits at a depth and is scaled up by its distance, so from the camera's home position it lands on its storyboard pixels. When the camera drifts, the near smoke slides past faster than the island, and the sea barely moves.</p>
           </div>
-          <div class="wide">
-            <h3>Checked</h3>
-            <p>The storyboard checks that no picture is stretched and nothing leaves the frame. Contact sheets of the first render showed shell bursts that looked like suns, smoke like blotches and a washed-out map, and each was toned down before the final render. Whisper heard every narrated word in the final mix, writing the numbers as digits and "Malinta" as "Melinda". The mix plays at -14.3 LUFS.</p>
-          </div>
+          <details>
+            <summary>How this one was made and checked</summary>
+            <div class="more">
+              <div>
+                <h3>Pictures and sound</h3>
+                <p>The pictures are Morton's maps of the island and of the landings, and four photos: Fort Drum's guns firing in 1935, MacArthur in the tunnel, Wainwright, and a 1982 Navy aerial of the island, all public domain and captioned on screen. The bay is open elevation data, and the smoke is blurred noise. The sound effects are from Freesound; three are CC BY: "Distant Battlefield Soundscape" by Kostas17 (CC BY 3.0), "Oceanwaves and crickets" by Eelke and a propeller fly-over by jimruss68 (both CC BY 4.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file.</p>
+              </div>
+              <div>
+                <h3>Three words cut for accuracy</h3>
+                <p>The recorded take called the last reserve "a battalion of sailors led by Marines". The Marine Corps history says only six Marines served in it, its commander and five NCOs, so those three words were cut out of the take, and the screen names the commander, Maj. Francis Williams. The landing's drift of about 1,000 yards is quoted from Morton, not measured on his map.</p>
+              </div>
+              <div>
+                <h3>Checked</h3>
+                <p>The storyboard checks that no picture is stretched and nothing leaves the frame. Contact sheets of the first render showed shell bursts that looked like suns, smoke like blotches and a washed-out map, and each was toned down before the final render. Whisper heard every narrated word in the final mix, writing the numbers as digits and "Malinta" as "Melinda". The mix plays at -14.3 LUFS.</p>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
+      <p class="back"><a href="#videos">Back to all fourteen videos</a></p>
     </div>
   </section>
 
@@ -774,17 +909,19 @@ SEA, BAY, ISLAND, MAP, SKY, NEAR = 5000, 2600, 1200, 900, 400, -250</code></pre>
       <h2 id="irisan-title">The Battle of Irisan</h2>
       <p class="meta">For a history channel · 102 seconds · vertical, for Shorts and Reels · layered 2.5D in Blender</p>
       <div class="body">
-        <div class="watch">
-          <video class="tall" controls preload="metadata" playsinline poster="media/irisan.jpg" width="1080" height="1920">
-            <source src="media/irisan.mp4" type="video/mp4">
-            <a href="media/irisan.mp4">Open the video file</a>
-          </video>
+        <div class="pair">
+          <div class="watch">
+            <video class="tall" controls preload="metadata" playsinline poster="media/irisan.jpg" width="1080" height="1920">
+              <source src="media/irisan.mp4" type="video/mp4">
+              <a href="media/irisan.mp4">Open the video file</a>
+            </video>
+          </div>
+          <figure class="paper">
+            <figcaption>The script, marked where each line starts</figcaption>
+            <p class="script">In April 1945, American troops fought their way up into the mountains of northern Luzon, toward Baguio. Baguio was General Yamashita's headquarters, so taking it promised tactical gains, and propaganda value too. The easiest way up was Route 9, from Bauang on the coast, twenty miles to Baguio in a straight line. By April 14, the 129th Infantry had broken through at Sablan, and the 148th Infantry took the lead. A mile past Yagyagan, the road dipped across the gorge of the Irisan River, the best natural defensive position on the route. General Bunzo Sato rushed in reinforcements, perhaps more than fifteen hundred men, though no more than a third at any one time. On April 17, the 148th attacked. Japanese antitank fire knocked out two American tanks at the bridge, and the Japanese lost two light tanks. Frontal attacks failed. Then a machine gun squad crept through heavy woods to a spot where it could fire on most of the defenders. Air strikes and artillery pounded the last ridges, and on April 21 the breakthrough was complete. The Army's official history calls it the critical action of the entire drive to Baguio. It cost the 148th about forty killed and one hundred sixty wounded. Nearly five hundred Japanese were killed. On April 26, the 129th Infantry secured most of the city. But some ten thousand Japanese troops had already pulled out. On September 3, 1945, Yamashita signed his surrender in Baguio, at Camp John Hay, with General Wainwright looking on.</p>
+            <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and every layer, mark and effect was timed to it. Pick a number to play the video from there.</p>
+          </figure>
         </div>
-        <figure class="paper">
-          <figcaption>The script, marked where each line starts</figcaption>
-          <p class="script">In April 1945, American troops fought their way up into the mountains of northern Luzon, toward Baguio. Baguio was General Yamashita's headquarters, so taking it promised tactical gains, and propaganda value too. The easiest way up was Route 9, from Bauang on the coast, twenty miles to Baguio in a straight line. By April 14, the 129th Infantry had broken through at Sablan, and the 148th Infantry took the lead. A mile past Yagyagan, the road dipped across the gorge of the Irisan River, the best natural defensive position on the route. General Bunzo Sato rushed in reinforcements, perhaps more than fifteen hundred men, though no more than a third at any one time. On April 17, the 148th attacked. Japanese antitank fire knocked out two American tanks at the bridge, and the Japanese lost two light tanks. Frontal attacks failed. Then a machine gun squad crept through heavy woods to a spot where it could fire on most of the defenders. Air strikes and artillery pounded the last ridges, and on April 21 the breakthrough was complete. The Army's official history calls it the critical action of the entire drive to Baguio. It cost the 148th about forty killed and one hundred sixty wounded. Nearly five hundred Japanese were killed. On April 26, the 129th Infantry secured most of the city. But some ten thousand Japanese troops had already pulled out. On September 3, 1945, Yamashita signed his surrender in Baguio, at Camp John Hay, with General Wainwright looking on.</p>
-          <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and every layer, mark and effect was timed to it. Pick a number to play the video from there.</p>
-        </figure>
         <div class="notes">
           <div>
             <h3>Where the facts come from</h3>
@@ -794,26 +931,32 @@ SEA, BAY, ISLAND, MAP, SKY, NEAR = 5000, 2600, 1200, 900, 400, -250</code></pre>
             </ul>
           </div>
           <div>
-            <h3>Terrain, pictures and sound</h3>
-            <p>The skyline and the relief are open elevation data from AWS Terrain Tiles (Mapzen; SRTM and GMTED2010 from the US Geological Survey, ETOPO1 from NOAA), with heights drawn four times true, and Route 9 follows today's road from OpenStreetMap. The map is Smith's Map 21 of the gorge, and the four photos are from the US Army and the US Navy, all public domain and captioned on screen. The unit symbols are drawn with milsymbol (MIT). The dawn, fog, cloud shadows, explosions and tracers are drawn from gradients and noise as illustration. The sound effects are from Freesound; two are CC BY: "Artillery (distance)" by 2887679652 (CC BY 4.0) and a tank engine recording by JoniHeinonen (CC BY 3.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file.</p>
-          </div>
-          <div class="wide">
-            <h3>Facts checked against the sources</h3>
-            <p>Every date and number was checked word for word against Smith. Where sources disagree, the video follows Smith or leaves the point out: Baguio's liberation is dated anywhere from 24 to 28 April, so the screen says only that the 129th secured most of the city on 26 April, Smith's date. The first cut drew the machine gun squad's fire landing on open ground near the American foothold, so it looked as if the squad fired the wrong way. Smith puts the squad on the east side of Ridge B, firing on most of the defenders, so the final cut labels the Japanese defenders and lands the hits on them.</p>
-          </div>
-          <div class="wide">
             <h3>One cue from the code</h3>
             <pre><code>TARGETS = [m21(*q) for q in ((204, 196), (226, 184), (219, 172), (199, 186))]
 FIRE = [f for s in (1474, 1490, 1506) for f in range(s, s + 12, 2)]
 tracers(m21(*SQUAD), TARGETS, FIRE)  # 1474 "fire on most"</code></pre>
             <p>Three bursts of fire start at frames 1474, 1490 and 1506, as the narrator says "fire on most of the defenders". Each tracer flies from the squad to a point measured on Smith's map, on Ridge B.</p>
           </div>
-          <div class="wide">
-            <h3>Checked</h3>
-            <p>The storyboard checks that no picture is stretched and nothing leaves the frame, and stills were checked before each render; the final render takes about 10 minutes in Blender's EEVEE. Whisper heard every narrated word in the final mix, writing the numbers as digits and the local names by ear: "Iresen", "Bawang" and "Yagiyagan". The mix plays at -14.3 LUFS.</p>
-          </div>
+          <details>
+            <summary>How this one was made and checked</summary>
+            <div class="more">
+              <div>
+                <h3>Terrain, pictures and sound</h3>
+                <p>The skyline and the relief are open elevation data from AWS Terrain Tiles (Mapzen; SRTM and GMTED2010 from the US Geological Survey, ETOPO1 from NOAA), with heights drawn four times true, and Route 9 follows today's road from OpenStreetMap. The map is Smith's Map 21 of the gorge, and the four photos are from the US Army and the US Navy, all public domain and captioned on screen. The unit symbols are drawn with milsymbol (MIT). The dawn, fog, cloud shadows, explosions and tracers are drawn from gradients and noise as illustration. The sound effects are from Freesound; two are CC BY: "Artillery (distance)" by 2887679652 (CC BY 4.0) and a tank engine recording by JoniHeinonen (CC BY 3.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file.</p>
+              </div>
+              <div>
+                <h3>Facts checked against the sources</h3>
+                <p>Every date and number was checked word for word against Smith. Where sources disagree, the video follows Smith or leaves the point out: Baguio's liberation is dated anywhere from 24 to 28 April, so the screen says only that the 129th secured most of the city on 26 April, Smith's date. The first cut drew the machine gun squad's fire landing on open ground near the American foothold, so it looked as if the squad fired the wrong way. Smith puts the squad on the east side of Ridge B, firing on most of the defenders, so the final cut labels the Japanese defenders and lands the hits on them.</p>
+              </div>
+              <div>
+                <h3>Checked</h3>
+                <p>The storyboard checks that no picture is stretched and nothing leaves the frame, and stills were checked before each render; the final render takes about 10 minutes in Blender's EEVEE. Whisper heard every narrated word in the final mix, writing the numbers as digits and the local names by ear: "Iresen", "Bawang" and "Yagiyagan". The mix plays at -14.3 LUFS.</p>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
+      <p class="back"><a href="#videos">Back to all fourteen videos</a></p>
     </div>
   </section>
 
@@ -822,17 +965,19 @@ tracers(m21(*SQUAD), TARGETS, FIRE)  # 1474 "fire on most"</code></pre>
       <h2 id="bangkusay-title">The Battle of Bangkusay Channel</h2>
       <p class="meta">For a history channel · 109 seconds · vertical, for Shorts and Reels · layered 2.5D in Blender · <a href="https://youtube.com/shorts/vT1MbQeYp1Y">Watch on YouTube</a></p>
       <div class="body">
-        <div class="watch">
-          <video class="tall" controls preload="metadata" playsinline poster="media/bangkusay.jpg" width="1080" height="1920">
-            <source src="media/bangkusay.mp4" type="video/mp4">
-            <a href="media/bangkusay.mp4">Open the video file</a>
-          </video>
+        <div class="pair">
+          <div class="watch">
+            <video class="tall" controls preload="metadata" playsinline poster="media/bangkusay.jpg" width="1080" height="1920">
+              <source src="media/bangkusay.mp4" type="video/mp4">
+              <a href="media/bangkusay.mp4">Open the video file</a>
+            </video>
+          </div>
+          <figure class="paper">
+            <figcaption>The script, marked where each line starts</figcaption>
+            <p class="script">In May 1571, Miguel López de Legazpi sailed into Manila Bay to found a Spanish city. Three local chiefs came to declare themselves his friends. Other villages would not. One village, Butas, on an inlet across the river, sent word that it wanted no peace with him. Their men came right up to Lakandula's village, beside Manila, to defy the Spaniards. On the third of June, the feast of Pentecost, Legazpi sent his master-of-camp, Martín de Goiti, against them by sea. At noon, Goiti found them waiting with their boats, one or two guns in each. They attacked with a great outcry, guns and many arrows, but by the Spanish accounts did little or no harm. Goiti had his boats lashed together in pairs and rowed slowly toward them. At close range, his arquebusiers opened fire. The fire killed many, and the fleet turned back toward the shore. Goiti's Visayan allies leapt into the water after them. Every boat was captured, with a small fort and its guns, and the prisoners were made slaves. That same day, Legazpi gave Manila the title of city. A history published in 1803 adds more. It says the fleet came from Macabebe and Hagonoy, and its chief dared the Spaniards to meet him in the bay of Bancusay. He fought bravely, it says, until a musket shot killed him, and the rest fled. Today he is remembered as Tarik Sulayman. But no account written at the time names him. His leading role and his death come from Zúñiga's history of 1803, more than two hundred years later. The name Tarik Sulayman comes from later genealogies, and no Spanish record gives it.</p>
+            <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and every layer, mark and effect was timed to its words. Pick a number to play the video from there.</p>
+          </figure>
         </div>
-        <figure class="paper">
-          <figcaption>The script, marked where each line starts</figcaption>
-          <p class="script">In May 1571, Miguel López de Legazpi sailed into Manila Bay to found a Spanish city. Three local chiefs came to declare themselves his friends. Other villages would not. One village, Butas, on an inlet across the river, sent word that it wanted no peace with him. Their men came right up to Lakandula's village, beside Manila, to defy the Spaniards. On the third of June, the feast of Pentecost, Legazpi sent his master-of-camp, Martín de Goiti, against them by sea. At noon, Goiti found them waiting with their boats, one or two guns in each. They attacked with a great outcry, guns and many arrows, but by the Spanish accounts did little or no harm. Goiti had his boats lashed together in pairs and rowed slowly toward them. At close range, his arquebusiers opened fire. The fire killed many, and the fleet turned back toward the shore. Goiti's Visayan allies leapt into the water after them. Every boat was captured, with a small fort and its guns, and the prisoners were made slaves. That same day, Legazpi gave Manila the title of city. A history published in 1803 adds more. It says the fleet came from Macabebe and Hagonoy, and its chief dared the Spaniards to meet him in the bay of Bancusay. He fought bravely, it says, until a musket shot killed him, and the rest fled. Today he is remembered as Tarik Sulayman. But no account written at the time names him. His leading role and his death come from Zúñiga's history of 1803, more than two hundred years later. The name Tarik Sulayman comes from later genealogies, and no Spanish record gives it.</p>
-          <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and every layer, mark and effect was timed to its words. Pick a number to play the video from there.</p>
-        </figure>
         <div class="notes">
           <div>
             <h3>Where the facts come from</h3>
@@ -842,25 +987,31 @@ tracers(m21(*SQUAD), TARGETS, FIRE)  # 1474 "fire on most"</code></pre>
             </ul>
           </div>
           <div>
-            <h3>Maps, sea and sound</h3>
-            <p>Today's Tondo shore has been built out into the bay, so the map scenes use two old maps: Pedro Murillo Velarde's of 1734 and Francisco de Gamoneda's plan of Manila of 1898, both public domain. Both are centuries after 1571, and the places and routes on them are approximate. The sea scenes, with the caracoas, the Spanish boats lashed in pairs, the arrows, gunfire, splashes and smoke, are drawn in code from polygons, gradients and noise, and the screen says "drawn as illustration". The sound effects are from Freesound; three are CC BY: "musket_fire_7.wav" and "musket_fire_2.wav" by J8054 (CC BY 4.0) and "rowing boat on sea - actions" by julius_galla (CC BY 3.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file.</p>
-          </div>
-          <div class="wide">
-            <h3>The name on the end card</h3>
-            <p>Popular accounts name the fleet's leader Tarik Sulayman. No account written at the time names him. His leading role and his death come from Zúñiga's history of 1803, more than two hundred years later, and the name comes from later genealogies; no Spanish record gives it. The end card gives the name, and under it a larger disclaimer that the narrator reads in full.</p>
-          </div>
-          <div class="wide">
             <h3>One cue from the code</h3>
             <pre><code>ring((bx, by), (w(12, 27), S11[1]), 'flash', 30)            # "the bay of Bancusay"
 chip('"the bay of Bancusay"', (bx + 26, by + 34), (w(12, 27) + 2, S11[1]))</code></pre>
             <p><code>w(line, word)</code> is the frame where the narrator speaks that word, from Whisper's word times on the take. As word 27 of line 12 is spoken, a ring flashes on the old map where the channel is marked, and its label follows two frames later.</p>
           </div>
           <div class="wide">
-            <h3>Checked</h3>
-            <p>Every quote was checked word for word against the source texts. The numbers the accounts disagree on, such as the size of the fleet, are left out, and the map markers say they show where, not how many. Whisper read the final mix back and heard 261 of the 282 script words as written; the rest are names spelled by ear, such as "bancusi", and numbers written as digits. The mix plays at -14.2 LUFS.</p>
+            <h3>The name on the end card</h3>
+            <p>Popular accounts name the fleet's leader Tarik Sulayman. No account written at the time names him. His leading role and his death come from Zúñiga's history of 1803, more than two hundred years later, and the name comes from later genealogies; no Spanish record gives it. The end card gives the name, and under it a larger disclaimer that the narrator reads in full.</p>
           </div>
+          <details>
+            <summary>How this one was made and checked</summary>
+            <div class="more">
+              <div>
+                <h3>Maps, sea and sound</h3>
+                <p>Today's Tondo shore has been built out into the bay, so the map scenes use two old maps: Pedro Murillo Velarde's of 1734 and Francisco de Gamoneda's plan of Manila of 1898, both public domain. Both are centuries after 1571, and the places and routes on them are approximate. The sea scenes, with the caracoas, the Spanish boats lashed in pairs, the arrows, gunfire, splashes and smoke, are drawn in code from polygons, gradients and noise, and the screen says "drawn as illustration". The sound effects are from Freesound; three are CC BY: "musket_fire_7.wav" and "musket_fire_2.wav" by J8054 (CC BY 4.0) and "rowing boat on sea - actions" by julius_galla (CC BY 3.0). <a href="https://github.com/DerpyNewb/programmatic-video-editing/blob/main/CREDITS.md">CREDITS.md</a> lists every file.</p>
+              </div>
+              <div>
+                <h3>Checked</h3>
+                <p>Every quote was checked word for word against the source texts. The numbers the accounts disagree on, such as the size of the fleet, are left out, and the map markers say they show where, not how many. Whisper read the final mix back and heard 261 of the 282 script words as written; the rest are names spelled by ear, such as "bancusi", and numbers written as digits. The mix plays at -14.2 LUFS.</p>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
+      <p class="back"><a href="#videos">Back to all fourteen videos</a></p>
     </div>
   </section>
 
@@ -921,16 +1072,22 @@ for (const sheet of document.querySelectorAll('.sheet')) {
   const script = sheet.querySelector('.script');
   const data = (window.CUTS || {})[sheet.id];
   const src = video.querySelector('source').getAttribute('src');
+  // The footage videos call each mark a cut; the battles call it a line of narration.
+  const unit = /is a cut/.test(sheet.querySelector('.how').textContent) ? 'Cut' : 'Line';
 
-  const failed = () => {
-    if (video.nextElementSibling) return; // already said
-    const note = document.createElement('p');
-    note.className = 'failed';
-    note.innerHTML = `This video didn't load here. <a href="${src}">Open the video file</a> instead.`;
-    video.after(note);
-  };
-  video.querySelector('source').addEventListener('error', failed);
-  if (video.networkState === video.NETWORK_NO_SOURCE) failed(); // it failed before this script ran
+  // Every video in the sheet, the alternate cuts in the notes too, says so when it fails to load.
+  for (const v of sheet.querySelectorAll('video')) {
+    const file = v.querySelector('source').getAttribute('src');
+    const failed = () => {
+      if (v.nextElementSibling?.classList.contains('failed')) return; // already said
+      const note = document.createElement('p');
+      note.className = 'failed';
+      note.innerHTML = `This video didn't load here. <a href="${file}">Open the video file</a> instead.`;
+      v.after(note);
+    };
+    v.querySelector('source').addEventListener('error', failed);
+    if (v.networkState === v.NETWORK_NO_SOURCE) failed(); // it failed before this script ran
+  }
   if (!data) continue;
 
   const words = script.textContent.trim().split(/\s+/);
@@ -944,7 +1101,7 @@ for (const sheet of document.querySelectorAll('.sheet')) {
     mark.className = 'cut';
     mark.href = `${src}#t=${t}`;
     mark.textContent = n + 1;
-    mark.setAttribute('aria-label', `Cut ${n + 1}, at ${t.toFixed(1)} seconds: play from here`);
+    mark.setAttribute('aria-label', `${unit} ${n + 1}, at ${t.toFixed(1)} seconds: play from here`);
     mark.addEventListener('click', (event) => {
       event.preventDefault();
       video.currentTime = t;
