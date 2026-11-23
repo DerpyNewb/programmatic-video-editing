@@ -1,6 +1,6 @@
 # Credits
 
-Every clip, photo, picture, track and sound effect in the eleven videos, with its license. The three videos cut from footage also credit them at the end; the eight battles caption each picture on screen.
+Every clip, photo, picture, track and sound effect in the fourteen videos, with its license. The three videos cut from footage also credit them at the end; the animated battles caption their photos on screen.
 
 ## The Great Pyramid in numbers (`media/giza.mp4`)
 
@@ -218,3 +218,48 @@ The island is drawn from elevation data. Elevation: Terrain Tiles on AWS (Mapzen
 - "Swoosh" by EminYILDIRIM, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/EminYILDIRIM/sounds/555057
 - "AIRPLANE FLYOVER.mp3" by tubbers, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/tubbers/sounds/211870
 - "M4 Assault rifle firing.wav" by mnslugger20, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/mnslugger20/sounds/259758
+
+## The Battle of Manila, 1570 (`media/manila1570.mp4`)
+
+- "reenactment2.aif" by alienistcog, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/alienistcog/sounds/125932
+- "S21-05 Muskets firing in battle.wav" by craigsmith, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/craigsmith/sounds/675624
+- "Fire Crackling 02.wav" by kingsrow, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/kingsrow/sounds/181562
+- "Cannon shot" by SamsterBirdies, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/SamsterBirdies/sounds/467883
+- "Medieval cannon shot" by engray, CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/), from https://freesound.org/people/engray/sounds/168656
+- "Waves, shore, surf" by ondercast, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/ondercast/sounds/534346
+- "Musket Shot.wav" by mlsulli, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/mlsulli/sounds/234869
+- "Rain on leaves" by SamsterBirdies, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/SamsterBirdies/sounds/584272
+- "Soft UI Button Click" by Jummit, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Jummit/sounds/528561
+- "Warcry Yarghh! - British Male" by theuncertainman, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/theuncertainman/sounds/402645
+- "Deep Whoosh #1" by Kinoton, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Kinoton/sounds/351256
+
+## Lamitan, 1637 (`media/lamitan.mp4`)
+
+- "Booms.wav" by studiomandragore, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/studiomandragore/sounds/401630
+- "S21-03 Musket volley.wav" by craigsmith, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/craigsmith/sounds/675623
+- "Crickets in the night" by caquet, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/caquet/sounds/221164
+- "Kendang, Kendhang or Gendang" by redafs, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/redafs/sounds/348234
+- "Cannon shot" by SamsterBirdies, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/SamsterBirdies/sounds/467883
+- "Medieval cannon shot" by engray, CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/), from https://freesound.org/people/engray/sounds/168656
+- "Soft Clicks" by andersmmg, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/andersmmg/sounds/538448
+- "Rooster crow" by jsbarrett, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/jsbarrett/sounds/200339
+- "Waves Up Close 2" by amholma, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/amholma/sounds/376804
+- "Wading in a shallow river" by macdaddyno1, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/macdaddyno1/sounds/321594
+
+## The Battle of Bangkusay Channel (`media/bangkusay.mp4`)
+
+- "S20-13 Cannon fire with commands.wav" by craigsmith, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/craigsmith/sounds/675610
+- "musket_fire_7.wav" by J8054, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/J8054/sounds/648752
+- "musket_fire_2.wav" by J8054, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/J8054/sounds/648749
+- "rowing boat on sea - actions" by julius_galla, CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/), from https://freesound.org/people/julius_galla/sounds/434892
+- "Male Yelling out a War Cry 1 - WITHOUT reverb.wav" by WelvynZPorterSamples, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/WelvynZPorterSamples/sounds/621342
+- "water splashing" by ssierra1202, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/ssierra1202/sounds/391943
+- "Arrow Whoosh 1" by Ali_6868, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Ali_6868/sounds/384908
+- "Male Yelling out a War Cry 4 - WITHOUT reverb.wav" by WelvynZPorterSamples, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/WelvynZPorterSamples/sounds/621335
+- "Arrow Whoosh 2 .R.wav" by saturdaysoundguy, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/saturdaysoundguy/sounds/391444
+- "Zen Ocean Waves,Ocean Waves Ambience.mp3" by INNORECORDS, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/INNORECORDS/sounds/456899
+- "water splash" by audiosmedia, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/audiosmedia/sounds/243519
+- "Arrow Whoosh 2" by Ali_6868, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Ali_6868/sounds/384909
+- "Male Yelling out a War Cry 6 - WITHOUT reverb.wav" by WelvynZPorterSamples, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/WelvynZPorterSamples/sounds/621336
+- Pedro Murillo Velarde, *Carta hydrographica y chorographica de las yslas Filipinas* (1734), sheet 1, Bibliothèque nationale de France, from https://commons.wikimedia.org/wiki/File:Carta_hydrographica_y_chorographica_de_las_yslas_Filipinas_-_P._Pedro_Murillo_Velarde_;_le_esculpio_Nicolas_de_la_Cruz_Bagay_-_btv1b532941706_(01_of_16).jpg
+- Francisco J. de Gamoneda, *Plano de Manila y sus arrabales* (1898), University of Texas map collection, from https://commons.wikimedia.org/wiki/File:Manila_and_suburbs_1898.jpg

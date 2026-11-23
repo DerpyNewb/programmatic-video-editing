@@ -32,6 +32,9 @@ ANIMATED = {  # key on the page: (render, poster time in s). Its marks are where
     'leyte': (ANIMATION / 'build' / 'leyte_unreal_vo.mp4', 5.0),
     'manila': (ANIMATION / 'build' / 'manila_unreal_vo.mp4', 3.0),
     'baguio': (ANIMATION / 'build' / 'baguio_blender_vo.mp4', 3.0),
+    'manila1570': (ANIMATION / 'build' / 'manila1570_unreal_vo.mp4', 3.0),
+    'bangkusay': (ANIMATION / 'build' / 'bangkusay_blender_vo.mp4', 3.0),
+    'lamitan': (ANIMATION / 'build' / 'lamitan_blender_vo.mp4', 3.0),
 }
 ALSO = {  # other cuts of a video, shown in its notes: key: (file, poster time in s). No marks of their own.
     'giza-remotion': (ADS / 'giza-pyramid-history' / 'giza-pyramid-history-remotion.mp4', 7.0),
