@@ -35,6 +35,8 @@ ANIMATED = {  # key on the page: (render, poster time in s). Its marks are where
     'manila1570': (ANIMATION / 'build' / 'manila1570_unreal_vo.mp4', 3.0),
     'bangkusay': (ANIMATION / 'build' / 'bangkusay_blender_vo.mp4', 3.0),
     'lamitan': (ANIMATION / 'build' / 'lamitan_blender_vo.mp4', 3.0),
+    'sm': (ANIMATION / 'build' / 'sm_unreal_vo.mp4', 4.0),
+    'jollibee': (ANIMATION / 'build' / 'jollibee_blender_vo.mp4', 4.0),
 }
 ALSO = {  # other cuts of a video, shown in its notes: key: (file, poster time in s). No marks of their own.
     'giza-remotion': (ADS / 'giza-pyramid-history' / 'giza-pyramid-history-remotion.mp4', 7.0),
@@ -42,6 +44,7 @@ ALSO = {  # other cuts of a video, shown in its notes: key: (file, poster time i
     'mactan-unreal': (ANIMATION / 'build' / 'mactan_unreal_vo.mp4', 3.0),
     'dalton-unreal': (ANIMATION / 'build' / 'dalton_unreal_vo.mp4', 3.0),
 }
+CRF = {'sm': 30, 'jollibee': 30}  # whole cities in 3D compress poorly; at 24 these passed GitHub's 100 MB file limit
 NUMBERS = {'two': '2', 'five': '5'}  # Whisper spells some numbers out
 
 
@@ -116,7 +119,7 @@ def ffmpeg(*args):
 
 def web(src, poster, key):
     """The web copy and the poster frame of one video."""
-    ffmpeg('-i', src, '-c:v', 'libx264', '-crf', 24, '-preset', 'slow', '-pix_fmt', 'yuv420p',
+    ffmpeg('-i', src, '-c:v', 'libx264', '-crf', CRF.get(key, 24), '-preset', 'slow', '-pix_fmt', 'yuv420p',
            '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', MEDIA / f'{key}.mp4')
     ffmpeg('-ss', poster, '-i', src, '-frames:v', 1, '-vf', "scale='min(1280,iw)':-2", '-q:v', 4, MEDIA / f'{key}.jpg')
 

@@ -1,6 +1,6 @@
 # Credits
 
-Every clip, photo, picture, track and sound effect in the fourteen videos, with its license. The three videos cut from footage also credit them at the end; the animated battles caption their photos on screen.
+Every clip, photo, picture, track and sound effect in the sixteen videos, with its license. The three videos cut from footage also credit them at the end; the animated battles and company histories caption their photos on screen.
 
 ## The Great Pyramid in numbers (`media/giza.mp4`)
 
@@ -263,3 +263,44 @@ The island is drawn from elevation data. Elevation: Terrain Tiles on AWS (Mapzen
 - "Male Yelling out a War Cry 6 - WITHOUT reverb.wav" by WelvynZPorterSamples, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/WelvynZPorterSamples/sounds/621336
 - Pedro Murillo Velarde, *Carta hydrographica y chorographica de las yslas Filipinas* (1734), sheet 1, Bibliothèque nationale de France, from https://commons.wikimedia.org/wiki/File:Carta_hydrographica_y_chorographica_de_las_yslas_Filipinas_-_P._Pedro_Murillo_Velarde_;_le_esculpio_Nicolas_de_la_Cruz_Bagay_-_btv1b532941706_(01_of_16).jpg
 - Francisco J. de Gamoneda, *Plano de Manila y sus arrabales* (1898), University of Texas map collection, from https://commons.wikimedia.org/wiki/File:Manila_and_suburbs_1898.jpg
+
+## The history of SM (`media/sm.mp4`)
+
+- "21st Presentation of SM Scholar-Graduates Batch 2017 Henry Sy tribute (cropped 2)" by Avito C. Dalan for the Philippine News Agency, Public domain, from https://commons.wikimedia.org/wiki/File:21st_Presentation_of_SM_Scholar_-Graduates_Batch_2017_Henry_Sy_tribute_(cropped_2).jpg
+- "Bombing campaign. Southeast Asia & the Pacific - NARA - 292587" by US National Archives, Public domain, from https://commons.wikimedia.org/wiki/File:Bombing_campaign._Southeast_Asia_%26_the_Pacific_-_NARA_-_292587.jpg
+- "Carriedo Street from Carriedo station" by PhiliptheNumber1, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0), from https://commons.wikimedia.org/wiki/File:Carriedo_Street_from_Carriedo_station.jpg
+- "SM HYPERMARKET NORTH EDSA in 2026" by Fadconyt, CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en), from https://commons.wikimedia.org/wiki/File:SM_HYPERMARKET_NORTH_EDSA_in_2026.jpg
+- "SM Megamall Side View 2" by Ganmatthew, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0), from https://commons.wikimedia.org/wiki/File:SM_Megamall_Side_View_2.jpg
+- "SM Xiamen 2026 2" by Daddynnoob, CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en), from https://commons.wikimedia.org/wiki/File:SM_Xiamen_2026_2.jpg
+- "Interior of SM Mall of Asia (01) (2026-01-18)" by Wide Awake!, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0), from https://commons.wikimedia.org/wiki/File:Interior_of_SM_Mall_of_Asia_(01)_(2026-01-18).jpg
+- "Suspense Whoosh/Transition 01" by tyops, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/tyops/sounds/275145
+- "Suspense Whoosh/Transition" by tyops, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/tyops/sounds/275143
+- "Hamburg City Traffic Ambience" by Kinoton, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Kinoton/sounds/352152
+- "rise5.wav" by soneproject, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/soneproject/sounds/334525
+- "UI click" by Ranner, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Ranner/sounds/488534
+- "Ambient Piano Music #4" by benpm, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/benpm/sounds/320603
+- Buildings, streets, parks and water: © OpenStreetMap contributors (ODbL), https://www.openstreetmap.org/copyright
+- Terrain: AWS Terrain Tiles (Mapzen)
+
+## The history of Jollibee (`media/jollibee.mp4`)
+
+- "02591jfGreenwich Pizza and Pasta Restaurant Bulacanfvf 02.jpg" by Judgefloro, CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en), from https://commons.wikimedia.org/wiki/File:02591jfGreenwich_Pizza_and_Pasta_Restaurant_Bulacanfvf_02.jpg
+- "9Red Ribbon bakeshop Marilao.jpg" by Judgefloro, CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en), from https://commons.wikimedia.org/wiki/File:9Red_Ribbon_bakeshop_Marilao.jpg
+- "Chowking restaurants in Manila.jpg" by Judgefloro, CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en), from https://commons.wikimedia.org/wiki/File:Chowking_restaurants_in_Manila.jpg
+- "Facade of Quiapo Church (WTMP po-kus 0149).jpg" by po-kus (Wikipedia Takes Manila participant), CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en), from https://commons.wikimedia.org/wiki/File:Facade_of_Quiapo_Church_(WTMP_po-kus_0149).jpg
+- "Jollibee Chickenjoy with Palabok.jpg" by Jeff, CC BY 2.0 (https://creativecommons.org/licenses/by/2.0), from https://commons.wikimedia.org/wiki/File:Jollibee_Chickenjoy_with_Palabok.jpg
+- "Jollibee Hong Kong October 2017.jpg" by Hana Yamada, CC BY 2.0 (https://creativecommons.org/licenses/by/2.0), from https://commons.wikimedia.org/wiki/File:Jollibee_Hong_Kong_October_2017.jpg
+- "Jollibee in Intramuros (2026-01-15).jpg" by Wide Awake!, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0), from https://commons.wikimedia.org/wiki/File:Jollibee_in_Intramuros_(2026-01-15).jpg
+- "Jollibee in Virginia Beach.jpg" by WhisperToMe, CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en), from https://commons.wikimedia.org/wiki/File:Jollibee_in_Virginia_Beach.jpg
+- "Jollibee, Scarborough Town Centre (54580917926).jpg" by Glenn Samonte - Own Work, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0), from https://commons.wikimedia.org/wiki/File:Jollibee,_Scarborough_Town_Centre_(54580917926).jpg
+- "Mang Inasal in A. Del Rosario Street (2025-06-29).jpg" by Wide Awake!, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0), from https://commons.wikimedia.org/wiki/File:Mang_Inasal_in_A._Del_Rosario_Street_(2025-06-29).jpg
+- "Ortigas Skyline sunset.jpg" by Ryomaandres, Public domain, from https://commons.wikimedia.org/wiki/File:Ortigas_Skyline_sunset.jpg
+- "Tony Tan Caktiong & Aquino 2016 (cropped).jpg" by Lauro Montellano Jr./ Malacañang Photo Bureau/PNA, Public domain, from https://commons.wikimedia.org/wiki/File:Tony_Tan_Caktiong_%26_Aquino_2016_(cropped).jpg
+- "Notification Chime" by hykenfreak, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/hykenfreak/sounds/202029
+- "citystreet3.wav" by sagetyrtle, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/sagetyrtle/sounds/36734
+- "Hamburg City Traffic Ambience" by Kinoton, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Kinoton/sounds/352152
+- "Soft UI Button Click" by Jummit, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Jummit/sounds/528561
+- "Resturant Ambience Tandoori.mp3" by digifishmusic, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/digifishmusic/sounds/33392
+- "Deep Whoosh #1" by Kinoton, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Kinoton/sounds/351256
+- Buildings, streets, parks and water and stores: © OpenStreetMap contributors (ODbL), https://www.openstreetmap.org/copyright
+- Globe: Natural Earth I with Shaded Relief and Water, 1:50m, public domain, https://www.naturalearthdata.com/
