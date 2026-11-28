@@ -3,6 +3,7 @@
   media/<key>.mp4   a web copy (H.264, CRF 24, AAC 128k, fast start)
   media/<key>.jpg   the poster frame
   media/cuts.js     where each cut falls in each script, for the marked scripts on the page
+  media/frames/<key>-<n>.jpg   a still of each cut or narration line, for the storyboards on the page
 
 Run it again after a video changes: python make_media.py
 """
@@ -128,6 +129,18 @@ def web(src, poster, key):
     ffmpeg('-ss', poster, '-i', src, '-frames:v', 1, '-vf', "scale='min(1280,iw)':-2", '-q:v', 4, MEDIA / f'{key}.jpg')
 
 
+def frames(key, cut_marks, end):
+    """A still of each cut or line, taken a moment after it starts so the titles have come in."""
+    out = MEDIA / 'frames'
+    out.mkdir(exist_ok=True)
+    for old in out.glob(f'{key}-*.jpg'):
+        old.unlink()
+    times = [t for _, t in cut_marks] + [end]
+    for n, (t, after) in enumerate(zip(times, times[1:]), 1):
+        ffmpeg('-ss', round(t + min(2.0, (after - t) / 2), 3), '-i', MEDIA / f'{key}.mp4', '-frames:v', 1,
+               '-vf', "scale='if(gt(iw,ih),320,240)':-2", '-q:v', 5, out / f'{key}-{n}.jpg')
+
+
 def main():
     MEDIA.mkdir(exist_ok=True)
     data = {}
@@ -138,12 +151,14 @@ def main():
             web(src, poster, key)
         script, cut_marks, credits = marks(folder)
         data[key] = {'marks': cut_marks, 'credits': credits}
+        frames(key, cut_marks, credits)
         print(key, len(cut_marks), 'cuts:', ' | '.join(' '.join(script.split()[i:i + 3]) for i, _ in cut_marks))
     for key, (src, poster) in ANIMATED.items():
         if 'data' not in sys.argv[1:]:
             web(src, poster, key)
         script, cut_marks, end = line_marks(ANIMATION / key)
         data[key] = {'marks': cut_marks, 'credits': end}
+        frames(key, cut_marks, end)
         print(key, len(cut_marks), 'lines:', ' | '.join(' '.join(script.split()[i:i + 3]) for i, _ in cut_marks))
     for key, (src, poster) in ALSO.items():
         if 'data' not in sys.argv[1:]:

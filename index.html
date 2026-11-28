@@ -25,6 +25,8 @@
   --pencil-light: #9db4ff;
   --edge: clamp(16px, 4vw, 48px);
   --gap: clamp(40px, 7vw, 96px);
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --ease-in: cubic-bezier(0.05, 0.7, 0.1, 1);
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -50,24 +52,51 @@ a:hover { text-decoration-thickness: 2px; }
 .skip { position: absolute; left: var(--edge); top: -60px; background: var(--paper); color: var(--paper-ink); padding: 10px 14px; z-index: 2; }
 .skip:focus { top: 12px; }
 
-/* opening */
-.hero { padding: clamp(48px, 9vw, 120px) 0 var(--gap); }
-.hero .lede { max-width: 46ch; font-size: clamp(1.15rem, 2.2vw, 1.4rem); line-height: 1.5; margin-top: 24px; }
+/* opening: the pitch beside a storyboard, then every video by format */
+.hero { padding: clamp(48px, 8vw, 104px) 0 var(--gap); }
+.hero h1 { font-size: clamp(3rem, 6.4vw, 5.5rem); }
+.intro { display: grid; gap: 48px; align-items: center; }
+.eyebrow { color: var(--muted); font-weight: 600; margin-bottom: 16px; }
+.hero .lede { max-width: 44ch; font-size: clamp(1.15rem, 2vw, 1.3rem); line-height: 1.5; margin-top: 24px; }
 .hero .who { margin-top: 20px; color: var(--muted); }
 .hero .who a { color: var(--text); }
-.reels { margin-top: clamp(36px, 6vw, 64px); }
-.reels .group { font-stretch: 62%; font-weight: 800; font-size: 1.1rem; color: var(--muted); margin: 32px 0 12px; }
-.reels .group:first-child { margin-top: 0; }
-.reel { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
-.reel a { display: grid; grid-template-columns: 132px 1fr; gap: 14px; align-items: center; text-decoration: none; padding: 6px; margin: -6px; }
-.reel img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; display: block; border: 1px solid var(--line); }
-.reel a:hover img { border-color: var(--text); }
-.reel .name { font-stretch: 62%; font-weight: 800; font-size: 1.45rem; line-height: 1.05; display: block; }
-.reel .kind { color: var(--muted); font-size: 0.95rem; display: block; margin-top: 4px; }
-@media (min-width: 760px) {
-  .reel { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-  .reel a { grid-template-columns: 1fr; gap: 12px; align-items: start; }
+.strip { margin: 0; background: var(--paper); color: var(--paper-ink); border-radius: 6px; padding: 20px; box-shadow: 0 18px 40px rgba(0, 0, 0, .45); }
+.strip .hd { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; font-size: .875rem; color: var(--paper-muted); margin-bottom: 10px; }
+.strip .hd b { color: var(--paper-ink); font-stretch: 62%; font-weight: 800; font-size: 1.25rem; }
+.frames { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.fr { display: grid; gap: 8px; align-content: start; padding: 6px; border-radius: 6px; color: inherit; text-decoration: none; transition: background-color .4s var(--ease), box-shadow .4s var(--ease); }
+.fr img { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 3px; background: #000; }
+.fr .tx { font-size: .875rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.fr:hover, .fr.now { background: var(--pencil-now); box-shadow: inset 0 -3px var(--pencil); }
+.fr.now .cut { background: var(--pencil); color: var(--paper); }
+.mk { display: flex; align-items: center; gap: 8px; font-size: .85rem; color: var(--paper-muted); font-variant-numeric: tabular-nums; }
+.strip figcaption { margin-top: 12px; font-size: .875rem; color: var(--paper-muted); max-width: 64ch; }
+.strip :focus-visible { outline-color: var(--pencil); }
+@media (min-width: 560px) { .frames { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 1000px) {
+  .intro { grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); gap: 56px; }
+  .strip { transform: rotate(-0.6deg); }
 }
+.reels { margin-top: clamp(56px, 8vw, 96px); }
+.reelhead { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; }
+.reelhead h2 { font-size: clamp(2rem, 4vw, 3rem); }
+.reelhead p { color: var(--muted); }
+.reels .group { font-stretch: 62%; font-weight: 800; font-size: 1.25rem; color: var(--muted); margin: 28px 0 14px; }
+.reel { list-style: none; margin: 0; padding: 0; display: grid; gap: 24px 20px; }
+.reel.wide { grid-template-columns: minmax(0, 1fr); }
+.reel.tall { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.reel a { display: grid; gap: 10px; text-decoration: none; }
+.reel .im { position: relative; display: block; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); background: #000; }
+.reel.wide .im { aspect-ratio: 16 / 9; }
+.reel.tall .im { aspect-ratio: 9 / 16; }
+.reel img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
+.reel a:hover .im { border-color: var(--text); }
+.reel .name { font-stretch: 62%; font-weight: 800; font-size: 1.3rem; line-height: 1.08; }
+.reel .kind { color: var(--muted); font-size: .9rem; margin-top: -6px; }
+.len { position: absolute; right: 8px; bottom: 8px; background: rgba(10, 10, 12, .85); color: #fff; font-size: .8rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; font-variant-numeric: tabular-nums; }
+@media (min-width: 560px) { .reel.wide { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 760px) { .reel.tall { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .reel.wide { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 
 /* one sheet per video */
 .sheet { border-top: 1px solid var(--line); padding: var(--gap) 0; scroll-margin-top: 16px; }
@@ -83,8 +112,6 @@ a:hover { text-decoration-thickness: 2px; }
 .paper figcaption { font-stretch: 62%; font-weight: 800; font-size: 1.35rem; line-height: 1.1; }
 .paper .script { font-size: 1.125rem; line-height: 2; margin-top: 14px; max-width: 68ch; }
 .paper .how { color: var(--paper-muted); font-size: 0.95rem; line-height: 1.5; margin-top: 16px; max-width: 60ch; }
-.phrase { padding: 0.12em 0; transition: background-color 0.2s, box-shadow 0.2s; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
-.phrase.now { background: var(--pencil-now); box-shadow: inset 0 -3px var(--pencil); }
 .cut {
   display: inline-flex; align-items: center; justify-content: center;
   min-width: 1.75em; height: 1.75em; padding: 0 0.3em; margin-right: 0.2em;
@@ -94,13 +121,26 @@ a:hover { text-decoration-thickness: 2px; }
 }
 .cut::before { content: ""; position: absolute; inset: -9px; } /* a 45 px touch target around the 27 px mark */
 .cut:hover { background: var(--pencil-wash); }
-.phrase.now .cut { background: var(--pencil); color: var(--paper); }
 .paper :focus-visible { outline-color: var(--pencil); }
 @media (max-width: 1179px) { /* a mark reached by Tab scrolls clear of the sticky video above it */
-  .cut { scroll-margin-top: calc((100vw - 2 * var(--edge)) * 9 / 16 + 32px); }
-  .pair:has(video.tall) .cut { scroll-margin-top: calc(55dvh + 32px); }
+  .shot { scroll-margin-top: calc((100vw - 2 * var(--edge)) * 9 / 16 + 32px); }
+  .pair:has(video.tall) .shot { scroll-margin-top: calc(55dvh + 32px); }
 }
-@media (prefers-reduced-motion: reduce) { .phrase { transition: none; } }
+/* The storyboard replaces the printed script once the page's script has built it; without scripts the script still reads. */
+.paper.built .script { display: none; }
+.shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 6px; margin-top: 14px; --thumb: 128px; }
+.pair:has(video.tall) .shots { --thumb: 72px; }
+.shot { position: relative; display: grid; grid-template-columns: var(--thumb) minmax(0, 1fr); gap: 14px; align-items: start; padding: 8px; border: 0; border-radius: 6px; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; transition: background-color .2s var(--ease), box-shadow .2s var(--ease); }
+.shot img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 3px; background: #000; }
+.pair:has(video.tall) .shot img { aspect-ratio: 9 / 16; }
+.shot .tx { display: block; margin-top: 6px; font-size: 1rem; line-height: 1.45; }
+.shot:hover { background: var(--pencil-wash); }
+.shot[aria-current="true"] { background: var(--pencil-now); box-shadow: inset 0 -3px var(--pencil); }
+.shot[aria-current="true"] .cut { background: var(--pencil); color: var(--paper); }
+@media (max-width: 1179px) { /* under the video, the storyboard is a strip to swipe, so seventeen of them don't stack the page tall */
+  .shots { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(84%, 320px); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; padding-bottom: 10px; }
+  .shot { scroll-snap-align: start; }
+}
 .notes { display: grid; gap: 22px 32px; margin-top: 32px; align-content: start; min-width: 0; }
 .notes h3 { margin-bottom: 6px; }
 .notes p, .notes li { color: var(--muted); max-width: 62ch; }
@@ -143,7 +183,6 @@ code { font: 0.875rem/1.5 ui-monospace, Consolas, "Cascadia Mono", monospace; co
 .method aside p { color: var(--muted); margin-bottom: 10px; }
 .method pre { background: var(--ground); }
 .method .also { color: var(--muted); max-width: 62ch; margin-top: 28px; }
-@media (min-width: 1100px) { .reel { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
 /* The cut rule needs about 620 px to sit on its own lines; it gets them from 700 px stacked and 1400 px side by side. */
 @media (min-width: 700px) { .method pre { white-space: pre; overflow-wrap: normal; overflow-x: auto; } }
 @media (min-width: 1400px) { .method .grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: start; } }
@@ -160,48 +199,73 @@ code { font: 0.875rem/1.5 ui-monospace, Consolas, "Cascadia Mono", monospace; co
 .card :focus-visible { outline-color: var(--pencil); }
 footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 0.95rem; }
 footer p { max-width: 64ch; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* the cut rule, drawn */
+.cutfig { margin: 48px 0 0; color: var(--text); }
+.cutfig .scroll { overflow-x: auto; }
+.cutfig svg { display: block; width: 100%; min-width: 640px; max-width: 920px; height: auto; }
+.cutfig figcaption { color: var(--muted); font-size: .95rem; margin-top: 10px; max-width: 70ch; }
+
+/* Motion (owner's ask, 2026-11-28): content rises in once as it scrolls into view, and posters answer the pointer.
+   The js class is set in the head, so nothing hides when scripts are off, and reduced motion keeps everything still. */
+@keyframes rise { from { opacity: 0; translate: 0 18px; } }
+@media (prefers-reduced-motion: no-preference) {
+  .js :is(.intro > div > *, .strip, .reelhead, .reel li, .sheet h2, .sheet .meta, .shot, .method li, .cutfig, .contact .card):not(.in) { opacity: 0; }
+  .js .in { animation: rise .55s var(--ease-in) var(--d, 0ms) backwards; }
+  .reel a:hover img { transform: scale(1.04); }
+}
+@media (prefers-reduced-motion: reduce) { .fr, .shot, .reel img { transition: none; } }
 </style>
+<script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
 <a class="skip" href="#pal">Skip to the videos</a>
 
 <header class="hero">
   <div class="wrap">
-    <h1>Programmatic Video Editing</h1>
-    <p class="lede">Seventeen narrated explainers, each made by code. Fourteen are animated from storyboard files in Blender and Unreal Engine, over public-domain pictures, maps and real terrain, and eight are in 3D, five of them over cities built from OpenStreetMap. Three of those eight are company histories, of Philippine Airlines, SM and Jollibee, and all three also come as 9:16 cuts for Shorts. Three are cut from real, openly licensed footage. Every graphic is drawn in code and timed to the narration, and none of the video is AI-generated. The narrators are Gemini text-to-speech voices.</p>
-    <p class="who">Yohann Mar Gayao · <a href="mailto:yohanng500@gmail.com?subject=Programmatic%20video%20editing">yohanng500@gmail.com</a> · <a href="https://github.com/DerpyNewb">GitHub</a></p>
-    <nav class="reels" id="videos" aria-label="The seventeen videos">
-      <p class="group" id="reel-3d">3D</p>
-      <ul class="reel" aria-labelledby="reel-3d">
-        <li><a href="#pal"><img src="media/pal.jpg" alt="" width="1280" height="720"><span><span class="name">The history of Philippine Airlines</span><span class="kind">Company history, 3D · 150 seconds</span></span></a></li>
-        <li><a href="#manila"><img src="media/manila.jpg" alt="" width="1080" height="1920"><span><span class="name">The Battle of Manila</span><span class="kind">History, 3D, vertical · 118 seconds</span></span></a></li>
-        <li><a href="#baguio"><img src="media/baguio.jpg" alt="" width="1080" height="1920"><span><span class="name">The Battle of Baguio</span><span class="kind">History, 3D, vertical · 112 seconds</span></span></a></li>
-        <li><a href="#leyte"><img src="media/leyte.jpg" alt="" width="1080" height="1920"><span><span class="name">The Battle of Leyte</span><span class="kind">History, 3D, vertical · 112 seconds</span></span></a></li>
-        <li><a href="#bataan"><img src="media/bataan.jpg" alt="" width="1080" height="1920"><span><span class="name">The Battle of Bataan</span><span class="kind">History, 3D, vertical · 102 seconds</span></span></a></li>
-        <li><a href="#manila1570"><img src="media/manila1570.jpg" alt="" width="1080" height="1920"><span><span class="name">The Battle of Manila, 1570</span><span class="kind">History, 3D, vertical · 97 seconds</span></span></a></li>
+    <div class="intro">
+      <div>
+        <p class="eyebrow">Seventeen narrated explainers</p>
+        <h1>Programmatic Video Editing</h1>
+        <p class="lede">Code places every cut and graphic on the narrator's words. Fourteen are animated in Blender and Unreal Engine, and three are cut from openly licensed footage. None of the video is AI-generated, and the narrators are Gemini text-to-speech voices.</p>
+        <p class="who">Yohann Mar Gayao · <a href="mailto:yohanng500@gmail.com?subject=Programmatic%20video%20editing">yohanng500@gmail.com</a> · <a href="https://github.com/DerpyNewb">GitHub</a></p>
+      </div>
+      <figure class="strip">
+        <div class="hd"><b>The Battle of Manila</b><span>Lines 1 to 4 of 13</span></div>
+        <div class="frames">
+          <a class="fr" href="#manila"><img src="media/frames/manila-1.jpg" alt="" width="240" height="426"><span class="mk"><span class="cut">1</span>0:01</span><span class="tx">On February 3, 1945, American cavalry broke into Manila's Santo Tomas University, where almost four thousand civilian internees were held.</span></a>
+          <a class="fr" href="#manila"><img src="media/frames/manila-2.jpg" alt="" width="240" height="426"><span class="mk"><span class="cut">2</span>0:11</span><span class="tx">The next night, infantry found about eight hundred prisoners of war and five hundred thirty internees in Old Bilibid Prison.</span></a>
+          <a class="fr" href="#manila"><img src="media/frames/manila-3.jpg" alt="" width="240" height="426"><span class="mk"><span class="cut">3</span>0:19</span><span class="tx">Yamashita had not planned to defend Manila, but Admiral Iwabuchi's naval command chose to fight, with about ten thousand troops in the city.</span></a>
+          <a class="fr" href="#manila"><img src="media/frames/manila-4.jpg" alt="" width="240" height="426"><span class="mk"><span class="cut">4</span>0:28</span><span class="tx">Falling back over the Pasig, they blew the bridges, and fires from their demolitions swept the districts north of the river.</span></a>
+        </div>
+        <figcaption>Each video below comes with a storyboard like this one, showing the picture just after each line of narration starts. Pick a frame to play the video from there.</figcaption>
+      </figure>
+    </div>
+    <nav class="reels" id="videos" aria-labelledby="videos-title">
+      <div class="reelhead"><h2 id="videos-title">The videos</h2><p>28 minutes in all.</p></div>
+      <p class="group" id="reel-wide">16:9</p>
+      <ul class="reel wide" aria-labelledby="reel-wide">
+        <li><a href="#pal"><span class="im"><img src="media/pal.jpg" alt="" width="1280" height="720"><span class="len">2:30</span></span><span class="name">The history of Philippine Airlines</span><span class="kind">20 lines · 3D in Blender, with a 9:16 cut</span></a></li>
+        <li><a href="#sm"><span class="im"><img src="media/sm.jpg" alt="" width="1280" height="720"><span class="len">2:19</span></span><span class="name">The history of SM</span><span class="kind">12 lines · 3D in Unreal Engine, with a 9:16 cut</span></a></li>
+        <li><a href="#jollibee"><span class="im"><img src="media/jollibee.jpg" alt="" width="1280" height="720"><span class="len">2:39</span></span><span class="name">The history of Jollibee</span><span class="kind">20 lines · 3D in Blender, with a 9:16 cut</span></a></li>
+        <li><a href="#mactan"><span class="im"><img src="media/mactan.jpg" alt="" width="1280" height="720"><span class="len">1:00</span></span><span class="name">The Battle of Mactan</span><span class="kind">10 lines · animated, with a 9:16 cut</span></a></li>
+        <li><a href="#giza"><span class="im"><img src="media/giza.jpg" alt="" width="1280" height="720"><span class="len">0:53</span></span><span class="name">The Great Pyramid in numbers</span><span class="kind">12 cuts · cut from footage</span></a></li>
+        <li><a href="#spf"><span class="im"><img src="media/spf.jpg" alt="" width="1280" height="720"><span class="len">0:51</span></span><span class="name">What the SPF number means</span><span class="kind">8 cuts · cut from footage</span></a></li>
+        <li><a href="#sky"><span class="im"><img src="media/sky.jpg" alt="" width="1280" height="720"><span class="len">0:51</span></span><span class="name">Why the sky is blue</span><span class="kind">9 cuts · cut from footage</span></a></li>
       </ul>
-      <p class="group" id="reel-company">Company histories in 3D</p>
-      <ul class="reel" aria-labelledby="reel-company">
-        <li><a href="#sm"><img src="media/sm.jpg" alt="" width="1280" height="720"><span><span class="name">The history of SM</span><span class="kind">Company history, 3D · 139 seconds</span></span></a></li>
-        <li><a href="#jollibee"><img src="media/jollibee.jpg" alt="" width="1280" height="720"><span><span class="name">The history of Jollibee</span><span class="kind">Company history, 3D · 159 seconds</span></span></a></li>
-      </ul>
-      <p class="group" id="reel-footage">Cut from footage</p>
-      <ul class="reel" aria-labelledby="reel-footage">
-        <li><a href="#giza"><img src="media/giza.jpg" alt="" width="1280" height="720"><span><span class="name">The Great Pyramid in numbers</span><span class="kind">History · 53 seconds</span></span></a></li>
-        <li><a href="#spf"><img src="media/spf.jpg" alt="" width="1280" height="720"><span><span class="name">What the SPF number means</span><span class="kind">Beauty · 51 seconds</span></span></a></li>
-        <li><a href="#sky"><img src="media/sky.jpg" alt="" width="1280" height="720"><span><span class="name">Why the sky is blue</span><span class="kind">Science explainer · 51 seconds</span></span></a></li>
-      </ul>
-      <p class="group" id="reel-animated">Animated</p>
-      <ul class="reel" aria-labelledby="reel-animated">
-        <li><a href="#mactan"><img src="media/mactan.jpg" alt="" width="1280" height="720"><span><span class="name">The Battle of Mactan</span><span class="kind">History, animated · 60 seconds</span></span></a></li>
-        <li><a href="#dalton"><img src="media/dalton.jpg" alt="" width="1080" height="1920"><span><span class="name">The Battle of Balete Pass</span><span class="kind">History, animated, vertical · 88 seconds</span></span></a></li>
-        <li><a href="#lamitan"><img src="media/lamitan.jpg" alt="" width="1080" height="1920"><span><span class="name">Lamitan, 1637</span><span class="kind">History, animated, vertical · 87 seconds</span></span></a></li>
-      </ul>
-      <p class="group" id="reel-layered">Layered 2.5D</p>
-      <ul class="reel" aria-labelledby="reel-layered">
-        <li><a href="#corregidor"><img src="media/corregidor.jpg" alt="" width="1080" height="1920"><span><span class="name">The Battle of Corregidor</span><span class="kind">History, layered 2.5D, vertical · 98 seconds</span></span></a></li>
-        <li><a href="#irisan"><img src="media/irisan.jpg" alt="" width="1080" height="1920"><span><span class="name">The Battle of Irisan</span><span class="kind">History, layered 2.5D, vertical · 102 seconds</span></span></a></li>
-        <li><a href="#bangkusay"><img src="media/bangkusay.jpg" alt="" width="1080" height="1920"><span><span class="name">The Battle of Bangkusay Channel</span><span class="kind">History, layered 2.5D, vertical · 109 seconds</span></span></a></li>
+      <p class="group" id="reel-tall">Vertical, for Shorts and Reels</p>
+      <ul class="reel tall" aria-labelledby="reel-tall">
+        <li><a href="#manila"><span class="im"><img src="media/manila.jpg" alt="" width="1080" height="1920"><span class="len">1:58</span></span><span class="name">The Battle of Manila</span><span class="kind">13 lines · 3D in Unreal Engine</span></a></li>
+        <li><a href="#baguio"><span class="im"><img src="media/baguio.jpg" alt="" width="1080" height="1920"><span class="len">1:52</span></span><span class="name">The Battle of Baguio</span><span class="kind">13 lines · 3D in Blender</span></a></li>
+        <li><a href="#leyte"><span class="im"><img src="media/leyte.jpg" alt="" width="1080" height="1920"><span class="len">1:52</span></span><span class="name">The Battle of Leyte</span><span class="kind">13 lines · 3D in Unreal Engine</span></a></li>
+        <li><a href="#bataan"><span class="im"><img src="media/bataan.jpg" alt="" width="1080" height="1920"><span class="len">1:42</span></span><span class="name">The Battle of Bataan</span><span class="kind">12 lines · 3D in Blender</span></a></li>
+        <li><a href="#manila1570"><span class="im"><img src="media/manila1570.jpg" alt="" width="1080" height="1920"><span class="len">1:37</span></span><span class="name">The Battle of Manila, 1570</span><span class="kind">13 lines · 3D in Unreal Engine</span></a></li>
+        <li><a href="#dalton"><span class="im"><img src="media/dalton.jpg" alt="" width="1080" height="1920"><span class="len">1:28</span></span><span class="name">The Battle of Balete Pass</span><span class="kind">12 lines · animated</span></a></li>
+        <li><a href="#lamitan"><span class="im"><img src="media/lamitan.jpg" alt="" width="1080" height="1920"><span class="len">1:27</span></span><span class="name">Lamitan, 1637</span><span class="kind">10 lines · animated</span></a></li>
+        <li><a href="#corregidor"><span class="im"><img src="media/corregidor.jpg" alt="" width="1080" height="1920"><span class="len">1:38</span></span><span class="name">The Battle of Corregidor</span><span class="kind">13 lines · layered 2.5D</span></a></li>
+        <li><a href="#irisan"><span class="im"><img src="media/irisan.jpg" alt="" width="1080" height="1920"><span class="len">1:42</span></span><span class="name">The Battle of Irisan</span><span class="kind">13 lines · layered 2.5D</span></a></li>
+        <li><a href="#bangkusay"><span class="im"><img src="media/bangkusay.jpg" alt="" width="1080" height="1920"><span class="len">1:49</span></span><span class="name">The Battle of Bangkusay Channel</span><span class="kind">15 lines · layered 2.5D</span></a></li>
       </ul>
     </nav>
   </div>
@@ -221,9 +285,9 @@ footer p { max-width: 64ch; }
             </video>
           </div>
           <figure class="paper">
-            <figcaption>The script, marked where each line starts</figcaption>
+            <figcaption>The storyboard, a frame at each line</figcaption>
             <p class="script">Two of Makati's main roads, Ayala Avenue and Paseo de Roxas, were once the runways of an airport. It was Nielson Airport, and at seven in the morning on the fifteenth of March, 1941, a twin-engined Beechcraft took off from it for Baguio. It was the first flight of Philippine Air Lines, which today calls itself Asia's first airline. A group of businessmen in Manila had formed the company only weeks before, with Andres Soriano as its general manager. Paul Gunn flew the plane, and five passengers were aboard. One of them, William Smith, held ticket number one. Baguio lies about two hundred kilometers to the north, up in the Cordillera. The plane landed at Loakan at a quarter to eight, and it was back in Manila before nine. That year, the airline took over the franchise of an older one, the Philippine Aerial Taxi Company, and the Commonwealth government invested in it. By September, its Beechcrafts were also flying to Bicol, Masbate, Tacloban and Cebu. Then, in December, the war reached the Philippines. PAL's Beechcrafts and their pilots were pressed into military service, flying American pilots south towards Australia. Two of the planes were lost. One was shot down over Mindanao, and the other was bombed on the ground in Java. PAL flew again on the fourteenth of February, 1946, from Nielson, with five Douglas DC-3s. That July, a DC-4 chartered by PAL carried forty American servicemen across the Pacific to Oakland, California, a trip of forty-one hours. PAL counts it as the first Pacific crossing by an Asian airline, and its own scheduled flights to San Francisco began that December. In 1947, a PAL DC-4 flew to Madrid, the airline's first route to Europe. Jets came in 1962 with the DC-8, and the first Boeing 747 arrived on Christmas Eve, 1979. The government took over the airline in 1977, and sold most of it back to private owners in 1992. It shut down for two weeks in the Asian financial crisis of 1998, and in 2021 it spent four months in Chapter 11 bankruptcy in the United States. Today it flies eighty-six aircraft to seventy destinations, twenty-nine of them at home, and in 2025 it carried sixteen point three million passengers. And in Makati, Nielson's old control tower still stands, between the two avenues that were once its runways.</p>
-            <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and the plane's run, the camera's flight and every mark were laid out on it. Pick a number to play the video from there.</p>
+            <p class="how">Each frame shows the picture just after its line of narration starts. The narration was recorded first, in one take, and the plane's run, the camera's flight and every mark were laid out on it. Pick a frame to play the video from there.</p>
           </figure>
         </div>
         <div class="notes">
@@ -285,9 +349,9 @@ footer p { max-width: 64ch; }
             </video>
           </div>
           <figure class="paper">
-            <figcaption>The script, marked where each line starts</figcaption>
+            <figcaption>The storyboard, a frame at each line</figcaption>
             <p class="script">On February 3, 1945, American cavalry broke into Manila's Santo Tomas University, where almost four thousand civilian internees were held. The next night, infantry found about eight hundred prisoners of war and five hundred thirty internees in Old Bilibid Prison. Yamashita had not planned to defend Manila, but Admiral Iwabuchi's naval command chose to fight, with about ten thousand troops in the city. Falling back over the Pasig, they blew the bridges, and fires from their demolitions swept the districts north of the river. On February 7, the 37th Division crossed the Pasig in assault boats, just east of Malacañan Palace. With the 11th Airborne pushing up from the south, the city was sealed off on February 12. As casualties mounted, the Americans lifted their limits on artillery, but air strikes stayed banned. Expecting only death, the Japanese committed all sorts of excesses against the city and the Filipinos still under their control. On February 23, after days of shelling, troops stormed Intramuros by boat across the Pasig and through a breach by Quezon Gate. Nearly three thousand hostages, mostly women and children, came out of its churches. Most of the men had been murdered in Fort Santiago's dungeons. Just before the last fighting ended, MacArthur restored the Commonwealth government at Malacañan. Your capital city, he said, cruelly punished though it be, has regained its rightful place. The last defenders held the Legislative, Finance and Agriculture Buildings. Howitzers firing point-blank wrecked them, and on March 3, it was over. The Americans lost over a thousand killed and fifty-five hundred wounded; the Japanese, some sixteen thousand killed. An estimated one hundred thousand Filipino civilians lost their lives.</p>
-            <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and the camera's flight, the ruins and the areas held were laid out on it. Pick a number to play the video from there.</p>
+            <p class="how">Each frame shows the picture just after its line of narration starts. The narration was recorded first, in one take, and the camera's flight, the ruins and the areas held were laid out on it. Pick a frame to play the video from there.</p>
           </figure>
         </div>
         <div class="notes">
@@ -346,9 +410,9 @@ footer p { max-width: 64ch; }
             </video>
           </div>
           <figure class="paper">
-            <figcaption>The script, marked where each line starts</figcaption>
+            <figcaption>The storyboard, a frame at each line</figcaption>
             <p class="script">Baguio, the prewar summer capital of the Philippines, sits about five thousand feet up in the mountains of northern Luzon. On December 8, 1941, Japanese bombers struck its barracks, and by Christmas Eve the Americans had pulled out. By 1945, it was the headquarters of General Yamashita's army, and of the collaborationist government. Four approaches led up to the city. Route 11, today's Kennon Road, wound up the Bued River gorge over nineteen bridges. It was the best road in northern Luzon, and the most strongly defended. Route 9, from the coast at Bauang, was the easiest. From February 21, the 33d Division probed the approaches. On Route 11, a small Japanese force could hold up the whole division almost indefinitely. Filipino guerrillas under Colonel Russell Volckmann cut off food from the north. By late March, Japanese troops at the front got under a quarter pound of rice a day. At the end of March, Yamashita ordered Japanese civilians and the puppet government out. In April, he left for the Bambang front, leaving General Utsunomiya in charge. I Corps ordered an all-out attack for April 12, with the 37th Division making the main effort up Route 9. At the Irisan Gorge, a six-day battle proved the critical action of the drive. At Asin, a Japanese battalion of under five hundred lost over three hundred fifty killed. Utsunomiya ordered a general withdrawal. A patrol of the 129th Infantry entered Baguio on April 24, and two days later the regiment secured most of the city. Some ten thousand Japanese troops got away. Since late February, the 23d Division alone had lost over two thousand killed in combat. On September 3, 1945, Yamashita came back to Baguio to surrender, at the former High Commissioner's residence in Camp John Hay.</p>
-            <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and the camera's flight, every mark and the areas held were laid out on it. Pick a number to play the video from there.</p>
+            <p class="how">Each frame shows the picture just after its line of narration starts. The narration was recorded first, in one take, and the camera's flight, every mark and the areas held were laid out on it. Pick a frame to play the video from there.</p>
           </figure>
         </div>
         <div class="notes">
@@ -406,9 +470,9 @@ check_safe(ELEMENTS, FRAMES, (-504, BOTTOM, RIGHT, TOP), BUTTONS, 'baguio HUD')<
             </video>
           </div>
           <figure class="paper">
-            <figcaption>The script, marked where each line starts</figcaption>
+            <figcaption>The storyboard, a frame at each line</figcaption>
             <p class="script">On October 20, 1944, American forces came back to the Philippines, landing on the island of Leyte. A mountain backbone runs down the island, between Leyte Valley in the east and Ormoc Valley in the west. At ten that morning, Sixth Army put two corps ashore at once: Ten Corps near Palo and Tacloban, and Twenty-fourth Corps fifteen miles south, at Dulag. General MacArthur waded ashore near Palo with President Sergio Osmena, and broadcast: People of the Philippines, I have returned. From October 23 to 26, the Battle of Leyte Gulf drew in nearly two hundred thousand men and two hundred eighty-two ships. The Japanese Navy suffered damage it could never repair. Japan still chose Leyte for its decisive battle. Nine convoys landed more than forty-five thousand troops at Ormoc. Ten Corps drove up Leyte Valley and took Carigara on November 2. Beyond it, Highway Two corkscrewed over Breakneck Ridge. Fought through a typhoon, the battle there cost nearly fifteen hundred American casualties. On December 6, Japanese paratroopers dropped on the Burauen airfields. The next day, the third anniversary of Pearl Harbor, the 77th Division landed below Ormoc. Three days later, Ormoc fell. On December 21, the two corps joined on Highway Two. On Christmas Day, Palompon fell, and MacArthur declared organized resistance over. The campaign cost the US Army more than fifteen thousand five hundred casualties, more than thirty-five hundred of them killed. Sixth Army estimated more than fifty-six thousand Japanese killed. Yamashita later said that after Leyte, he realized decisive battle was impossible.</p>
-            <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and the camera's flight and every mark were laid out on it. Pick a number to play the video from there.</p>
+            <p class="how">Each frame shows the picture just after its line of narration starts. The narration was recorded first, in one take, and the camera's flight and every mark were laid out on it. Pick a frame to play the video from there.</p>
           </figure>
         </div>
         <div class="notes">
@@ -464,9 +528,9 @@ aa.render_warm_up_count = 32</code></pre>
             </video>
           </div>
           <figure class="paper">
-            <figcaption>The script, marked where each line starts</figcaption>
+            <figcaption>The storyboard, a frame at each line</figcaption>
             <p class="script">Bataan, 1942. The peninsula where Filipino and American troops made their stand on Luzon. On December 23, 1941, General MacArthur ordered his forces back into Bataan. The defense of Bataan began on January 7. Bataan is twenty-five miles long, with two extinct volcanoes: Mount Natib in the north, and the Mariveles Mountains in the south. The first line ran twenty miles, from Abucay across Mount Natib to Mauban, but the mountain split it in two. The Japanese attacked on January 9. By January 26, the defenders had fallen back to their final line, from Orion to Bagac. Japanese landings on the west coast failed, and on February 8, General Homma called off his offensive. But Bataan was starving. From January 6, the troops lived on half rations. By March, they got about a thousand calories a day, and most front-line soldiers had malaria. On April 3, Good Friday, the final Japanese offensive opened with almost a hundred and fifty guns. On Easter Sunday, they took Mount Samat. Within days, the defense collapsed. On April 9, General Edward King surrendered his force of seventy-eight thousand men. The prisoners were marched sixty-five miles, from Mariveles to San Fernando, and then sent on to Camp O'Donnell. Thousands died on the march, and more than twenty thousand in the camp. Today a memorial cross stands on Mount Samat, and every April the Philippines marks Araw ng Kagitingan, the Day of Valor.</p>
-            <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and the camera moves and every mark were laid out on it, so each line on the map draws itself as the narrator names it. Pick a number to play the video from there.</p>
+            <p class="how">Each frame shows the picture just after its line of narration starts. The narration was recorded first, in one take, and the camera moves and every mark were laid out on it, so each line on the map draws itself as the narrator names it. Pick a frame to play the video from there.</p>
           </figure>
         </div>
         <div class="notes">
@@ -521,9 +585,9 @@ aa.render_warm_up_count = 32</code></pre>
             </video>
           </div>
           <figure class="paper">
-            <figcaption>The script, marked where each line starts</figcaption>
+            <figcaption>The storyboard, a frame at each line</figcaption>
             <p class="script">In May 1570, the Spanish master-of-camp, Martin de Goiti, sailed north from Panay to explore Luzon. He had two ships with three large guns, and about fifteen boats crewed by Visayan allies. Manila stood on a tongue of land between the river and the sea, behind a palisade, with cannon at its gates. Its young ruler, Rajah Sulayman, met Goiti at the shore. His people, he said, were not painted Indians; they would repay with death the least thing that touched their honor. Goiti then went into the town with only his interpreters, and sealed a blood compact with Sulayman and his uncle, also a rajah. But the town stayed armed, and allies warned that its warriors would strike at the first rain, when Spanish arquebuses could not fire. At ten one morning, Goiti fired a cannon seaward to recall a boat, and the fort's guns opened fire on his ship. The Spaniards stormed the palisade before the gunners at its gates could fire, took the town, and set it on fire. Its people fled up the river. The rain they had waited for came only when the town had burned. Beside Sulayman's house, the Spaniards found cannon being cast, and a mould for one seventeen feet long. Prisoners told the Spaniards that Sulayman had given the order to fire, and fired the first shot himself. With too few men to follow them inland, and the southwest gales coming, Goiti sailed back. Legazpi grieved that Manila had burned; he meant to settle there. When Legazpi came in 1571, Sulayman made peace. If I were king of this land, he said, the word I had given would not have been broken.</p>
-            <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and the camera's flight, the fire and every mark were laid out on it. Pick a number to play the video from there.</p>
+            <p class="how">Each frame shows the picture just after its line of narration starts. The narration was recorded first, in one take, and the camera's flight, the fire and every mark were laid out on it. Pick a frame to play the video from there.</p>
           </figure>
         </div>
         <div class="notes">
@@ -577,9 +641,9 @@ BURN = cue(7, 'fire')</code></pre>
             </video>
           </div>
           <figure class="paper">
-            <figcaption>The script, marked where each line starts</figcaption>
+            <figcaption>The storyboard, a frame at each line</figcaption>
             <p class="script">SM is the largest shopping mall operator in the Philippines. It started with one small shoe store in downtown Manila. Henry Sy was born in 1924 in Fujian, in southern China. At about twelve, he came to Manila to join his father, who kept a sari-sari store in Quiapo. The war took almost everything. One of the family's stores burned down, and another was looted. After the war, he peddled American-made shoes on the streets of Manila. In October 1958, he opened Shoemart in downtown Manila. It was the first shoe store on Carriedo Street with air conditioning. In 1972, during martial law, he opened his first department store, in Quiapo, because he wanted to sell more than shoes. In time, Shoemart became simply SM. In 1976, he bought Acme Savings Bank and renamed it Banco de Oro. It grew into BDO Unibank. In November 1985, in a time of political and economic turmoil, SM opened its first mall, SM City North EDSA, on marshland in Quezon City. Even then, it was the largest mall in the country. SM Megamall followed in June 1991, at EDSA and Ortigas Avenue, in the middle of an energy crisis. In 1994, SM Prime Holdings went public with four malls. In December 2001, SM opened its first mall in China, in Xiamen, in the province Henry Sy had left as a boy. In May 2006 came the flagship: SM Mall of Asia, on land reclaimed from Manila Bay. Nearly a million people came on its opening day. From 2008 to 2018, Forbes named Henry Sy the richest man in the Philippines, eleven years in a row. He died in his sleep in January 2019, at ninety-four. At the end of 2025, SM Prime ran eighty-nine malls in the Philippines and nine in China. It all grew from one shoe store in downtown Manila.</p>
-            <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and the storyboard opens a short gap between its lines. Each mall rises on the frame its name is spoken. Pick a number to play the video from there.</p>
+            <p class="how">Each frame shows the picture just after its line of narration starts. The narration was recorded first, in one take, and the storyboard opens a short gap between its lines. Each mall rises on the frame its name is spoken. Pick a frame to play the video from there.</p>
           </figure>
         </div>
         <div class="notes">
@@ -641,9 +705,9 @@ BURN = cue(7, 'fire')</code></pre>
             </video>
           </div>
           <figure class="paper">
-            <figcaption>The script, marked where each line starts</figcaption>
+            <figcaption>The storyboard, a frame at each line</figcaption>
             <p class="script">In 1975, Tony Tan Caktiong, a new chemical engineering graduate, opened an ice cream parlor in Cubao, Quezon City, with his family. It was a Magnolia franchise, the Cubao Ice Cream House, in the Coronet Theater. The family ran a second parlor in Quiapo, Manila. Customers kept asking for sandwiches, so the parlors added hot meals, and the food soon proved more popular than the ice cream. In 1978, the family dropped the Magnolia franchise and turned the parlors into fast-food restaurants. The Cubao store was christened Jollibee. The bee stood for hard work, and "jolly" for happiness. Jollibee Foods Corporation was registered in January 1978, with seven restaurants around Metro Manila. Its first flagship was the Yumburger. In 1979, the first franchised Jollibee opened on Ronquillo Street in Santa Cruz, Manila, and spaghetti joined the menu. In 1980 came Chickenjoy, and the Jollibee mascot. In 1981, McDonald's opened its first Philippine restaurant, in Morayta, Manila. Jollibee's managers compared the two, and McDonald's won on everything but taste. So, as its CEO tells it, when McDonald's opened one big store, Jollibee surrounded it with six small ones. By the mid-1980s, Jollibee led the Philippine fast-food market, and in 1992 it held more than half of it. In 1993, the company listed on the stock exchange and moved its main office to Ortigas Center, in Pasig. Its headquarters today is Jollibee Plaza, nearby. Its 400th store opened in 2001 in Intramuros, and its 1,000th Philippine store in 2017, at Bonifacio Global City. At home it kept buying: Greenwich pizza in 1994, Chowking in 2000, Red Ribbon in 2005, and most of Mang Inasal in 2010. Abroad, early ventures in Singapore and Taiwan stumbled. Brunei, from 1987, became the lasting start. Hong Kong followed in 1996, and in 1998 the first American Jollibee opened in Daly City, California. Canada came in 2016, and in 2018 it opened in Milan and London, its first stores in Europe. The group also bought into brands abroad: Smashburger, The Coffee Bean and Tea Leaf, and Compose Coffee from South Korea. By September 2026, the group had nearly eleven thousand stores across its brands, about a third of them at home. And it all began with two ice cream parlors, in Cubao and Quiapo.</p>
-            <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and each mark on screen sits on the frame of the word that names it. Pick a number to play the video from there.</p>
+            <p class="how">Each frame shows the picture just after its line of narration starts. The narration was recorded first, in one take, and each mark on screen sits on the frame of the word that names it. Pick a frame to play the video from there.</p>
           </figure>
         </div>
         <div class="notes">
@@ -705,9 +769,9 @@ BURN = cue(7, 'fire')</code></pre>
             </video>
           </div>
           <figure class="paper">
-            <figcaption>The script, marked where the code cuts</figcaption>
+            <figcaption>The storyboard, a frame at each cut</figcaption>
             <p class="script">For more than 3,700 years, nobody built anything taller. The Great Pyramid of Giza was the tomb of the pharaoh Khufu, finished more than 4,500 years ago. Workers quarried an estimated 2.3 million stone blocks, about 6 million tonnes in all. When it was new, it stood 146.6 meters high. Over the centuries, most of its smooth white limestone casing was stripped away, and today it stands 138.5 meters tall. Its granite blocks came from Aswan, more than 900 kilometers to the south. It's the oldest of the Seven Wonders of the Ancient World, and the only one still largely intact. Which ancient wonder should we visit next?</p>
-            <p class="how">Each blue number is a cut. The code puts it 0.12 seconds before the word that opens the phrase. Pick one to play the video from there.</p>
+            <p class="how">Each frame shows the shot that opens at a cut. The code puts each cut 0.12 seconds before the word that opens the phrase. Pick one to play the video from there.</p>
           </figure>
         </div>
         <div class="notes">
@@ -763,9 +827,9 @@ BURN = cue(7, 'fire')</code></pre>
             </video>
           </div>
           <figure class="paper">
-            <figcaption>The script, marked where the code cuts</figcaption>
+            <figcaption>The storyboard, a frame at each cut</figcaption>
             <p class="script">SPF 30 doesn't block twice as much UVB as SPF 15. SPF, or sun protection factor, measures how well sunscreen blocks UVB, the rays that burn your skin. SPF 15 blocks about 93 percent. SPF 30 blocks about 97, and SPF 50 about 98. No sunscreen blocks 100 percent. Those numbers come from a thick test layer, and many people apply only 20 to 50 percent of that. SPF also says nothing about UVA, the rays that age your skin, so check the label for broad spectrum. Skin doctors recommend SPF 30 or higher, about a shot glass for your whole body, reapplied every 2 hours. What SPF are you wearing today?</p>
-            <p class="how">Each blue number is a cut. The code puts it 0.12 seconds before the word that opens the phrase. Pick one to play the video from there.</p>
+            <p class="how">Each frame shows the shot that opens at a cut. The code puts each cut 0.12 seconds before the word that opens the phrase. Pick one to play the video from there.</p>
           </figure>
         </div>
         <div class="notes">
@@ -815,9 +879,9 @@ BURN = cue(7, 'fire')</code></pre>
             </video>
           </div>
           <figure class="paper">
-            <figcaption>The script, marked where the code cuts</figcaption>
+            <figcaption>The storyboard, a frame at each cut</figcaption>
             <p class="script">Why is the sky blue, when sunlight looks white? Sunlight is every color of the rainbow mixed together. Air molecules are far smaller than a wave of light, and they scatter short waves much more than long ones. Blue light, at 470 nanometers, scatters about 5 times as much as red, at 700, so blue reaches you from every part of the sky. When the Sun sits on the horizon, its light crosses about 38 times as much air as when it's straight overhead. Most of the blue scatters away before it reaches you, and the reds and oranges are left. On Mars, sunsets are blue. Which question should we answer next?</p>
-            <p class="how">Each blue number is a cut. The code puts it 0.12 seconds before the word that opens the phrase. Pick one to play the video from there.</p>
+            <p class="how">Each frame shows the shot that opens at a cut. The code puts each cut 0.12 seconds before the word that opens the phrase. Pick one to play the video from there.</p>
           </figure>
         </div>
         <div class="notes">
@@ -867,9 +931,9 @@ BURN = cue(7, 'fire')</code></pre>
             </video>
           </div>
           <figure class="paper">
-            <figcaption>The script, marked where each line starts</figcaption>
+            <figcaption>The storyboard, a frame at each line</figcaption>
             <p class="script">April 27, 1521. The Battle of Mactan. Magellan's fleet left Spain in 1519. In Cebu, Rajah Humabon became his ally. On Mactan, Zula asked Magellan for help. His rival, Lapulapu, refused to obey Spain. At midnight, sixty armored men set out in three boats. Rocks kept the boats far out, so forty-nine men waded in, thigh-deep. More than fifteen hundred warriors were waiting for them. An arrow hit Magellan's leg, and most of his men fled. A few stayed with him until he fell. Magellan and eight of his men died, with four allies. Lapulapu lost fifteen. Days later, Humabon turned on the crews. The Victoria came home with eighteen men. Today, April 27 is Lapu-Lapu Day in the Philippines.</p>
-            <p class="how">Each blue number is a line of narration. The script was read in one take and cut in the middle of its pauses, and each line starts as its scene or its moment in the battle opens. Pick one to play the video from there.</p>
+            <p class="how">Each frame shows the picture just after its line of narration starts. The script was read in one take and cut in the middle of its pauses, and each line starts as its scene or its moment in the battle opens. Pick one to play the video from there.</p>
           </figure>
         </div>
         <div class="notes">
@@ -939,9 +1003,9 @@ BURN = cue(7, 'fire')</code></pre>
             </video>
           </div>
           <figure class="paper">
-            <figcaption>The script, marked where each line starts</figcaption>
+            <figcaption>The storyboard, a frame at each line</figcaption>
             <p class="script">Balete Pass, 1945. The battle for the road into northern Luzon. General Yamashita's army held the Cagayan Valley, the rice bowl of northern Luzon. Route 5, the road in from the south, crossed the mountains at Balete Pass. From San Jose, it climbs nearly twenty-five miles into the Caraballo Mountains, to three thousand feet at the pass. On February 21, the US 25th Division began its drive north. Japan committed perhaps twelve thousand troops to hold the road. Filipino guerrillas and a Chinese militia fought alongside the Americans. The front was six miles wide, across steep, forested ridges. Carrying parties took twelve hours to reach one forward battalion. On May 9, a patrol reached the pass and found no Japanese. On May 13, Route 5 was declared open. Three days later, a sniper killed Brigadier General James Dalton the Second as he inspected the pass. That September, the pass was renamed Dalton Pass in his memory. The drive cost the 25th Division's regiments five hundred forty-five killed and sixteen hundred fifty wounded. Japan's 10th Division lost almost seven thousand men killed. On May 27, the Americans took Santa Fe, the gateway to the Cagayan Valley. Since 2016, Balete Pass has been a national shrine, and the battle is remembered every May.</p>
-            <p class="how">Each blue number is a line of narration. This time the narration was recorded first, in one take, and every scene was laid out on it, so each mark on screen lands on the word that names it. Pick a number to play the video from there.</p>
+            <p class="how">Each frame shows the picture just after its line of narration starts. This time the narration was recorded first, in one take, and every scene was laid out on it, so each mark on screen lands on the word that names it. Pick a frame to play the video from there.</p>
           </figure>
         </div>
         <div class="notes">
@@ -1004,9 +1068,9 @@ ring(m19(*ROUTE5[2]), (372, S2[1]))</code></pre>
             </video>
           </div>
           <figure class="paper">
-            <figcaption>The script, marked where each line starts</figcaption>
+            <figcaption>The storyboard, a frame at each line</figcaption>
             <p class="script">Mindanao, 1637. Spain's governor marches on the court of Sultan Kudarat. Months earlier, Kudarat's war captain Tagal was sailing home from a raid. At Punta de Flechas, a squadron from Zamboanga caught his fleet and killed him. Governor Sebastian Hurtado de Corcuera came in person. On March 13, 1637, he landed near Lamitan with about seventy men. Guns covered the beach road, so they forded the river instead. Town and fort fell in about half an hour. Kudarat smeared his face with mud and fled to his fortified hill. On March 17, they stormed the hill from the front, up a path so narrow that men climbed one at a time. After two hours, Corcuera sounded the retreat. That night, the defenders feasted, believing they had killed the governor. At dawn, a second column under Nicolas Gonzalez struck from the rear, where the hill had no stockades. Kudarat escaped, shot in the arm. Accounts disagree on whether his queen leapt to her death or got away. On March 25, as the Spanish embarked, Kudarat's men lay in ambush on two hills by the shore. The parting salute, fired with live shot, swept them without the Spanish knowing. Kudarat lived. When Spanish soldiers later reached Lake Lanao, he asked its people: look at the Tagalogs and Visayans. Are you better than they?</p>
-            <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and each mark on screen sits on the frame of the word that names it. Pick a number to play the video from there.</p>
+            <p class="how">Each frame shows the picture just after its line of narration starts. The narration was recorded first, in one take, and each mark on screen sits on the frame of the word that names it. Pick a frame to play the video from there.</p>
           </figure>
         </div>
         <div class="notes">
@@ -1059,9 +1123,9 @@ ring(m19(*ROUTE5[2]), (372, S2[1]))</code></pre>
             </video>
           </div>
           <figure class="paper">
-            <figcaption>The script, marked where each line starts</figcaption>
+            <figcaption>The storyboard, a frame at each line</figcaption>
             <p class="script">Corregidor, 1942. The island fortress at the mouth of Manila Bay. Three and a half miles long and shaped like a tadpole, it was the largest of four fortified islands guarding the finest natural harbor in the Orient. Its big guns were built to fight battleships. Inside Malinta Hill, a tunnel fourteen hundred feet long held the army's headquarters, a hospital and the Commonwealth government. Japanese bombers first struck on December 29, 1941. The next day, the headquarters moved into the tunnel. In March, MacArthur left by PT boat, and General Jonathan Wainwright took command. On April 9, Bataan surrendered. Japanese guns moved onto its southern tip, two miles across the water. For twenty-seven days they shelled the island. On May 4 alone, an estimated sixteen thousand shells fell. On the night of May 5, under a full moon, the Japanese 61st Infantry crossed in landing barges. They came ashore near North Point, a thousand yards east of their target. Between half and two-thirds of the boats were put out of action, but by one thirty in the morning, the troops ashore had taken Battery Denver. Colonel Howard sent in his last reserve, a battalion of sailors. They counterattacked at six fifteen. Shortly before ten, Japanese tanks went into action. With a thousand wounded in the tunnel, Wainwright decided to surrender. At noon on May 6, the white flag went up. Close to eleven thousand men on Corregidor became prisoners. In 1954, the battlefields of Corregidor and Bataan were declared national shrines.</p>
-            <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and every layer and mark was timed to it. Pick a number to play the video from there.</p>
+            <p class="how">Each frame shows the picture just after its line of narration starts. The narration was recorded first, in one take, and every layer and mark was timed to it. Pick a frame to play the video from there.</p>
           </figure>
         </div>
         <div class="notes">
@@ -1115,9 +1179,9 @@ SEA, BAY, ISLAND, MAP, SKY, NEAR = 5000, 2600, 1200, 900, 400, -250</code></pre>
             </video>
           </div>
           <figure class="paper">
-            <figcaption>The script, marked where each line starts</figcaption>
+            <figcaption>The storyboard, a frame at each line</figcaption>
             <p class="script">In April 1945, American troops fought their way up into the mountains of northern Luzon, toward Baguio. Baguio was General Yamashita's headquarters, so taking it promised tactical gains, and propaganda value too. The easiest way up was Route 9, from Bauang on the coast, twenty miles to Baguio in a straight line. By April 14, the 129th Infantry had broken through at Sablan, and the 148th Infantry took the lead. A mile past Yagyagan, the road dipped across the gorge of the Irisan River, the best natural defensive position on the route. General Bunzo Sato rushed in reinforcements, perhaps more than fifteen hundred men, though no more than a third at any one time. On April 17, the 148th attacked. Japanese antitank fire knocked out two American tanks at the bridge, and the Japanese lost two light tanks. Frontal attacks failed. Then a machine gun squad crept through heavy woods to a spot where it could fire on most of the defenders. Air strikes and artillery pounded the last ridges, and on April 21 the breakthrough was complete. The Army's official history calls it the critical action of the entire drive to Baguio. It cost the 148th about forty killed and one hundred sixty wounded. Nearly five hundred Japanese were killed. On April 26, the 129th Infantry secured most of the city. But some ten thousand Japanese troops had already pulled out. On September 3, 1945, Yamashita signed his surrender in Baguio, at Camp John Hay, with General Wainwright looking on.</p>
-            <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and every layer, mark and effect was timed to it. Pick a number to play the video from there.</p>
+            <p class="how">Each frame shows the picture just after its line of narration starts. The narration was recorded first, in one take, and every layer, mark and effect was timed to it. Pick a frame to play the video from there.</p>
           </figure>
         </div>
         <div class="notes">
@@ -1171,9 +1235,9 @@ tracers(m21(*SQUAD), TARGETS, FIRE)  # 1474 "fire on most"</code></pre>
             </video>
           </div>
           <figure class="paper">
-            <figcaption>The script, marked where each line starts</figcaption>
+            <figcaption>The storyboard, a frame at each line</figcaption>
             <p class="script">In May 1571, Miguel López de Legazpi sailed into Manila Bay to found a Spanish city. Three local chiefs came to declare themselves his friends. Other villages would not. One village, Butas, on an inlet across the river, sent word that it wanted no peace with him. Their men came right up to Lakandula's village, beside Manila, to defy the Spaniards. On the third of June, the feast of Pentecost, Legazpi sent his master-of-camp, Martín de Goiti, against them by sea. At noon, Goiti found them waiting with their boats, one or two guns in each. They attacked with a great outcry, guns and many arrows, but by the Spanish accounts did little or no harm. Goiti had his boats lashed together in pairs and rowed slowly toward them. At close range, his arquebusiers opened fire. The fire killed many, and the fleet turned back toward the shore. Goiti's Visayan allies leapt into the water after them. Every boat was captured, with a small fort and its guns, and the prisoners were made slaves. That same day, Legazpi gave Manila the title of city. A history published in 1803 adds more. It says the fleet came from Macabebe and Hagonoy, and its chief dared the Spaniards to meet him in the bay of Bancusay. He fought bravely, it says, until a musket shot killed him, and the rest fled. Today he is remembered as Tarik Sulayman. But no account written at the time names him. His leading role and his death come from Zúñiga's history of 1803, more than two hundred years later. The name Tarik Sulayman comes from later genealogies, and no Spanish record gives it.</p>
-            <p class="how">Each blue number is a line of narration. The narration was recorded first, in one take, and every layer, mark and effect was timed to its words. Pick a number to play the video from there.</p>
+            <p class="how">Each frame shows the picture just after its line of narration starts. The narration was recorded first, in one take, and every layer, mark and effect was timed to its words. Pick a frame to play the video from there.</p>
           </figure>
         </div>
         <div class="notes">
@@ -1237,6 +1301,40 @@ def before(word, n=1):
           <p>Change a word in the script, record it again, and the cuts and graphics move with the new timings.</p>
         </aside>
       </div>
+      <figure class="cutfig">
+      <div class="scroll">
+        <svg viewBox="0 0 760 216" role="img" aria-label="In the Great Pyramid video, the second shot starts 0.12 seconds before the narrator says nobody, and the third starts 0.12 seconds before The.">
+          <text x="96" y="65" text-anchor="end" font-size="13" font-weight="700" fill="currentColor">Picture</text>
+          <text x="96" y="127" text-anchor="end" font-size="13" font-weight="700" fill="currentColor">Voice</text>
+          <rect x="110" y="42" width="68" height="38" rx="3" fill="currentColor" fill-opacity="0.08" stroke="currentColor" stroke-opacity="0.35"/>
+          <rect x="178" y="42" width="431" height="38" rx="3" fill="currentColor" fill-opacity="0.08" stroke="currentColor" stroke-opacity="0.35"/>
+          <rect x="609" y="42" width="113" height="38" rx="3" fill="currentColor" fill-opacity="0.08" stroke="currentColor" stroke-opacity="0.35"/>
+          <text x="144" y="65" text-anchor="middle" font-size="12" fill="currentColor">Shot 1</text>
+          <text x="393" y="65" text-anchor="middle" font-size="12" fill="currentColor">Shot 2</text>
+          <text x="665" y="65" text-anchor="middle" font-size="12" fill="currentColor">Shot 3</text>
+          <line x1="110" y1="140" x2="722" y2="140" stroke="currentColor" stroke-opacity="0.35"/>
+          <line x1="198" y1="106" x2="198" y2="140" stroke="currentColor" stroke-width="2"/>
+          <text x="205" y="127" font-size="13" fill="currentColor">"nobody built anything taller."</text>
+          <line x1="629" y1="106" x2="629" y2="140" stroke="currentColor" stroke-width="2"/>
+          <text x="636" y="127" font-size="13" fill="currentColor">"The Great Pyramid…"</text>
+          <line x1="178" y1="30" x2="178" y2="150" stroke="#9db4ff" stroke-width="2"/>
+          <line x1="609" y1="30" x2="609" y2="150" stroke="#9db4ff" stroke-width="2"/>
+          <text x="178" y="21" text-anchor="middle" font-size="12" font-weight="700" fill="#9db4ff">cut at 3.00 s</text>
+          <text x="609" y="21" text-anchor="middle" font-size="12" font-weight="700" fill="#9db4ff">cut at 5.53 s</text>
+          <path d="M178 158 v6 h20 v-6" fill="none" stroke="currentColor"/>
+          <path d="M609 158 v6 h20 v-6" fill="none" stroke="currentColor"/>
+          <text x="188" y="180" text-anchor="middle" font-size="12" fill="currentColor">0.12 s</text>
+          <text x="619" y="180" text-anchor="middle" font-size="12" fill="currentColor">0.12 s</text>
+          <line x1="110" y1="194" x2="722" y2="194" stroke="currentColor" stroke-opacity="0.35"/>
+          <path d="M178 194 v5 M348 194 v5 M518 194 v5 M688 194 v5" stroke="currentColor" stroke-opacity="0.6"/>
+          <text x="178" y="212" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.7">3 s</text>
+          <text x="348" y="212" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.7">4 s</text>
+          <text x="518" y="212" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.7">5 s</text>
+          <text x="688" y="212" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity="0.7">6 s</text>
+        </svg>
+      </div>
+      <figcaption>In the Great Pyramid video, the second shot starts 0.12 seconds before the narrator says "nobody", and the third starts 0.12 seconds before "The". <code>timeline.py</code> places every cut this way, rounded to a whole frame.</figcaption>
+    </figure>
       <p class="also">The eleven battles and the three company histories are animated instead of cut. Their scripts and voices go through steps 1, 2 and 8, but a storyboard file sets every frame, Blender and Unreal Engine render it, and <code>sound.py</code> places each line, effect and stretch of ambience on the storyboard's frame numbers. From Balete Pass on, the narration came first, and each storyboard was laid out on its measured lines. Bataan (in Blender) and Leyte (in Unreal Engine, under a physical sun, sky and clouds) are real landscapes in 3D, built from open elevation data. Manila (in Unreal Engine, at true scale) and Baguio (in Blender) add the cities' buildings from OpenStreetMap and tint the ground each side held, phase by phase, from the Army's battle maps. Manila in 1570 (in Unreal Engine) is an illustrated town, built in code, on the shore of an 1898 plan of the city. Corregidor, Irisan and Bangkusay Channel stack flat layers at different depths so the camera can move between them. The company histories of SM (in Unreal Engine) and Jollibee (in Blender) fly over today's Metro Manila from OpenStreetMap, and each building they name rises from the ground on the word that names it. Philippine Airlines (in Blender) sinks today's Makati back into the airfield of 1941 and flies a Beech 18, modelled in code, over real terrain to Baguio.</p>
     </div>
   </section>
@@ -1263,15 +1361,17 @@ def before(word, n=1):
 
 <script src="media/cuts.js"></script>
 <script>
-// Marks each script where its cuts fall (media/cuts.js), plays the video from a mark, and washes the phrase on screen.
-// Without this script the text still reads; each mark links to the video file at its time.
+// Turns each script into a storyboard: a frame at each cut or line (media/frames, from make_media.py), placed by media/cuts.js.
+// Picking a frame plays the video from there, and the frame on screen is washed in pencil blue while it plays.
+// Without this script the printed script still reads.
+const clock = t => { const s = Math.round(t); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+
 for (const sheet of document.querySelectorAll('.sheet')) {
   const video = sheet.querySelector('video');
+  const paper = sheet.querySelector('.paper');
   const script = sheet.querySelector('.script');
   const data = (window.CUTS || {})[sheet.id];
-  const src = video.querySelector('source').getAttribute('src');
-  // The footage videos call each mark a cut; the battles call it a line of narration.
-  const unit = /is a cut/.test(sheet.querySelector('.how').textContent) ? 'Cut' : 'Line';
+  const unit = /each cut/.test(paper.querySelector('figcaption').textContent) ? 'cut' : 'line';
 
   // Every video in the sheet, the alternate cuts in the notes too, says so when it fails to load.
   for (const v of sheet.querySelectorAll('video')) {
@@ -1290,45 +1390,74 @@ for (const sheet of document.querySelectorAll('.sheet')) {
 
   const words = script.textContent.trim().split(/\s+/);
   const starts = data.marks.map(([i]) => i);
-  const phrases = [];
-  script.textContent = '';
-  data.marks.forEach(([i, t], n) => {
-    const phrase = document.createElement('span');
-    phrase.className = 'phrase';
-    const mark = document.createElement('a');
-    mark.className = 'cut';
-    mark.href = `${src}#t=${t}`;
-    mark.textContent = n + 1;
-    mark.setAttribute('aria-label', `${unit} ${n + 1}, at ${t.toFixed(1)} seconds: play from here`);
-    mark.addEventListener('click', (event) => {
-      event.preventDefault();
+  const board = document.createElement('div');
+  board.className = 'shots';
+  const shots = data.marks.map(([i, t], n) => {
+    const shot = document.createElement('button');
+    shot.type = 'button';
+    shot.className = 'shot';
+    shot.innerHTML = `<img src="media/frames/${sheet.id}-${n + 1}.jpg" alt="" loading="lazy"><span><span class="mk"><span class="vh">Play from ${unit} </span><span class="cut">${n + 1}</span>${clock(t)}</span><span class="tx"></span></span>`;
+    shot.querySelector('.tx').textContent = words.slice(i, n + 1 < starts.length ? starts[n + 1] : words.length).join(' ');
+    shot.addEventListener('click', () => {
       video.currentTime = t;
       video.play().catch(() => {});
       video.scrollIntoView({ block: 'nearest' });
     });
-    const end = n + 1 < starts.length ? starts[n + 1] : words.length;
-    phrase.append(mark, words.slice(i, end).join(' '));
-    script.append(phrase, ' ');
-    phrases.push({ t, phrase, mark });
+    board.append(shot);
+    return { t, shot };
   });
+  paper.querySelector('figcaption').after(board);
+  paper.classList.add('built');
 
-  const wash = () => {
+  let shown = -1;
+  const follow = () => {
     const now = video.currentTime;
     const started = !(video.paused && now === 0);
-    phrases.forEach(({ t, phrase, mark }, k) => {
-      const next = k + 1 < phrases.length ? phrases[k + 1].t : data.credits;
+    shots.forEach(({ t, shot }, k) => {
+      const next = k + 1 < shots.length ? shots[k + 1].t : data.credits;
       const on = started && now >= t && now < next;
-      phrase.classList.toggle('now', on);
-      if (on) mark.setAttribute('aria-current', 'true');
-      else mark.removeAttribute('aria-current');
+      shot.setAttribute('aria-current', on);
+      if (on && k !== shown && board.scrollWidth > board.clientWidth) {
+        board.scrollBy({ left: shot.getBoundingClientRect().left - board.getBoundingClientRect().left, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      }
+      if (on) shown = k;
     });
   };
-  for (const event of ['timeupdate', 'seeked', 'play']) video.addEventListener(event, wash);
+  for (const event of ['timeupdate', 'seeked', 'play']) video.addEventListener(event, follow);
 }
+
 // One narrator at a time: starting a video pauses the others.
 const videos = [...document.querySelectorAll('video')];
 for (const video of videos) {
   video.addEventListener('play', () => videos.forEach(other => other !== video && other.pause()));
+}
+
+const blocks = document.querySelectorAll('.intro > div > *, .strip, .reelhead, .reel li, .sheet h2, .sheet .meta, .shot, .method li, .cutfig, .contact .card');
+if ('IntersectionObserver' in window) {
+  const seen = new IntersectionObserver(entries => {
+    let i = 0;
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      e.target.style.setProperty('--d', Math.min(i++ * 50, 300) + 'ms');
+      e.target.classList.add('in');
+      seen.unobserve(e.target);
+    }
+  }, { rootMargin: '0px 0px -6% 0px' });
+  blocks.forEach(el => seen.observe(el));
+} else {
+  blocks.forEach(el => el.classList.add('in'));
+}
+
+if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+  const frames = document.querySelectorAll('.strip .fr');
+  let k = 0;
+  const step = () => {
+    if (document.hidden) return;
+    frames.forEach((f, i) => f.classList.toggle('now', i === k));
+    k = (k + 1) % frames.length;
+  };
+  step();
+  setInterval(step, 2400);
 }
 </script>
 </body>
