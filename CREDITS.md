@@ -325,3 +325,29 @@ The island is drawn from elevation data. Elevation: Terrain Tiles on AWS (Mapzen
 - Elevation: Terrain Tiles on AWS (Mapzen), https://registry.opendata.aws/terrain-tiles/ ; SRTM and GMTED2010 data courtesy of the U.S. Geological Survey
 - Land cover: ESA WorldCover 2021 v200, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), https://esa-worldcover.org/
 - Globe: Natural Earth shaded relief, public domain, https://www.naturalearthdata.com/
+
+## The history of BPI (`media/bpi.mp4`, and its 9:16 cut `media/bpi-portrait.mp4`)
+
+- "Juan Antonio de Urbiztondo, marqués de la Solana" by Luis Carlos Legrand, Public domain, from https://commons.wikimedia.org/wiki/File:Juan_Antonio_de_Urbiztondo,_marqu%C3%A9s_de_la_Solana.jpg
+- "Manila December 1982-5" by Szilas, CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en), from https://commons.wikimedia.org/wiki/File:Manila_December_1982-5.jpg
+- "Manila Walled City Destruction May 1945" by Unknown photographer, Public domain, from https://commons.wikimedia.org/wiki/File:Manila_Walled_City_Destruction_May_1945.jpg
+- "PHI-A8-El Banco Español-Filipino-10 pesos (1896)" by National Museum of American History (note); Godot13 (scan), The note is public domain; the scan is CC BY-SA 4.0 where scans can be copyrighted (https://creativecommons.org/licenses/by-sa/4.0/), from https://commons.wikimedia.org/wiki/File:PHI-A8-El_Banco_Espa%C3%B1ol-Filipino-10_pesos_(1896).jpg
+- "PHL - 50 pesos fuertes anverso" by Banco Español-Filipino (coin), Don Norris (photo), The note is public domain; the photo is CC BY-SA 4.0 (also GFDL) (https://creativecommons.org/licenses/by-sa/4.0/), from https://commons.wikimedia.org/wiki/File:PHL_-_50_pesos_fuertes_anverso.jpg
+- "Plaza Cervantes in 1910 from Calle Rosario" by Photo Supply Company, Public domain, from https://commons.wikimedia.org/wiki/File:Plaza_Cervantes_in_1910_from_Calle_Rosario.jpg
+- "Distant Boom.wav" by Henrythetrain, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Henrythetrain/sounds/142598
+- "building collapse / demolition" by greyfeather, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/greyfeather/sounds/712918
+- "WWS Horseshoesonstonepavedstreet" by Work With Sounds / Torsten Nilsson, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://commons.wikimedia.org/w/index.php?curid=38095919
+- "Woosh_Low_02.wav" by moogy73, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/moogy73/sounds/425700
+- "Click_1.wav" by JonnyRuss01, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/JonnyRuss01/sounds/478197
+- "442697-SBssa-Crowd Talking 003" by SoundSnap, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/deed.en/), from https://commons.wikimedia.org/w/index.php?curid=149102415
+- "Church Bells, Distant, A.wav" by InspectorJ, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), from https://freesound.org/people/InspectorJ/sounds/398195
+- "busy city 05" by rucisko, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/rucisko/sounds/462494
+- "Hamburg City Traffic Ambience" by Kinoton, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Kinoton/sounds/352152
+- "Distant Blasts.wav" by DylanTheFish, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/DylanTheFish/sounds/455513
+- "211146 unfa another-crowd" by unfa, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/deed.en/), from https://commons.wikimedia.org/w/index.php?curid=116935875
+- "292934-152 Writing-pen-paper-various marks and lines" by soundsnap, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/deed.en/), from https://commons.wikimedia.org/w/index.php?curid=149101212
+- "Clock ticking" by olver, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/olver/sounds/130388
+- "360703 eguobyte large-crowd-medium-distance-stereo" by eguobyte, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/deed.en/), from https://commons.wikimedia.org/w/index.php?curid=116752850
+- Streets, buildings and places: © OpenStreetMap contributors (ODbL), https://www.openstreetmap.org/copyright
+- Elevation: Terrain Tiles on AWS (Mapzen), https://registry.opendata.aws/terrain-tiles/ ; SRTM and GMTED2010 data courtesy of the U.S. Geological Survey
+- Land cover: ESA WorldCover 2021 v200, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), https://esa-worldcover.org/

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yohann Mar Gayao, programmatic video editing</title>
-<meta name="description" content="Seventeen narrated explainers made by code: three cut from real, openly licensed footage and fourteen animated in Blender and Unreal Engine, with graphics timed to the narration and no AI video.">
+<meta name="description" content="Eighteen narrated explainers made by code: three cut from real, openly licensed footage and fifteen animated in Blender and Unreal Engine, with graphics timed to the narration and no AI video.">
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -137,7 +137,7 @@ a:hover { text-decoration-thickness: 2px; }
 .shot:hover { background: var(--pencil-wash); }
 .shot[aria-current="true"] { background: var(--pencil-now); box-shadow: inset 0 -3px var(--pencil); }
 .shot[aria-current="true"] .cut { background: var(--pencil); color: var(--paper); }
-@media (max-width: 1179px) { /* under the video, the storyboard is a strip to swipe, so seventeen of them don't stack the page tall */
+@media (max-width: 1179px) { /* under the video, the storyboard is a strip to swipe, so eighteen of them don't stack the page tall */
   .shots { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(84%, 320px); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; padding-bottom: 10px; }
   .shot { scroll-snap-align: start; }
 }
@@ -226,9 +226,9 @@ footer p { max-width: 64ch; }
   <div class="wrap">
     <div class="intro">
       <div>
-        <p class="eyebrow">Seventeen narrated explainers</p>
+        <p class="eyebrow">Eighteen narrated explainers</p>
         <h1>Programmatic Video Editing</h1>
-        <p class="lede">Code places every cut and graphic on the narrator's words. Fourteen are animated in Blender and Unreal Engine, and three are cut from openly licensed footage. None of the video is AI-generated, and the narrators are Gemini text-to-speech voices.</p>
+        <p class="lede">Code places every cut and graphic on the narrator's words. Fifteen are animated in Blender and Unreal Engine, and three are cut from openly licensed footage. None of the video is AI-generated, and the narrators are Gemini text-to-speech voices.</p>
         <p class="who">Yohann Mar Gayao · <a href="mailto:yohanng500@gmail.com?subject=Programmatic%20video%20editing">yohanng500@gmail.com</a> · <a href="https://github.com/DerpyNewb">GitHub</a></p>
       </div>
       <figure class="strip">
@@ -243,10 +243,11 @@ footer p { max-width: 64ch; }
       </figure>
     </div>
     <nav class="reels" id="videos" aria-labelledby="videos-title">
-      <div class="reelhead"><h2 id="videos-title">The videos</h2><p>28 minutes in all.</p></div>
+      <div class="reelhead"><h2 id="videos-title">The videos</h2><p>31 minutes in all.</p></div>
       <p class="group" id="reel-wide">16:9</p>
       <ul class="reel wide" aria-labelledby="reel-wide">
         <li><a href="#pal"><span class="im"><img src="media/pal.jpg" alt="" width="1280" height="720"><span class="len">2:30</span></span><span class="name">The history of Philippine Airlines</span><span class="kind">20 lines · 3D in Blender, with a 9:16 cut</span></a></li>
+        <li><a href="#bpi"><span class="im"><img src="media/bpi.jpg" alt="" width="1280" height="720"><span class="len">2:31</span></span><span class="name">The history of BPI</span><span class="kind">20 lines · 3D in Blender, with a 9:16 cut</span></a></li>
         <li><a href="#sm"><span class="im"><img src="media/sm.jpg" alt="" width="1280" height="720"><span class="len">2:19</span></span><span class="name">The history of SM</span><span class="kind">12 lines · 3D in Unreal Engine, with a 9:16 cut</span></a></li>
         <li><a href="#jollibee"><span class="im"><img src="media/jollibee.jpg" alt="" width="1280" height="720"><span class="len">2:39</span></span><span class="name">The history of Jollibee</span><span class="kind">20 lines · 3D in Blender, with a 9:16 cut</span></a></li>
         <li><a href="#mactan"><span class="im"><img src="media/mactan.jpg" alt="" width="1280" height="720"><span class="len">1:00</span></span><span class="name">The Battle of Mactan</span><span class="kind">10 lines · animated, with a 9:16 cut</span></a></li>
@@ -332,7 +333,71 @@ footer p { max-width: 64ch; }
           </details>
         </div>
       </div>
-      <p class="back"><a href="#videos">Back to all seventeen videos</a></p>
+      <p class="back"><a href="#videos">Back to all eighteen videos</a></p>
+    </div>
+  </section>
+
+  <section class="sheet" id="bpi" aria-labelledby="bpi-title">
+    <div class="wrap">
+      <h2 id="bpi-title">The history of BPI</h2>
+      <p class="meta">A company history · 151 seconds · 1080p, with a 9:16 cut · 3D in Blender, with low-poly people · <a href="https://youtu.be/r6F5eN5Ym3w">Watch on YouTube</a></p>
+      <div class="body">
+        <div class="pair">
+          <div class="watch">
+            <video controls preload="metadata" playsinline poster="media/bpi.jpg" width="1920" height="1080">
+              <source src="media/bpi.mp4" type="video/mp4">
+              <a href="media/bpi.mp4">Open the video file</a>
+            </video>
+          </div>
+          <figure class="paper">
+            <figcaption>The storyboard, a frame at each line</figcaption>
+            <p class="script">In 1851, the Philippines had no bank. Church charities called the obras pías did some of a bank's work. That year, Governor-General Antonio de Urbiztondo asked the colonial authorities to approve a bank, and on the first of August they did. It was named for Spain's queen: El Banco Español-Filipino de Isabel Segunda. Its capital was four hundred thousand pesos, and half its shares were kept for church and public funds. It opened in rooms the government lent it in the Royal Custom House, inside the walls of Intramuros. Its first loan, on the first of May, 1852, went to a Chinese borrower named Tadian. Its first notes were dated that same day. These pesos fuertes, with the queen's portrait, were the country's first paper money. In 1862 it moved into a building of its own, at the corner of Cabildo and Victoria streets. When Isabel lost her throne, the bank dropped her name, and from 1869 it was simply El Banco Español-Filipino. Trade had crossed the Pasig River to Binondo, and in 1892 the bank followed it, to Plaza Cervantes. Under American rule, a new charter let the stockholders choose an English name, and on the first of January, 1912, it became the Bank of the Philippine Islands. It was the only bank allowed to issue notes until 1916, and it kept that right until the Central Bank opened in 1949. Under the Japanese occupation it stayed open, but it was made to hand the accounts of Allied depositors to a Japanese bank. In 1945, the battle for Manila levelled Intramuros, where the bank had begun. In 1969, Ayala Corporation became its largest shareholder. An Ayala had sat on its very first board. The head office followed Manila's business district to Makati, and from 1980 it stood at the corner of Ayala Avenue and Paseo de Roxas. In the early 1980s it put in the country's first ATMs. Mergers made it one of the country's biggest banks: Citytrust in 1996, Far East Bank in 2000, and Robinsons Bank in 2024. The 1980 tower has since come down, and a forty-five-storey head office is rising on the same corner, due in 2030. On the first of August, 2026, the bank turned 175. Today it serves more than nineteen million customers.</p>
+            <p class="how">Each frame shows the picture just after its line of narration starts. The narration was recorded first, in one take, and the camera's flight, the street scenes and every mark were laid out on it. Pick a frame to play the video from there.</p>
+          </figure>
+        </div>
+        <div class="notes">
+          <div>
+            <h3>Where the facts come from</h3>
+            <ul>
+              <li><a href="https://archive.org/details/A11412008">The bank's statutes of 1851</a>, on its name, its capital and the shares kept for church and public funds</li>
+              <li>BPI's own <a href="http://web.archive.org/web/20051220104533/http://info.bpiexpressonline.com/bpiprod/BPIAbout.nsf/History+and+Tradition/History&amp;Tradition?OpenDocument">history of 2005</a> and its 2026 press releases, on the first loan and notes, the move to Binondo and the bank today</li>
+              <li><a href="https://archive.org/details/BankersMagazine1918aVol96">The Bankers Magazine of March 1918</a> and <a href="https://lawphil.net/statutes/acts/act1907/act_1790_1907.html">Act No. 1790</a>, on the early offices and the English name</li>
+              <li>The Supreme Court's <a href="https://lawphil.net/judjuris/juri1949/jul1949/gr_l-1729_1949.html">Everett Steamship v. BPI</a> (1949), on the occupation, and Smith's <a href="https://www.ibiblio.org/hyperwar/USA/USA-P-Triumph/index.html">Triumph in the Philippines</a>, on the battle for Manila</li>
+            </ul>
+          </div>
+          <div>
+            <h3>One cue from the code</h3>
+            <pre><code>sets.crowd(lines, K1912, 60, 0, N, seed=21, avoid=[(-25, 1, 5.0), (-21.5, -1, 5.0), (-18, -3, 5.0)])</code></pre>
+            <p>Sixty people in the dress of 1912 walk the streets around Plaza Cervantes, each along a random stretch of street. A walker whose route passes within 5 m of a point on the camera's path is drawn again, so nobody walks under the lens. <code>K1912</code> lists the kinds of people of 1912.</p>
+          </div>
+          <details>
+            <summary>How this one was made and checked</summary>
+            <div class="more">
+              <div>
+                <h3>Old Manila, the people and the sound</h3>
+                <p>Old Manila is drawn in Blender over real terrain, with the bay at the shore of Gamoneda's 1898 plan, low-poly houses on today's street plan and the walls of Intramuros, and a beam of light marks each head office in turn. Intramuros darkens to ruins in 1945, today's city rises from OpenStreetMap, and on Ayala Avenue the 1980 head office comes down while a 45-storey tower rises in its place. Four street scenes cut in over the aerial: the Royal Custom House in 1852, the bank's hall, Plaza Cervantes about 1912 and Ayala Avenue today. Their people are built, rigged and animated in code: fourteen kinds in the dress of 1852, 1912 and today, each under 1,200 triangles on a 16-bone skeleton, who walk, wait, talk, count, write and sit. The clothes of 1852 and 1912 follow travellers' accounts from 1851 to 1913 and José Honorato Lozano's watercolours of 1847. Six pictures from Wikimedia Commons carry their author and licence in their captions. Four are public domain or CC0, and the two banknotes were photographed by Don Norris and scanned by Godot13 (CC BY-SA 4.0). Two sounds are CC BY 4.0: distant church bells by InspectorJ and horseshoes on paving by Work With Sounds. This is an independent explainer, not made or endorsed by the Bank of the Philippine Islands.</p>
+              </div>
+              <div>
+                <h3>Facts checked against the sources</h3>
+                <p>Every fact was checked against a quoted source, and the fact sheet lists 22 points where sources disagree. Where they disagree or say nothing, the video says less: it doesn't say which corner of Cabildo and Victoria streets the 1862 building stood on, it singles out no building on Plaza Cervantes, and it dates the first ATMs to the early 1980s, since the sources give 1981, 1982 or 1983. One phrase, that the head office followed Manila's business district to Makati, is the fact sheet's reading of the dates rather than a quoted source.</p>
+              </div>
+              <div>
+                <h3>Checked</h3>
+                <p>Each street scene was reviewed at four frames a second. That found a customer walking into the lens in the hall and a walker passing under the plaza camera, so crowds now draw such walkers again, and the hall stops rendering if its late customer comes within 2 m of the lens. Before the text is rendered, a check lists any two labels or captions that overlap on any frame, in both cuts. Whisper read the final mix back and heard 365 of the 388 script words as written and dropped none; the rest are names and numbers it spells by ear. The mix plays at -14 LUFS.</p>
+              </div>
+              <div>
+                <h3>The 9:16 cut</h3>
+                <video class="tall" controls preload="none" playsinline poster="media/bpi-portrait.jpg" width="1080" height="1920">
+                  <source src="media/bpi-portrait.mp4" type="video/mp4">
+                  <a href="media/bpi-portrait.mp4">Open the video file</a>
+                </video>
+                <p>This cut is for Shorts and Reels, with the same narration and soundtrack. The same storyboard makes both cuts, and the street scenes are rendered again for the tall frame. The text stays clear of the titles and buttons the apps lay over the frame, and place labels slide to stay on screen while their place is in view. <a href="https://youtube.com/shorts/zjw5JHOhrT8">Watch the Short on YouTube</a></p>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+      <p class="back"><a href="#videos">Back to all eighteen videos</a></p>
     </div>
   </section>
 
@@ -393,7 +458,7 @@ footer p { max-width: 64ch; }
           </details>
         </div>
       </div>
-      <p class="back"><a href="#videos">Back to all seventeen videos</a></p>
+      <p class="back"><a href="#videos">Back to all eighteen videos</a></p>
     </div>
   </section>
 
@@ -453,7 +518,7 @@ check_safe(ELEMENTS, FRAMES, (-504, BOTTOM, RIGHT, TOP), BUTTONS, 'baguio HUD')<
           </details>
         </div>
       </div>
-      <p class="back"><a href="#videos">Back to all seventeen videos</a></p>
+      <p class="back"><a href="#videos">Back to all eighteen videos</a></p>
     </div>
   </section>
 
@@ -511,7 +576,7 @@ aa.render_warm_up_count = 32</code></pre>
           </details>
         </div>
       </div>
-      <p class="back"><a href="#videos">Back to all seventeen videos</a></p>
+      <p class="back"><a href="#videos">Back to all eighteen videos</a></p>
     </div>
   </section>
 
@@ -568,7 +633,7 @@ aa.render_warm_up_count = 32</code></pre>
           </details>
         </div>
       </div>
-      <p class="back"><a href="#videos">Back to all seventeen videos</a></p>
+      <p class="back"><a href="#videos">Back to all eighteen videos</a></p>
     </div>
   </section>
 
@@ -624,7 +689,7 @@ BURN = cue(7, 'fire')</code></pre>
           </details>
         </div>
       </div>
-      <p class="back"><a href="#videos">Back to all seventeen videos</a></p>
+      <p class="back"><a href="#videos">Back to all eighteen videos</a></p>
     </div>
   </section>
 
@@ -688,7 +753,7 @@ BURN = cue(7, 'fire')</code></pre>
           </details>
         </div>
       </div>
-      <p class="back"><a href="#videos">Back to all seventeen videos</a></p>
+      <p class="back"><a href="#videos">Back to all eighteen videos</a></p>
     </div>
   </section>
 
@@ -752,7 +817,7 @@ BURN = cue(7, 'fire')</code></pre>
           </details>
         </div>
       </div>
-      <p class="back"><a href="#videos">Back to all seventeen videos</a></p>
+      <p class="back"><a href="#videos">Back to all eighteen videos</a></p>
     </div>
   </section>
 
@@ -810,7 +875,7 @@ BURN = cue(7, 'fire')</code></pre>
           </details>
         </div>
       </div>
-      <p class="back"><a href="#videos">Back to all seventeen videos</a></p>
+      <p class="back"><a href="#videos">Back to all eighteen videos</a></p>
     </div>
   </section>
 
@@ -862,7 +927,7 @@ BURN = cue(7, 'fire')</code></pre>
           </details>
         </div>
       </div>
-      <p class="back"><a href="#videos">Back to all seventeen videos</a></p>
+      <p class="back"><a href="#videos">Back to all eighteen videos</a></p>
     </div>
   </section>
 
@@ -914,7 +979,7 @@ BURN = cue(7, 'fire')</code></pre>
           </details>
         </div>
       </div>
-      <p class="back"><a href="#videos">Back to all seventeen videos</a></p>
+      <p class="back"><a href="#videos">Back to all eighteen videos</a></p>
     </div>
   </section>
 
@@ -986,7 +1051,7 @@ BURN = cue(7, 'fire')</code></pre>
           </details>
         </div>
       </div>
-      <p class="back"><a href="#videos">Back to all seventeen videos</a></p>
+      <p class="back"><a href="#videos">Back to all eighteen videos</a></p>
     </div>
   </section>
 
@@ -1051,7 +1116,7 @@ ring(m19(*ROUTE5[2]), (372, S2[1]))</code></pre>
           </details>
         </div>
       </div>
-      <p class="back"><a href="#videos">Back to all seventeen videos</a></p>
+      <p class="back"><a href="#videos">Back to all eighteen videos</a></p>
     </div>
   </section>
 
@@ -1106,7 +1171,7 @@ ring(m19(*ROUTE5[2]), (372, S2[1]))</code></pre>
           </details>
         </div>
       </div>
-      <p class="back"><a href="#videos">Back to all seventeen videos</a></p>
+      <p class="back"><a href="#videos">Back to all eighteen videos</a></p>
     </div>
   </section>
 
@@ -1162,7 +1227,7 @@ SEA, BAY, ISLAND, MAP, SKY, NEAR = 5000, 2600, 1200, 900, 400, -250</code></pre>
           </details>
         </div>
       </div>
-      <p class="back"><a href="#videos">Back to all seventeen videos</a></p>
+      <p class="back"><a href="#videos">Back to all eighteen videos</a></p>
     </div>
   </section>
 
@@ -1218,7 +1283,7 @@ tracers(m21(*SQUAD), TARGETS, FIRE)  # 1474 "fire on most"</code></pre>
           </details>
         </div>
       </div>
-      <p class="back"><a href="#videos">Back to all seventeen videos</a></p>
+      <p class="back"><a href="#videos">Back to all eighteen videos</a></p>
     </div>
   </section>
 
@@ -1273,7 +1338,7 @@ chip('"the bay of Bancusay"', (bx + 26, by + 34), (w(12, 27) + 2, S11[1]))</code
           </details>
         </div>
       </div>
-      <p class="back"><a href="#videos">Back to all seventeen videos</a></p>
+      <p class="back"><a href="#videos">Back to all eighteen videos</a></p>
     </div>
   </section>
 
@@ -1335,7 +1400,7 @@ def before(word, n=1):
       </div>
       <figcaption>In the Great Pyramid video, the second shot starts 0.12 seconds before the narrator says "nobody", and the third starts 0.12 seconds before "The". <code>timeline.py</code> places every cut this way, rounded to a whole frame.</figcaption>
     </figure>
-      <p class="also">The eleven battles and the three company histories are animated instead of cut. Their scripts and voices go through steps 1, 2 and 8, but a storyboard file sets every frame, Blender and Unreal Engine render it, and <code>sound.py</code> places each line, effect and stretch of ambience on the storyboard's frame numbers. From Balete Pass on, the narration came first, and each storyboard was laid out on its measured lines. Bataan (in Blender) and Leyte (in Unreal Engine, under a physical sun, sky and clouds) are real landscapes in 3D, built from open elevation data. Manila (in Unreal Engine, at true scale) and Baguio (in Blender) add the cities' buildings from OpenStreetMap and tint the ground each side held, phase by phase, from the Army's battle maps. Manila in 1570 (in Unreal Engine) is an illustrated town, built in code, on the shore of an 1898 plan of the city. Corregidor, Irisan and Bangkusay Channel stack flat layers at different depths so the camera can move between them. The company histories of SM (in Unreal Engine) and Jollibee (in Blender) fly over today's Metro Manila from OpenStreetMap, and each building they name rises from the ground on the word that names it. Philippine Airlines (in Blender) sinks today's Makati back into the airfield of 1941 and flies a Beech 18, modelled in code, over real terrain to Baguio.</p>
+      <p class="also">The eleven battles and the four company histories are animated instead of cut. Their scripts and voices go through steps 1, 2 and 8, but a storyboard file sets every frame, Blender and Unreal Engine render it, and <code>sound.py</code> places each line, effect and stretch of ambience on the storyboard's frame numbers. From Balete Pass on, the narration came first, and each storyboard was laid out on its measured lines. Bataan (in Blender) and Leyte (in Unreal Engine, under a physical sun, sky and clouds) are real landscapes in 3D, built from open elevation data. Manila (in Unreal Engine, at true scale) and Baguio (in Blender) add the cities' buildings from OpenStreetMap and tint the ground each side held, phase by phase, from the Army's battle maps. Manila in 1570 (in Unreal Engine) is an illustrated town, built in code, on the shore of an 1898 plan of the city. Corregidor, Irisan and Bangkusay Channel stack flat layers at different depths so the camera can move between them. The company histories of SM (in Unreal Engine) and Jollibee (in Blender) fly over today's Metro Manila from OpenStreetMap, and each building they name rises from the ground on the word that names it. Philippine Airlines (in Blender) sinks today's Makati back into the airfield of 1941 and flies a Beech 18, modelled in code, over real terrain to Baguio.</p>
     </div>
   </section>
 
