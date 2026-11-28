@@ -37,6 +37,7 @@ ANIMATED = {  # key on the page: (render, poster time in s). Its marks are where
     'lamitan': (ANIMATION / 'build' / 'lamitan_blender_vo.mp4', 3.0),
     'sm': (ANIMATION / 'build' / 'sm_unreal_vo.mp4', 4.0),
     'jollibee': (ANIMATION / 'build' / 'jollibee_blender_vo.mp4', 4.0),
+    'pal': (ANIMATION / 'build' / 'pal_blender_vo.mp4', 12.5),
 }
 ALSO = {  # other cuts of a video, shown in its notes: key: (file, poster time in s). No marks of their own.
     'giza-remotion': (ADS / 'giza-pyramid-history' / 'giza-pyramid-history-remotion.mp4', 7.0),
@@ -45,8 +46,9 @@ ALSO = {  # other cuts of a video, shown in its notes: key: (file, poster time i
     'dalton-unreal': (ANIMATION / 'build' / 'dalton_unreal_vo.mp4', 3.0),
     'sm-portrait': (ANIMATION / 'build' / 'sm_portrait_unreal_vo.mp4', 4.0),
     'jollibee-portrait': (ANIMATION / 'build' / 'jollibee_portrait_blender_vo.mp4', 4.0),
+    'pal-portrait': (ANIMATION / 'build' / 'pal_portrait_blender_vo.mp4', 12.5),
 }
-CRF = {'sm': 30, 'jollibee': 30, 'sm-portrait': 30, 'jollibee-portrait': 30}  # whole cities in 3D compress poorly; at 24 these passed GitHub's 100 MB file limit
+CRF = {'sm': 30, 'jollibee': 30, 'sm-portrait': 30, 'jollibee-portrait': 30, 'pal': 30, 'pal-portrait': 30}  # whole cities in 3D compress poorly; at 24 these passed GitHub's 100 MB file limit
 NUMBERS = {'two': '2', 'five': '5'}  # Whisper spells some numbers out
 
 

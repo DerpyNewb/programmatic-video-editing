@@ -1,6 +1,6 @@
 # Credits
 
-Every clip, photo, picture, track and sound effect in the sixteen videos, with its license. The three videos cut from footage also credit them at the end; the animated battles and company histories caption their photos on screen.
+Every clip, photo, picture, track and sound effect in the seventeen videos, with its license. The three videos cut from footage also credit them at the end; the animated battles and company histories caption their photos on screen.
 
 ## The Great Pyramid in numbers (`media/giza.mp4`)
 
@@ -304,3 +304,24 @@ The island is drawn from elevation data. Elevation: Terrain Tiles on AWS (Mapzen
 - "Deep Whoosh #1" by Kinoton, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Kinoton/sounds/351256
 - Buildings, streets, parks and water and stores: © OpenStreetMap contributors (ODbL), https://www.openstreetmap.org/copyright
 - Globe: Natural Earth I with Shaded Relief and Water, 1:50m, public domain, https://www.naturalearthdata.com/
+
+## The history of Philippine Airlines (`media/pal.mp4`, and its 9:16 cut `media/pal-portrait.mp4`)
+
+- "Beechcraft 18D (c-n 177) 1989-05-29 Andre Gerwing Collection ID 002841.jpg" by André Gerwing, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0), from https://commons.wikimedia.org/wiki/File:Beechcraft_18D_(c-n_177)_1989-05-29_Andre_Gerwing_Collection_ID_002841.jpg
+- "DC-4 Philippine Air Lines (7161598487).jpg" by Bill Larkins, CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0), from https://commons.wikimedia.org/wiki/File:DC-4_Philippine_Air_Lines_(7161598487).jpg
+- "Douglas DC-3 Philippine Air Lines (PI-C91) (12243260826).jpg" by Bill Larkins, CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0), from https://commons.wikimedia.org/wiki/File:Douglas_DC-3_Philippine_Air_Lines_(PI-C91)_(12243260826).jpg
+- "Loakan Airport.JPEG" by Camera Operator: TSGT DAVID N. CRAFT, Public domain, from https://commons.wikimedia.org/wiki/File:Loakan_Airport.JPEG
+- "Philippine Airlines Boeing 747-2F6B; N743PR, January 1982 BZH (5573636149).jpg" by Aero Icarus from Zürich, Switzerland, CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0), from https://commons.wikimedia.org/wiki/File:Philippine_Airlines_Boeing_747-2F6B;_N743PR,_January_1982_BZH_(5573636149).jpg
+- "Philippine Airlines RP-C3510(85th Anniversary sticker) run PR318(Philippines Manila Ninoy Aquino International Airport to Hong Kong International Airport) 18-01-2026(1).jpg" by LN9267, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0), from https://commons.wikimedia.org/wiki/File:Philippine_Airlines_RP-C3510(85th_Anniversary_sticker)_run_PR318(Philippines_Manila_Ninoy_Aquino_International_Airport_to_Hong_Kong_International_Airport)_18-01-2026(1).jpg
+- "Stereo Propliner Landing Sample 1.wav" by bigpickle51, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/bigpickle51/sounds/262756
+- "Soaring Clouds" by bruce965, CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/), from https://freesound.org/people/bruce965/sounds/464108
+- "Woosh_Low_02.wav" by moogy73, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/moogy73/sounds/425700
+- "Click_1.wav" by JonnyRuss01, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/JonnyRuss01/sounds/478197
+- "Double Prop plane" by Mozfoo, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Mozfoo/sounds/440164
+- "P-47 Thunderbolt Startup" by Fight2FlyPhoto, CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/), from https://freesound.org/people/Fight2FlyPhoto/sounds/142900
+- "busy city 05" by rucisko, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/rucisko/sounds/462494
+- "ambientBell.wav" by Divinux, CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/), from https://freesound.org/people/Divinux/sounds/198416
+- Roads, runways, buildings and places: © OpenStreetMap contributors (ODbL), https://www.openstreetmap.org/copyright
+- Elevation: Terrain Tiles on AWS (Mapzen), https://registry.opendata.aws/terrain-tiles/ ; SRTM and GMTED2010 data courtesy of the U.S. Geological Survey
+- Land cover: ESA WorldCover 2021 v200, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), https://esa-worldcover.org/
+- Globe: Natural Earth shaded relief, public domain, https://www.naturalearthdata.com/
